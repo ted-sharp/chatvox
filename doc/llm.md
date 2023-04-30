@@ -114,6 +114,7 @@ BERT --> ELECTRA
 *[BERT](https://ja.wikipedia.org/wiki/BERT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.10.11 Google)*
 Decoderを無くしたのはGPT-1と同じだが、双方向(Bidirectional)なAttention層が追加されている。
 Transformerが12層連なっているためモデルが大きい。
+Masked LM(Masked Language Modeling)という手法を用いて事前学習した。
 
 *[RoBERTa](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/) (2019.07.26 Facebook AI Research)*
 Robustly optimized BERT approachの略。
@@ -145,6 +146,21 @@ RoBERTaと同様にBERTの事前学習を改良したもの。
 ```mermaid
 flowchart
 
+Transformer --> BERT --> XLNet
+Transformer --> Transformer-XL --> XLNet
+```
+
+*[Transformer-XL](https://arxiv.org/abs/1901.02860) (2019.01.09)*
+Transformer Extra Largeの略。
+通常のTransformerでは、入力長の二乗の計算量がかかる。
+そのため文章をセグメントに分けて、長文に対応できるようにしもの。
+
+*XLNet*
+BERTの改良版。
+
+```mermaid
+flowchart
+
 Transformer --> GPT-1 --> GPT-2 --> GPT-3
 GPT-3 --> InstructGPT --> ChatGPT
 GPT-3 --> Codex --> ChatGPT
@@ -152,7 +168,7 @@ GPT-3 --> GPT-3.5 --> ChatGPT
 GPT-3 --> GPT-4
 ```
 
-*GPT-1 (2018.06.11 OpenAI)*
+*[GPT-1](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 OpenAI)*
 TransformerのEncoder部分のみを用いて、大規模テキストデータで学習したものがGPTとなる。
 GPT(Generative Pretrained Transformer)の名前が示す通り、事前学習や転移学習で特定のタスクに適応させている。
 
@@ -160,32 +176,90 @@ GPTの初期モデル。
 BookCorpus 7000冊のデータ4.5GB を事前学習に用いた。
 1.2億個のパラメータ。
 
-*GPT-2 (2019.02.14 OpenAI)*
+*[GPT-2](https://ja.wikipedia.org/wiki/GPT-2) (2019.02.14 OpenAI)*
 GPTの仕組みは大規模化が可能だった。
 そのため、データセットとパラメータ数を増やす方向にシフトしていった。
 
 WEBから収集した40GBのデータ。
 15億パラメータ。
 
-*GPT-3 (2020.06.11 OpenAI)*
+*[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.06.11 OpenAI)*
 大規模化でGPT-3を超えたあたりでとても優秀になった。
 
 WEBから収集した570GBのデータ。
 1750億個パラメータ。
 
 *InstructGPT*
+GPT-3の小型版を使用して、RLHFを取り入れたモデル。
+RLHF(Reinforcement Learning from Human Feedback)は、
+人間からのフィードバックでファインチューニングする手法。
 
-*Codex*
+*[OpenAI Codex](https://ja.wikipedia.org/wiki/OpenAI_Codex) (2021.08 OpenAI)*
+自然言語からコードを生成するためのモデル。
+GitHub Copilotで使われている。
+
+120億個パラメータ。
+
+Microsoft CodeBERT
+NovelAI Genji(GPT-Jベース)
+
 
 *GPT-3.5 (2022.03.15 OpenAI)*
 text-davinci-003
 
 3550億個パラメータ。
 
-*ChatGPT (2022.11)*
+*[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11 OpenAI)*
 
 
-*GPT-4 (2023.03.14 OpenAI)*
+*[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
+マルチモーダル。
+
+```mermaid
+flowchart
+
+Transformer --> T5 --> Flan-T5
+```
+
+*T5 (2019.10.23 Google)*
+Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
+GPT-2レベル。
+
+*Flan-T5*
+GPT-3レベルのオープンソース言語モデル。
+
+```mermaid
+flowchart
+
+GPT-2_Clone --> GPT-Neo --> GPT-J --> GPT-NeoX
+Alpaca --> Dolly
+GPT-Neo --> Dolly
+```
+
+*GPT-Neo (EleutherAI)*
+オープンソースのGPT-3を作成することを目的としたモデル。
+
+*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (EleutherAI) *
+60億パラメータ。
+
+
+*GPT-NeoX*
+GPT-3に匹敵する。
+200億パラメータ。
+Microsoft DeepSpeedを使って学習を高速化している。
+Nvidia Megatronを使って分散して学習した。
+
+
+```mermaid
+flowchart
+
+GPT-3 --> GLaM --> LaMDA --> PaLM
+GPT-3 --> OPT --> Galactica
+
+```
+
+
+
 
 
 ```mermaid
@@ -246,3 +320,4 @@ Falcon
 StableLM
 
 
+TODO: データセット
