@@ -39,9 +39,16 @@ JUMAN++ (2015)
 *[デスクトップ マスコット](https://ja.wikipedia.org/wiki/%E4%BC%BA%E3%81%8B) (1998)*
 その後、ペルソナウェア、偽ペルソナウェア、伺か、が流行っていた。
 
+*[IBM Watson](https://en.wikipedia.org/wiki/IBM_Watson) (2011)*
+クイズ番組に出場させるために開発された。
+
 *[Siri](https://ja.wikipedia.org/wiki/Siri) (2011)*
 Hey, Siri!
 iPhoneに搭載され話題となった。
+
+*[Mitsuku](https://en.wikipedia.org/wiki/Kuki_AI) (2013)*
+2013年から2019年の間にローブナー賞で5回優勝している。
+2021年にはKuki AIという名前に代わり、メタバースに進出した。
 
 *[Alexa](https://ja.wikipedia.org/wiki/Amazon_Alexa) (2014)*
 Amazon Echoに搭載され話題となった。
@@ -54,6 +61,9 @@ LINEに登場して話題となった。
 *[Googleアシスタント](https://ja.wikipedia.org/wiki/Google_%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88) (2017)*
 OK, Google!
 今までのGoogle Nowの仕組みと組み合わせて、音声でAndroidを操作することができる。
+
+*[Meena](https://ja.wikipedia.org/wiki/LaMDA) (2020)*
+Meenaとして開発されたものが、のちにLaMDAとなった。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022)*
 OpenAIが開発した大規模言語モデルGPT-3を利用したシステム。
@@ -112,7 +122,7 @@ BERT --> ELECTRA
 ```
 
 *[BERT](https://ja.wikipedia.org/wiki/BERT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.10.11 Google)*
-Decoderを無くしたのはGPT-1と同じだが、双方向(Bidirectional)なAttention層が追加されている。
+TransformerのEncoderを使用し、双方向(Bidirectional)なAttention層が追加されている。
 Transformerが12層連なっているためモデルが大きい。
 Masked LM(Masked Language Modeling)という手法を用いて事前学習した。
 
@@ -140,8 +150,10 @@ V3: 2021.11.16
 A Lite BERTの略。
 BERTの軽量版。
 
-*ELECTRA*
-RoBERTaと同様にBERTの事前学習を改良したもの。
+*[ELECTRA](https://arxiv.org/abs/2003.10555) (2020 Google)*
+GANの手法を取り入れて、BERTの事前学習手法を改良した。
+Masked LMの代わりにReplaced Token Detectionという手法を用いている。
+より少ないデータで効率的な事前学習ができる。
 
 ```mermaid
 flowchart
@@ -155,7 +167,7 @@ Transformer Extra Largeの略。
 通常のTransformerでは、入力長の二乗の計算量がかかる。
 そのため文章をセグメントに分けて、長文に対応できるようにしもの。
 
-*XLNet*
+*XLNet (2019 Google)*
 BERTの改良版。
 
 ```mermaid
@@ -169,7 +181,7 @@ GPT-3 --> GPT-4
 ```
 
 *[GPT-1](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 OpenAI)*
-TransformerのEncoder部分のみを用いて、大規模テキストデータで学習したものがGPTとなる。
+TransformerのDecoderを用いて、大規模テキストデータで学習したものがGPTとなる。
 GPT(Generative Pretrained Transformer)の名前が示す通り、事前学習や転移学習で特定のタスクに適応させている。
 
 GPTの初期モデル。
@@ -210,7 +222,7 @@ text-davinci-003
 3550億個パラメータ。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11 OpenAI)*
-
+InstructGPTの兄弟モデルをもとにしている。
 
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
 マルチモーダル。
@@ -218,22 +230,25 @@ text-davinci-003
 ```mermaid
 flowchart
 
-Transformer --> T5 --> Flan-T5
+Transformer --> T5 --> Flan-T5 --> Flan-UL2
 ```
 
-*T5 (2019.10.23 Google)*
+*[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
 Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
 GPT-2レベル。
+T5はTransformerのEncoderとDecorderの両方を使用している。
+C4データセットを使用。
 
 *Flan-T5*
 GPT-3レベルのオープンソース言語モデル。
+
+Flan-UL2
+商用利用可能。
 
 ```mermaid
 flowchart
 
 GPT-2_Clone --> GPT-Neo --> GPT-J --> GPT-NeoX
-Alpaca --> Dolly
-GPT-Neo --> Dolly
 ```
 
 *GPT-Neo (EleutherAI)*
@@ -258,8 +273,30 @@ GPT-3 --> OPT --> Galactica
 
 ```
 
+GLaM
 
+*[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2022.05 Google)*
+Language Model for Dialogue Applicationsの略。
+もともとはMeena(2020.01)として開発されたが、のちにLaMDAとして発表された。
+Googleの社員が意識が宿ったと述べて話題となった。
+2021年？2022年？
 
+*[Gopher](https://arxiv.org/abs/2112.11446) (2021 DeepMind)*
+2800億のパラメータを持つ。
+Massive Textと呼ばれる10.5TBの英語テキストデータを使用。
+124種中100種のタスクで最高記録を更新して話題となった。
+
+*Chinchilla (2022 DeepMind)
+700億のパラメータを持つ。
+言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
+
+PaLM (2022.04 Google)
+Pathways Language Modelの略。
+5400億のパラメータ。
+ジョークの説明ができる？
+
+OPT (2022.05 Meta)
+1750億のパラメータを持つ。
 
 
 ```mermaid
@@ -271,9 +308,17 @@ LLaMA --> Alpaca
 Alpaca --> Alpaca_LoRA
 Alpaca --> Vicuna
 Alpaca --> Guanaco
+Alpaca --> Dolly
+GPT-Neo --> Dolly
 
 ```
 
+LLaMA (2023.02 Meta)
+商用利用禁止、研究目的にのみ使用可能。
+
+Alpaca (2023.03 Stanford)
+LLaMA 7Bモデルを微調整したもの。
+A100 8枚で3hかかった。
 
 
 
@@ -293,29 +338,22 @@ GPT-3 --> Chinchilla --> Cerebras-GPT
 
 ```
 
-*Seq2Seq (2014)*
-algo: Encoder + Decorder
-Encoder is "Text to Vector"
-RNN or LSTM
 
-*Transformer (2017)*
-algo: Attention
-
-*GPT-1 (2018)*
-
-GPT-Neo
-GPT-J
-GPT-NeoX
-
-GLaM
-LaMDA
-PaLM
-Alpaka
-Chinchilla
-OPT
-BLOOM
-LLaMA
 Cerebras-GPT
+chinchillaのスケーリング則を参考。
+111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13Bのモデルがある。
+オープンなデータセットを使用。
+オープンソース。
+
+BLOOM (2022.11 BigScience)
+BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
+70以上の国と250以上の機関の1000人を超える研究者の協力でアs区政された多言語LLM。
+46の自然言語と13のプログラミング言語を扱える。
+初のオープンソースLLMとなる？？？
+
+
+
+
 Falcon
 StableLM
 
