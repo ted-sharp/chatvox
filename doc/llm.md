@@ -115,7 +115,7 @@ Seq2Seqは、翻訳や対話システム、要約などの様々な自然言語�
 RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コストが増大する問題があった。
 Self-Attentionを用いることで、効率的に処理できるようになった。
 
-*[ELMo](https://arxiv.org/abs/1802.05365) (2018.02.15)*
+*[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
 
@@ -147,14 +147,12 @@ BookCorpus 7000冊のデータ4.5GB を事前学習に用いた。
 WEBから収集した40GBのデータ。
 15億パラメータ。
 
-*[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.06.11 OpenAI)*
+*[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.05.28 OpenAI)*
+GPT-3を超えたあたりでとても優秀になった。
+OpenAIはGPT-3はClosed-Sourceとした。
+
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
-
-GPT-3を超えたあたりでとても優秀になった。
-パラメータ数がある閾値を超えると、いままで処理できなかったタスクをこなせるようになる。
-これを創発と呼ぶ。
-
 
 WEBから収集した570GBのデータ。
 1750億個パラメータ。
@@ -175,11 +173,18 @@ NovelAI Genji(GPT-Jベース)
 
 
 *GPT-3.5 (2022.03.15 OpenAI)*
+初期バージョン
+text-davinci-002
+code-davinci-002
+
+*GPT-3.5v2 (2022.11.28 OpenAI)*
+改良バージョン
+gpt-3.5-turbo 会話用
 text-davinci-003
 
 3550億個パラメータ。
 
-*[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11 OpenAI)*
+*[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11.30 OpenAI)*
 InstructGPTの兄弟モデル。
 チャット向けに調整されている。
 
@@ -189,34 +194,64 @@ InstructGPTの兄弟モデル。
 ```mermaid
 flowchart
 
+GPT-2 --> GPT-Neo --> GPT-J --> GPT-NeoX --> Pythia
+```
+
+*GPT-Neo (2021.03 EleutherAI)*
+GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
+GPT-3以降Closed-Sourceのものが増えた。
+
+*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.05 EleutherAI)*
+60億パラメータ。
+
+*GPT-NeoX (2022.04 EleutherAI)*
+GPT-3に匹敵する。
+200億パラメータ。
+Microsoft DeepSpeedを使って学習を高速化している。
+Nvidia Megatronを使って分散して学習した。
+
+*Pythia*
+
+```mermaid
+flowchart
+
 Transformer --> BERT
 ELMo --> BERT --> RoBERTa --> LUKE
+BERT --> DistilBERT
 BERT --> ALBERT
 BERT --> ELECTRA
 BERT --> DeBERTa
 ```
 
 *[BERT](https://ja.wikipedia.org/wiki/BERT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.10.11 Google)*
+Pretraining Architecture: Encoder
 Bidirectional Encoder Representations from Transformersの略。
 GPTとは違い、TransformerのEncoderを使用し、文章の先頭と末尾からの双方向(Bidirectional)なAttention層が追加されている。
 MLM(Masked Language Modeling)という手法を用いて、ラベリングなしの少ないデータから学習できた。
 また文脈を予測するためにNSP(Next Sentence Prediction)という手法が用いられた。
+
 GPT-1を超えて最高スコアを更新し、応用も効くため話題となった。
+その後GPT-3が発表されるまでBERT系が多く登場することとなった。
 
 *[RoBERTa](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/) (2019.07.26 Facebook AI Research)*
 Robustly optimized BERT approachの略。
 BERTの仕組みをそのままに、パラメータの調整やデータ量を増大させたもの。
 
-*[ALBERT](https://medium.com/syncedreview/googles-albert-is-a-leaner-bert-achieves-sota-on-3-nlp-benchmarks-f64466dd583) (2019.09 Google)*
+*DistilBERT (2019.08.02 Huggingface)*
+BERTを蒸留したもの。
+
+*[ALBERT](https://medium.com/syncedreview/googles-albert-is-a-leaner-bert-achieves-sota-on-3-nlp-benchmarks-f64466dd583) (2019.09.20 Google)*
+Pretraining Task: MLM/NSP
+Num. Params: Base = 12M, Large = 18M, XLarge = 60M
 A Lite BERTの略。
 パラメータの因数分解と冗長性を排除することで、軽量化したモデル。
 
-BERT-baseモデルを軽量化すると、12MパラメータのALBERTモデルが作成できた。
+BERT-baseモデルを軽量化すると、12MパラメータのALBERT-baseモデルが作成できた。
 これは89%の削減となるが、性能の低下はわずかだった。
 モデルサイズが縮小されたので、より大規模な構成を行えるようになった。
 ALBERT-xxlarge構成では最新のスコアを更新した。
 
-*[ELECTRA](https://arxiv.org/abs/2003.10555) (20219.09.26 Google)*
+*[ELECTRA](https://arxiv.org/abs/2003.10555) (20219.09.26 Stanford, Google)*
 GANの手法を取り入れて、BERTの事前学習手法を改良した。
 MLMは文章中のマスクした15%を学習できない問題点があった。
 ELECTRAではReplaced Token Detectionという手法を用いて、より少ないデータで効率的な事前学習ができる。
@@ -238,7 +273,6 @@ flowchart
 
 Transformer --> BERT --> XLNet
 Transformer --> Transformer-XL --> XLNet
-Transformer --> Reformer
 ```
 
 *[Transformer-XL](https://arxiv.org/abs/1901.02860) (2019.01.09)*
@@ -253,18 +287,21 @@ BERTの改良版。
 20のタスクでBERTを超えたと話題になった。
 しかし計算量も増大した。
 
-*Reformer (2020.01.16)*
-自然言語処理(NLP)以外の画像や音楽といった処理にTransformerを利用するために考えられた手法。
-LSH:Locality-Sensitive-Hashingで長いシーケンシャルデータを扱う複雑さを軽減した。
-reversible residual layersにより、メモリ効率を劇的に改善できた。
-言語処理に適用した場合、小説ほどのテキストを一度に学習できる。
-
 ```mermaid
 flowchart
 
-Transformer --> T5 --> Flan-T5
+BERT --> BART
+GPT --> BART
+
+Transformer --> T5 --> Flan-T5/Flan-PaLM
+PaLM --> Flan-T5/Flan-PaLM
+
 Transformer --> UL2 --> Flan-UL2
 ```
+
+*[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
+Bidirectional Auto-Regressive Transformerの略です。
+BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
 Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
@@ -279,17 +316,16 @@ Colossal Clean Crawled Corpus(C4)を作成して、学習に利用している�
 C4データセットを使用。
 GPT-2レベル。
 
-*Flan-T5*
+*Flan-T5/Flan-PaLM (2022.10.20 Google)*
 指示調整タスクのFlan Collectionを使って学習したT5モデル。
 GPT-3レベルのオープンソース言語モデル。
 
-UL2 (2020.10.14)
+*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
 Unified Language Learnerの略。
 データセットやセットアップによらずに言語モデルの性能を上げる手法。
 2種類の言語モデルの長所を併せ持つ。
 
 20B
-
 
 *Flan-UL2*
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
@@ -301,15 +337,11 @@ GoogleがLLaMAに対抗するようにオープンソースで公開した。
 flowchart
 
 Transformer --> Evolved-Transformer --> Meena --> LaMDA
-
-Transformer --> Gopher --> Chinchilla --> Cerebras-GPT
 Transformer --> GLaM
-Transformer --> PaLM
-
-Transformer --> OPT
-
+Transformer --> PaLM --> Flan-PaLM
+PaLM --> Flan-T5
+T5 --> Flan-T5
 ```
-
 
 *Meena (2020.01.28 Google)*
 Googleが開発したチャットボット。
@@ -318,8 +350,6 @@ LaMDAの前身。
 
 26億のパラメータをもつ。
 パブリックドメインのソーシャルメディアの会話から341GBのテキストでトレーニングされている。
-GPT-2と比較すると、
-
 
 *[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2021.05, 2022.01.21 Google)*
 Language Model for Dialogue Applicationsの略。
@@ -328,23 +358,6 @@ Googleの社員が意識が宿ったと述べて話題となった。
 
 1370億のパラメータを持つ。
 1.56T words。
-
-
-*[Gopher](https://arxiv.org/abs/2112.11446) (2021 DeepMind)*
-2800億のパラメータを持つ。
-Massive Textと呼ばれる10.5TBの英語テキストデータを作成し、学習に用いた。
-124種中100種のタスクで最高記録を更新して話題となった。
-
-*Chinchilla (2022 DeepMind)*
-700億のパラメータを持つ。
-言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
-
-
-*Cerebras-GPT (Cerebras)*
-chinchillaのスケーリング則を参考。
-111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13Bのモデルがある。
-オープンなデータセットを使用。
-オープンソース。
 
 *GLaM (2021.12.09 Google)*
 Generalist Language Modelの略。
@@ -360,20 +373,40 @@ Pathways Language Modelの略。
 GPTと同じDecoderタイプのTransformerを採用している。
 
 規模が大きくなるにつれて、機能が解放されていくイメージ。
+OpenAIのスケーリング則を追検証した形となる。
 Gopherなどの先行LLMではモデル規模を拡大しても性能向上の恩恵はあまり見られなかった。
-OpenAIのスケーリング則と創発を追検証した形となる。
-
 
 5400億のパラメータ。
-ジョークの説明ができる？
 
-OPT (2022.05 Meta)
+```mermaid
+flowchart
+
+GPT --> Gopher --> Chinchilla --> Cerebras-GPT
+GPT --> OPT
+GPT --> BLOOM
+```
+
+*[Gopher](https://arxiv.org/abs/2112.11446) (2021.12.08 DeepMind)*
+2800億のパラメータを持つ。
+Massive Textと呼ばれる10.5TBの英語テキストデータを作成し、学習に用いた。
+124種中100種のタスクで最高記録を更新して話題となった。
+
+*[Chinchilla](https://en.wikipedia.org/wiki/Chinchilla_AI) (2022.03.29 DeepMind)*
+700億のパラメータを持つ。
+言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
+
+SparrowはChinchillaのプロンプトバージョンです。
+
+*Cerebras-GPT (2023.03.28 Cerebras)*
+chinchillaのスケーリング則を参考。
+111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13Bのモデルがある。
+オープンなデータセットを使用。
+オープンソース。
+
+*OPT (2022.05.02 Meta)*
 1750億のパラメータを持つ。
 
-
-
-
-BLOOM (2022.11 BigScience)
+*BLOOM (2022.07 BigScience)*
 BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 70以上の国と250以上の機関の1000人を超える研究者の協力で作成された多言語LLM。
 46の自然言語と13のプログラミング言語を扱える。
@@ -385,30 +418,11 @@ BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるので、動かすだけでも24GBのGPUが14枚以上必要とされる。
 1Bのモデルだと12GBのGPUで動かすことができる。
 
-
-```mermaid
-flowchart
-
-GPT-2-Clone --> GPT-Neo --> GPT-J --> GPT-NeoX
-```
-
-*GPT-Neo (EleutherAI)*
-オープンソースのGPT-3を作成することを目的としたモデル。
-
-*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (EleutherAI)*
-60億パラメータ。
-
-*GPT-NeoX*
-GPT-3に匹敵する。
-200億パラメータ。
-Microsoft DeepSpeedを使って学習を高速化している。
-Nvidia Megatronを使って分散して学習した。
-
-
 ```mermaid
 flowchart
 
 GPT-3  --> LLaMA
+PaLM --> LLaMA
 GPT-3 --> ChatGPT --> Alpaca
 LLaMA --> Alpaca
 Alpaca --> Alpaca_LoRA
@@ -460,36 +474,72 @@ RNN --> RWKV --> Raven
 Falcon
 
 
-TODO: データセット
-TODO: HuggingFaceへのリンク、TensorHubへのリンク
+Archi: Pretraining Architecture
+Task: Pretraining Task
 
 M=million=100万
 B=billion=10億
 T=trillion=1兆
 
-|Name|Release|Developer|Params|Corpus|License|Cost|Note|
-|--|--|--|--|--|--|--|--|
-|ELMo|2018||94M|||||
-|BERT|2018|Google|340M|3.3B words|Apache2.0|||
-|XLNet|2019|Google|340M|33B words|Apache2.0|||
-|GPT-1|2018.06.11|OpenAI|117M|BookCorpus 4.5GB||8GPUs 1month, 1.7e19 FLOP||
-|GPT-2|2019.02.14|OpenAI|1.5B|40GB webtext, 10B tokens|MIT|1.5e21 FLOP||
-|GPT-2 full|2019.11.05|OpenAI|1.5B|40GB webtext, 10B tokens|MIT|1.5e21 FLOP||
-|GPT-3|2020.05.28|OpenAI|175B|570GB plaintext, 499B tokens|API|3.1e23 FLOP||
-|GPT-3.5|2022.03.15|OpenAI|175B|570GB plaintext, 499B tokens|API|3.1e23 FLOP||
-|GPT-4|2023.03.14|OpenAI|Undisclosed|Undisclosed|API|Estimated 2.1e25 FLOP||
-|GPT-Neo|2021.03|EleutherAI|2.7B|825GB|MIT|||
-|GPT-J|2021.06|EleutherAI|6B|825GB|Apache2.0|||
-|GPT-NeoX|2022.02|EleutherAI|20B|825GB|Apache2.0|||
-|Gopher|2021.12|DeepMind|280B|MassiveText 10.5TB, 300B tokens||||
-|LaMDA|2022.01|Google|137B|1.56T words, 168B tokens||||
-|Chinchilla|2022.03|DeepMind|70B|1.4T tokens||||
-|PaLM|2022.04|Google|540B|768B tokens||||
-|OPT|2022.05|Meta|175B|180B tokens||||
-|BLOOM|2022.06|Various|175B|1.6TB, 350B tokens||||
+<!-- <div style="overflow-x:scroll"> -->
+
+|Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|--|--|--|--|--|--|--|--|--|--|--|
+|2018.06.11|OpenAI|GPT|Transformer|Decoder|LM|117M|BookCorpus 4.5GB|8GPUs 1month, 1.7e19 FLOP||
+|2019.02.14|OpenAI|GPT-2|GPT|Decoder|LM|1.5B|40GB webtext, 10B tokens|1.5e21 FLOP|MIT|
+|2020.05.28|OpenAI|GPT-3|GPT|Decoder|LM|175B|570GB plaintext, 499B tokens|3.1e23 FLOP|API||
+|2022.03.15|OpenAI|GPT-3.5|GPT|Decoder|LM, RLHF|175B|Same as InstructGPT||API||
+|2022.11.30|OpenAI|ChatGPT|GPT|Decoder|LM, RLHF|175B|Same as GPT3 + datasets generated for RLHF||API||
+|2023.03.14|OpenAI|GPT-4|GPT|Decoder|LM, RLHF|-|-|Estimated 2.1e25 FLOP|API||
+|2021.03|EleutherAI|GPT-Neo|GPT-2|Decoder|LM|125M, 350M, 1.3B, 2.7B (XL)|Pile||MIT||
+|2021.05|EleutherAI|GPT-J|GPT-2|Decoder|LM|6B|Pile||Apache2.0|||
+|2022.04|EleutherAI|GPT-NeoX|GPT-3|Decoder|LM|20B|Pile||Apache2.0||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|2018.02.15|UW, AllenAI|ELMo|-|LSTM|-|94M||||||
+|2018.10.11|Google|BERT|Transformer|Encoder|MLM/NSP|Base = 110M, Large = 340M|3.3B words: Toronto Book Corpus and Wikipedia||Apache2.0||
+|2019.07.26|UW, Google|RoBERTa|BERT|Encoder|MLM(Dynamic)|Base = 125M, Large = 356M|Same as BERT + CC News + OpenWebText + Stories(33B words)||||
+|2019.08.02|Huggingface|DistilBERT|BERT|Encoder|MLM/NSP|66M|Same as BERT||||
+|2019.09.20|Google|ALBERT|BERT|Encoder|MLM/NSP|Base = 12M, Large = 18M, XLarge = 60M|Same as BERT||||
+|2019.09.26|Stanford, Google|ELECTRA|BERT|Encoder|RTD|Small = 14M, Base = 110M, Large = 330M|Same as BERT except for Large with is same as XLNet||||
+|2020.06.13|Microsoft|DeBERTa|BERT|Encoder|MLM|750M (xlarge)|English Wikipedia, BookCorpus, OPENWEBTEXT and STORIES||MIT||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|2019.06.19|CMU, Google|XLNet|Transformer XL|Decoder|PLM|Base=117M, Large=360M|33B words: Same as BERT + Giga5 (16GB text) + and aggressively filtered ClueWeb 2012-B (19GB), Common Crawl (110 GB)||Apache2.0|||
+|2019.10.29|Facebook|BART|BERT for encoder, GPT for Decoder|Encoder/Decoder|DAE|10% more than BERT|Same as RoBERTa|||||
+|2019.10.23|Google|T5|Transformer|Encoder/Decoder|DAE|60M, 220M, 770M, 3B, 11B|C4(750GB)||||
+|2021.01|Google|Switch|T5|Encoder/Decoder, MoE|DAE|1T|C4||||
+|2022.10.20|Google|Flan-T5|T5|Encoder/Decoder|Instruction Tuning|80M, 250M, 780M, 3B, 11B|Flan Collection||Apache-2.0||
+|2022.10.14|Google|UL2|Transformer|Encoder/Decoder|Mixture-of-Denoisers|20B|4C||Apache2.0||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|2021.12.09|Google|GLaM|Transformer|Decoder, MoE|LM|1.2T across 64 experts, but only 96B get activated for inference|1.6T tokens including web pages filtered by Wikipedia and books for quality||||
+|2022.01.21|Google|LaMDA|Transformer|Decoder|LM|137B|1.56T words, 168B tokens||||
+|2022.04.04|Google|PaLM|GPT|Decoder|LM|8B, 62B, 540B|780B tokens||||
+|2022.10.22|Google|Flan-PaLM|PaLM|Decoder|Instruction Tuning|8B, 62B, 540B|same as PaLM + Flan Collection||||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|2021.12.08|DeepMind|Gopher|GPT|Decoder|LM|280B|MassiveText 10.5TB, 300B tokens||||
+|2022.03.16|DeepMind|GopherCite|Gopher|Decoder|LM|280B|MassiveText 10.5TB, 300B tokens||||
+|2022.03.29|DeepMind|Chinchilla|Gopher|Decoder|LM|70B|1.4T tokens, Massive Text||||
+|2022.05.02|Facebook|OPT|GPT-3|Decoder|LM|175B|180B tokens = RoBERTa + the Pile + PushShift.io Reddit||||
+|2022.07|BigScience|BLOOM|GPT|Decoder|LM|560m, 1.1B, 1.7B, 3B, 7.1B, 176B|366B tokens (1.5 TB of text data) multilingual dataset||||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+|2023.02.24|Meta|LLaMA|PaLM？？？, GPT|Decoder|LM|6.7B, 13.0B, 32.5B, 65.2B|English CommonCrawl + C4 + Github + Wikipedia + Gutenberg and Books3 + ArXiv + Stack Exchange||学術用途のみ||
+|2023.03|Stanford|Alpaca|LLaMA|Decoder|LM|7B, 13B？？？|Alpaca Dataset: 1.4T||学術用途のみ||
+|2023.03|Stanford, UC Berkeley, CMU, UC San Diego, MBZUAI|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
+|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
+
+TODO: LUKE
+TODO: Pythia
+TODO: Cerebras
+TODO: ？？？
+
+TODO: データセット
+TODO: HuggingFaceへのリンク、TensorHubへのリンク
+
+
+
+<!-- </div> -->
+<!-- 
 |AlexaTM|2022.11|Amazon|20B|1.3T|API|||
 |LLaMA|2023.02|Meta|13B-65B|LLaMA Dataset: 1.4T|学術用途のみ|||
-|Alpaca||Stanford|13B|Alpaca Dataset: 1.4T|学術用途のみ|||
 |Vicuna||etc|7B-13B|ShareGPT会話データ|学術用途のみ|||
 |Dolly-v2||Databricks|7B-13B|Databricks Dataset|オープン、商用可|||
 |Cerebras-GPT|2023.03|Cerebras|13B||Apache2.0|||
@@ -497,6 +547,7 @@ T=trillion=1兆
 |RWKV||BlinkDL|7B-13B|Pile|オープン、商用可|||
 |Raven||BlinkDL|7B-13B|Alpaca Dataset|学術用途のみ|||
 |StableLM||stability.ai|7B-13B|拡張Pile|オープン、商用可|||
+-->
 
 ### 向いているタスク
 
