@@ -116,7 +116,7 @@ RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コス�
 Self-Attentionを用いることで、効率的に処理できるようになった。
 
 *[ELMo](https://arxiv.org/abs/1802.05365) (2018.02.15)*
-単語ベクトルで文脈を考慮できるようにしたもの。
+Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
 
 ```mermaid
@@ -150,7 +150,11 @@ WEBから収集した40GBのデータ。
 *[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.06.11 OpenAI)*
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
+
 GPT-3を超えたあたりでとても優秀になった。
+パラメータ数がある閾値を超えると、いままで処理できなかったタスクをこなせるようになる。
+これを創発と呼ぶ。
+
 
 WEBから収集した570GBのデータ。
 1750億個パラメータ。
@@ -176,7 +180,8 @@ text-davinci-003
 3550億個パラメータ。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11 OpenAI)*
-InstructGPTの兄弟モデルをもとにしている。
+InstructGPTの兄弟モデル。
+チャット向けに調整されている。
 
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
 マルチモーダル。
@@ -257,7 +262,8 @@ reversible residual layersにより、メモリ効率を劇的に改善できた
 ```mermaid
 flowchart
 
-Transformer --> T5 --> Flan-T5 --> Flan-UL2
+Transformer --> T5 --> Flan-T5
+Transformer --> UL2 --> Flan-UL2
 ```
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
@@ -274,15 +280,27 @@ C4データセットを使用。
 GPT-2レベル。
 
 *Flan-T5*
+指示調整タスクのFlan Collectionを使って学習したT5モデル。
 GPT-3レベルのオープンソース言語モデル。
 
+UL2 (2020.10.14)
+Unified Language Learnerの略。
+データセットやセットアップによらずに言語モデルの性能を上げる手法。
+2種類の言語モデルの長所を併せ持つ。
+
+20B
+
+
 *Flan-UL2*
+指示調整タスクのFlan Collectionを使って学習したUL2モデル。
 商用利用可能。
+GoogleがLLaMAに対抗するようにオープンソースで公開した。
+
 
 ```mermaid
 flowchart
 
-Transformer --> Evolved Transformer --> Meena --> LaMDA
+Transformer --> Evolved-Transformer --> Meena --> LaMDA
 
 Transformer --> Gopher --> Chinchilla --> Cerebras-GPT
 Transformer --> GLaM
@@ -342,6 +360,9 @@ Pathways Language Modelの略。
 GPTと同じDecoderタイプのTransformerを採用している。
 
 規模が大きくなるにつれて、機能が解放されていくイメージ。
+Gopherなどの先行LLMではモデル規模を拡大しても性能向上の恩恵はあまり見られなかった。
+OpenAIのスケーリング則と創発を追検証した形となる。
+
 
 5400億のパラメータ。
 ジョークの説明ができる？
@@ -398,8 +419,16 @@ GPT-Neo --> Dolly
 
 ```
 
-LLaMA (2023.02 Meta)
+LLaMA (2023.02.24 Meta)
 商用利用禁止、研究目的にのみ使用可能。
+
+65Bと33Bは1.4兆トークンでトレーニングされている。
+7Bは1兆個のトークン。
+
+65B
+
+LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている。
+
 
 Alpaca (2023.03 Stanford)
 LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整したもの。
@@ -478,6 +507,8 @@ T5で使用されている、Encoder、Decoderの構造は、翻訳や要約に�
 0-shotとは、追加学習なしの状態を示す。
 few-shotは、わずかな追加学習をして、タスクに適応させたあとの状態を示す。
 
+最先端(SOTA:State-Of-The-Art)
+
 ## Datasets
 
 Pile
@@ -485,6 +516,11 @@ C4
 MassiveText (DeepMind)
 Wikipedia
 GitHub
+
+Flan Collection
+指示調整タスク
+
+思考連鎖プロンプト(CoT:Chain of Thought prompting)
 
 ## Others
 
@@ -497,3 +533,16 @@ bitsandbytes
 FlexGen
 
 
+## 参考
+
+[Wikipedia - LLM](https://en.wikipedia.org/wiki/Large_language_model)
+[Transformer models: an introduction and catalog — 2023 Edition](https://amatriain.net/blog/transformer-models-an-introduction-and-catalog-2d1e9039f376/)
+[A Catalog of Transformer Models](https://doi.org/10.48366/r585918)
+[Multi-task Language Understanding on MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu)
+[LLMSurvey](https://github.com/rucaibox/llmsurvey)
+[The Practical Guides for Large Language Models](https://github.com/mooler0410/llmspracticalguide)
+
+[WebBigdata - 人工知能/機械学習 - モデル](https://webbigdata.jp/category/ai-ml/models/)
+[百花繚乱の大規模言語モデル　その現状まとめ【2023年4月末版】](https://www.itmedia.co.jp/news/articles/2304/25/news156.html)
+[大規模言語モデル間の性能比較まとめ](https://note.com/mahlab/n/na71a267a16dc)
+[【自然言語処理】Transformer #まとめ編](https://yhayato1320.hatenablog.com/entry/2023/01/24/163747)
