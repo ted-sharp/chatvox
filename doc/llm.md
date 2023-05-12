@@ -76,9 +76,11 @@ Codexなどを組み込んだGPT-3.5が爆発的な人気を呼んだ。
 flowchart
 
 RNN --> LSTM --> Word2Vec --> GloVe
+Word2Vec --> fastText
 LSTM --> Seq2Seq --> Attention --> Transformer
 RNN --> GRU
 LSTM --> ELMo
+LSTM --> ULMFiT
 ```
 
 *[RNN](https://ja.wikipedia.org/wiki/%E5%9B%9E%E5%B8%B0%E5%9E%8B%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF) (1986, 2012)*
@@ -102,7 +104,11 @@ LSTMよりも簡単な構造を持ち、パラメータ数が少なく、計算�
 Word2Vecというワードをベクトル化して計算できる手法が登場した。
 
 *[GloVe](https://en.wikipedia.org/wiki/GloVe) (2014)*
-Word2Vecの局所的(local)な表現と、大局的(Gloval)な表現を組み合わせた手法。
+Word2Vecの局所的(local)な表現と、大局的(Global)な表現を組み合わせた手法。
+
+*[fastText](https://en.wikipedia.org/wiki/FastText) (2015)*
+[facebookresearch/fastText](https://github.com/facebookresearch/fastText)
+Self-Attentionの原型。
 
 *[Seq2Seq](https://en.wikipedia.org/wiki/Seq2seq) (2014)*
 EncoderとDecoderを搭載したSeq2Seqという手法が登場した。
@@ -118,6 +124,11 @@ Self-Attentionを用いることで、効率的に処理できるようになっ
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
+
+*[ULMFiT]() (2018.02.18)*
+[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
+事前学習とファインチューニングという今のLLMの原型となるもの。
+
 
 ```mermaid
 flowchart
@@ -210,7 +221,10 @@ GPT-3に匹敵する。
 Microsoft DeepSpeedを使って学習を高速化している。
 Nvidia Megatronを使って分散して学習した。
 
-*Pythia*
+*Pythia (2023.02.13 EleutherAI)*
+[Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
+[EleutherAI/pythia](https://github.com/EleutherAI/pythia)
+
 
 ```mermaid
 flowchart
@@ -292,16 +306,21 @@ flowchart
 
 BERT --> BART
 GPT --> BART
-
-Transformer --> T5 --> Flan-T5/Flan-PaLM
-PaLM --> Flan-T5/Flan-PaLM
-
-Transformer --> UL2 --> Flan-UL2
 ```
 
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
+
+```mermaid
+flowchart
+
+Transformer --> T5 --> MT5
+T5 --> T0
+MT5 --> MT0
+
+Transformer --> UL2
+```
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
 Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
@@ -314,11 +333,16 @@ Colossal Clean Crawled Corpus(C4)を作成して、学習に利用している�
 
 110億のパラメタ。
 C4データセットを使用。
-GPT-2レベル。
 
-*Flan-T5/Flan-PaLM (2022.10.20 Google)*
-指示調整タスクのFlan Collectionを使って学習したT5モデル。
-GPT-3レベルのオープンソース言語モデル。
+MT5
+Multilingual-T5
+
+T0
+ゼロショット向けに調整したT5
+
+MT0
+MT5をファインチューニングしたもの。
+BLOOMZと同時に発表された？
 
 *[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
 Unified Language Learnerの略。
@@ -327,20 +351,31 @@ Unified Language Learnerの略。
 
 20B
 
+
+```mermaid
+flowchart
+
+T5 --> Flan-T5/Flan-PaLM
+PaLM --> Flan-T5/Flan-PaLM
+UL2 --> Flan-UL2
+```
+
+*Flan-T5/Flan-PaLM (2022.10.20 Google)*
+指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
+GPT-3レベルのオープンソース言語モデル。
+
+
 *Flan-UL2*
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
 商用利用可能。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 
-
 ```mermaid
 flowchart
 
-Transformer --> Evolved-Transformer --> Meena --> LaMDA
+Transformer --> Evolved-Transformer --> Meena --> LaMDA --> Bard
 Transformer --> GLaM
-Transformer --> PaLM --> Flan-PaLM
-PaLM --> Flan-T5
-T5 --> Flan-T5
+Transformer --> PaLM --> PaLM2
 ```
 
 *Meena (2020.01.28 Google)*
@@ -358,6 +393,9 @@ Googleの社員が意識が宿ったと述べて話題となった。
 
 1370億のパラメータを持つ。
 1.56T words。
+
+*Bard*
+ChatGPTのに対抗して、LaMDAベースで作成したもの
 
 *GLaM (2021.12.09 Google)*
 Generalist Language Modelの略。
@@ -378,18 +416,23 @@ Gopherなどの先行LLMではモデル規模を拡大しても性能向上の�
 
 5400億のパラメータ。
 
+*PaLM2*
+
 ```mermaid
 flowchart
 
 GPT --> Gopher --> Chinchilla --> Cerebras-GPT
-GPT --> OPT
-GPT --> BLOOM
+GPT --> OPT --> OPT-IML
+GPT --> BLOOM --> BLOOMZ
+BLOOM --> BLOOM+1
 ```
 
 *[Gopher](https://arxiv.org/abs/2112.11446) (2021.12.08 DeepMind)*
 2800億のパラメータを持つ。
 Massive Textと呼ばれる10.5TBの英語テキストデータを作成し、学習に用いた。
 124種中100種のタスクで最高記録を更新して話題となった。
+
+GopherCite
 
 *[Chinchilla](https://en.wikipedia.org/wiki/Chinchilla_AI) (2022.03.29 DeepMind)*
 700億のパラメータを持つ。
@@ -406,6 +449,8 @@ chinchillaのスケーリング則を参考。
 *OPT (2022.05.02 Meta)*
 1750億のパラメータを持つ。
 
+OPT-IML
+
 *BLOOM (2022.07 BigScience)*
 BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 70以上の国と250以上の機関の1000人を超える研究者の協力で作成された多言語LLM。
@@ -418,6 +463,9 @@ BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるので、動かすだけでも24GBのGPUが14枚以上必要とされる。
 1Bのモデルだと12GBのGPUで動かすことができる。
 
+BLOOMZ
+BLOOMをファインチューニングしたもの。
+
 ```mermaid
 flowchart
 
@@ -429,7 +477,8 @@ Alpaca --> Alpaca_LoRA
 Alpaca --> Vicuna
 Alpaca --> Guanaco
 Alpaca --> Dolly
-GPT-Neo --> Dolly
+GPT-Neo --> Dolly --> Dolly-v2
+LLaMA --> OpenLLaMA
 
 ```
 
@@ -454,6 +503,8 @@ AlpacaをShareGPTのデータで微調整したもの。
 
 Dolly-v2
 Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
+
+MPT-7B
 
 StableLM
 StableDiffusionによる、クリーンかつ自由なモデル。
@@ -488,8 +539,6 @@ T=trillion=1兆
 |2018.06.11|OpenAI|GPT|Transformer|Decoder|LM|117M|BookCorpus 4.5GB|8GPUs 1month, 1.7e19 FLOP||
 |2019.02.14|OpenAI|GPT-2|GPT|Decoder|LM|1.5B|40GB webtext, 10B tokens|1.5e21 FLOP|MIT|
 |2020.05.28|OpenAI|GPT-3|GPT|Decoder|LM|175B|570GB plaintext, 499B tokens|3.1e23 FLOP|API||
-|2022.03.15|OpenAI|GPT-3.5|GPT|Decoder|LM, RLHF|175B|Same as InstructGPT||API||
-|2022.11.30|OpenAI|ChatGPT|GPT|Decoder|LM, RLHF|175B|Same as GPT3 + datasets generated for RLHF||API||
 |2023.03.14|OpenAI|GPT-4|GPT|Decoder|LM, RLHF|-|-|Estimated 2.1e25 FLOP|API||
 |2021.03|EleutherAI|GPT-Neo|GPT-2|Decoder|LM|125M, 350M, 1.3B, 2.7B (XL)|Pile||MIT||
 |2021.05|EleutherAI|GPT-J|GPT-2|Decoder|LM|6B|Pile||Apache2.0|||
@@ -507,30 +556,28 @@ T=trillion=1兆
 |2019.10.29|Facebook|BART|BERT for encoder, GPT for Decoder|Encoder/Decoder|DAE|10% more than BERT|Same as RoBERTa|||||
 |2019.10.23|Google|T5|Transformer|Encoder/Decoder|DAE|60M, 220M, 770M, 3B, 11B|C4(750GB)||||
 |2021.01|Google|Switch|T5|Encoder/Decoder, MoE|DAE|1T|C4||||
-|2022.10.20|Google|Flan-T5|T5|Encoder/Decoder|Instruction Tuning|80M, 250M, 780M, 3B, 11B|Flan Collection||Apache-2.0||
 |2022.10.14|Google|UL2|Transformer|Encoder/Decoder|Mixture-of-Denoisers|20B|4C||Apache2.0||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 |2021.12.09|Google|GLaM|Transformer|Decoder, MoE|LM|1.2T across 64 experts, but only 96B get activated for inference|1.6T tokens including web pages filtered by Wikipedia and books for quality||||
 |2022.01.21|Google|LaMDA|Transformer|Decoder|LM|137B|1.56T words, 168B tokens||||
 |2022.04.04|Google|PaLM|GPT|Decoder|LM|8B, 62B, 540B|780B tokens||||
-|2022.10.22|Google|Flan-PaLM|PaLM|Decoder|Instruction Tuning|8B, 62B, 540B|same as PaLM + Flan Collection||||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 |2021.12.08|DeepMind|Gopher|GPT|Decoder|LM|280B|MassiveText 10.5TB, 300B tokens||||
-|2022.03.16|DeepMind|GopherCite|Gopher|Decoder|LM|280B|MassiveText 10.5TB, 300B tokens||||
 |2022.03.29|DeepMind|Chinchilla|Gopher|Decoder|LM|70B|1.4T tokens, Massive Text||||
 |2022.05.02|Facebook|OPT|GPT-3|Decoder|LM|175B|180B tokens = RoBERTa + the Pile + PushShift.io Reddit||||
 |2022.07|BigScience|BLOOM|GPT|Decoder|LM|560m, 1.1B, 1.7B, 3B, 7.1B, 176B|366B tokens (1.5 TB of text data) multilingual dataset||||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 |2023.02.24|Meta|LLaMA|PaLM？？？, GPT|Decoder|LM|6.7B, 13.0B, 32.5B, 65.2B|English CommonCrawl + C4 + Github + Wikipedia + Gutenberg and Books3 + ArXiv + Stack Exchange||学術用途のみ||
 |2023.03|Stanford|Alpaca|LLaMA|Decoder|LM|7B, 13B？？？|Alpaca Dataset: 1.4T||学術用途のみ||
-|2023.03|Stanford, UC Berkeley, CMU, UC San Diego, MBZUAI|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
+|2023.03|Stanford, and others|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 
-TODO: LUKE
-TODO: Pythia
 TODO: Cerebras
 TODO: ？？？
 
+JurassicはOpenAIっぽいAPI提供なので省略か・・・？
+
+TODO: 論文あるときは、論文のタイトルとリンク
 TODO: データセット
 TODO: HuggingFaceへのリンク、TensorHubへのリンク
 
