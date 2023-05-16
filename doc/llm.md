@@ -18,13 +18,17 @@ ELIZA(DOCTOR)は心理療法士の会話を模したものが有名。
 PARRYは偏執病的統合失調症患者をシミュレートしようとしたもの。
 ELIZA(DOCTOR)と通信し話題となった。
 
-*[A.L.I.C.E](https://ja.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity) (1995)*
+*[A.L.I.C.E.](https://ja.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity) (1995)*
 ヒューリスティックパターンマッチングを使用している。
-パターンマッチング手法の集大成といえる。
+AIML(Artificial Intelligence Markup Language)というXMLベースで条件を記述できた。
+AIMLはGPLライセンスで公開されたため、後の多くのチャットボットがGPLで作成されることとなった。
+ローブナー賞(Loebner Prize)というチャットボットが人間と区別できないほどの会話能力を持つか評価するコンテストで優勝して話題となった。
+ローブナー賞で2000年、2001年、2004年に受賞している。
 
 *[Jabberwacky](https://ja.wikipedia.org/wiki/Jabberwacky) (1997)*
 ユーモラスな人間同士の自然な会話をシミュレートすることを目的としていた。
 ユーザーとの会話の大規模なデータベースを構築し、言語と文脈を学習することができた。
+ローブナー賞で2003年、2005年、2006年に受賞している。
 
 *[人工無能](https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%84%A1%E8%84%B3) (1995)*
 一方日本では、ゆいぼっとや人工無能うずらが流行っていた。
@@ -42,12 +46,22 @@ JUMAN++ (2015)
 *[IBM Watson](https://en.wikipedia.org/wiki/IBM_Watson) (2011)*
 クイズ番組に出場させるために開発された。
 
+2013年には、Watsonにより人間味を持たせようと俗語辞書Urban Dictionaryを学習させたことにより、下品な言葉遣いになった事例がある。
+この試みは中断され、スマートフィルターが開発されることとなった。
+
 *[Siri](https://ja.wikipedia.org/wiki/Siri) (2011)*
 Hey, Siri!
 iPhoneに搭載され話題となった。
 
+*[Google Now](https://ja.wikipedia.org/wiki/Google_Now) (2012)*
+OK, Google!
+Androidに搭載され話題となった。
+
 *[Mitsuku](https://en.wikipedia.org/wiki/Kuki_AI) (2013)*
-2013年から2019年の間にローブナー賞で5回優勝している。
+A.L.I.C.E.で開発されたAIMLを基にしている。
+2013年から2019年の間にローブナー賞で5回受賞している。
+これ以降はローブナー賞は中止された。
+
 2021年にはKuki AIという名前に代わり、メタバースに進出した。
 
 *[Alexa](https://ja.wikipedia.org/wiki/Amazon_Alexa) (2014)*
@@ -56,11 +70,13 @@ Amazon Echoに搭載され話題となった。
 同時期にWindowsのCortanaなどがある。
 
 *[りんな](https://ja.wikipedia.org/wiki/%E3%82%8A%E3%82%93%E3%81%AA_(%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD)) (2015)*
-LINEに登場して話題となった。
+女子高生AIとしてLINEに登場して話題となった。
+
+同時期にMicrosoft Tayが登場しているが、ユーザーとの会話を学習する機能により調教されたため、問題発言を繰り返し終了された。
 
 *[Googleアシスタント](https://ja.wikipedia.org/wiki/Google_%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88) (2017)*
-OK, Google!
 今までのGoogle Nowの仕組みと組み合わせて、音声でAndroidを操作することができる。
+また、双方向の会話が可能となった。
 
 *[Meena](https://ja.wikipedia.org/wiki/LaMDA) (2020)*
 Meenaとして開発されたものが、のちにLaMDAとなった。
@@ -199,17 +215,24 @@ text-davinci-003
 InstructGPTの兄弟モデル。
 チャット向けに調整されている。
 
+APIは従量課金制。
+Azure OpenAI Serviceからも同じモデルのAPIを使用することができる。
+なお、価格は同じで、レスポンスはAzureの方が早い模様。
+
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
 マルチモーダル。
 
 ```mermaid
 flowchart
 
+GPT4ALL --> GPT4ALL-J
+GPT-J --> GPT4ALL-J
 GPT-2 --> GPT-Neo --> GPT-J --> GPT-NeoX --> Pythia
 ```
 
 *GPT-Neo (2021.03 EleutherAI)*
 GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
+GPT-2のクローンを作ろうとしたものをもとにしている。
 GPT-3以降Closed-Sourceのものが増えた。
 
 *[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.05 EleutherAI)*
@@ -225,6 +248,21 @@ Nvidia Megatronを使って分散して学習した。
 [Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
 [EleutherAI/pythia](https://github.com/EleutherAI/pythia)
 
+
+GPT4ALL
+ローカルで動くChatGPTを目指したもの？
+
+GPT4ALL-J
+GPT-Jをファインチューニングしたモデルを使用している。
+
+Megatron-NL(nVidia)
+8.3B
+
+Turing-NLG (2020.02.13 Microsoft)
+https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
+170B
+
+MT-NLG
 
 ```mermaid
 flowchart
@@ -304,8 +342,8 @@ BERTの改良版。
 ```mermaid
 flowchart
 
-BERT --> BART
-GPT --> BART
+Transformer --> BERT --> BART
+Transformer --> GPT --> BART
 ```
 
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
@@ -355,15 +393,22 @@ Unified Language Learnerの略。
 ```mermaid
 flowchart
 
-T5 --> Flan-T5/Flan-PaLM
-PaLM --> Flan-T5/Flan-PaLM
-UL2 --> Flan-UL2
+Transformer --> T5 --> Flan-T5/Flan-PaLM
+Transformer --> PaLM --> Flan-T5/Flan-PaLM
 ```
 
 *Flan-T5/Flan-PaLM (2022.10.20 Google)*
 指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
 GPT-3レベルのオープンソース言語モデル。
 
+
+```mermaid
+flowchart
+
+Transformer --> UL2 --> Flan-UL2
+UL2 --> UL2R --> Flan-U-PaLM
+Transformer --> PaLM --> Flan-U-PaLM
+```
 
 *Flan-UL2*
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
@@ -421,7 +466,8 @@ Gopherなどの先行LLMではモデル規模を拡大しても性能向上の�
 ```mermaid
 flowchart
 
-GPT --> Gopher --> Chinchilla --> Cerebras-GPT
+Transformer --> GPT --> Gopher --> Chinchilla --> Sparrow
+Chinchilla --> Cerebras-GPT
 GPT --> OPT --> OPT-IML
 GPT --> BLOOM --> BLOOMZ
 BLOOM --> BLOOM+1
@@ -470,7 +516,6 @@ BLOOMをファインチューニングしたもの。
 flowchart
 
 GPT-3  --> LLaMA
-PaLM --> LLaMA
 GPT-3 --> ChatGPT --> Alpaca
 LLaMA --> Alpaca
 Alpaca --> Alpaca_LoRA
@@ -479,6 +524,7 @@ Alpaca --> Guanaco
 Alpaca --> Dolly
 GPT-Neo --> Dolly --> Dolly-v2
 LLaMA --> OpenLLaMA
+LLaMA --> RedPajama-INCITE
 
 ```
 
@@ -506,8 +552,12 @@ Databricksは自社の社員による1.5万回の会話データセットを作�
 
 MPT-7B
 
+
 StableLM
 StableDiffusionによる、クリーンかつ自由なモデル。
+
+HuggingChat
+
 
 
 
