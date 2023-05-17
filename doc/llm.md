@@ -141,10 +141,14 @@ Self-Attentionを用いることで、効率的に処理できるようになっ
 Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
 
-*[ULMFiT]() (2018.02.18)*
+*ULMFiT (2018.02.18)*
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
 事前学習とファインチューニングという今のLLMの原型となるもの。
 
+Wikipedia
+arxiv
+GitHub
+HuggingFace
 
 ```mermaid
 flowchart
@@ -225,9 +229,9 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 ```mermaid
 flowchart
 
-GPT4ALL --> GPT4ALL-J
-GPT-J --> GPT4ALL-J
-GPT-2 --> GPT-Neo --> GPT-J --> GPT-NeoX --> Pythia
+GPT-2 --> GPT-J --> GPT4ALL-J
+GPT-2 --> GPT-Neo --> GPT-NeoX --> GPT4LL --> GPT4ALL-J
+GPT-NeoX --> Pythia
 ```
 
 *GPT-Neo (2021.03 EleutherAI)*
@@ -237,12 +241,14 @@ GPT-3以降Closed-Sourceのものが増えた。
 
 *[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.05 EleutherAI)*
 60億パラメータ。
+The Pileデータセットで訓練された。
+公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
 
-*GPT-NeoX (2022.04 EleutherAI)*
-GPT-3に匹敵する。
+*GPT-NeoX (2022.02 EleutherAI)*
 200億パラメータ。
 Microsoft DeepSpeedを使って学習を高速化している。
 Nvidia Megatronを使って分散して学習した。
+公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
 
 *Pythia (2023.02.13 EleutherAI)*
 [Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
@@ -254,6 +260,14 @@ GPT4ALL
 
 GPT4ALL-J
 GPT-Jをファインチューニングしたモデルを使用している。
+
+Pythia
+LLMの訓練とスケーリングを分析するために作成された。
+70Mから12Bまでのパラメータのモデルがある。
+さらに各モデルの154のチェックポイントを公開している。
+
+
+
 
 Megatron-NL(nVidia)
 8.3B
@@ -353,11 +367,9 @@ BERTのEncoderとGPTのDecoderを組み合わせたもの。
 ```mermaid
 flowchart
 
-Transformer --> T5 --> MT5
+Transformer --> T5 --> mT5
 T5 --> T0
-MT5 --> MT0
-
-Transformer --> UL2
+mT5 --> mT0
 ```
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
@@ -382,45 +394,12 @@ MT0
 MT5をファインチューニングしたもの。
 BLOOMZと同時に発表された？
 
-*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
-Unified Language Learnerの略。
-データセットやセットアップによらずに言語モデルの性能を上げる手法。
-2種類の言語モデルの長所を併せ持つ。
-
-20B
-
-
-```mermaid
-flowchart
-
-Transformer --> T5 --> Flan-T5/Flan-PaLM
-Transformer --> PaLM --> Flan-T5/Flan-PaLM
-```
-
-*Flan-T5/Flan-PaLM (2022.10.20 Google)*
-指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
-GPT-3レベルのオープンソース言語モデル。
-
-
-```mermaid
-flowchart
-
-Transformer --> UL2 --> Flan-UL2
-UL2 --> UL2R --> Flan-U-PaLM
-Transformer --> PaLM --> Flan-U-PaLM
-```
-
-*Flan-UL2*
-指示調整タスクのFlan Collectionを使って学習したUL2モデル。
-商用利用可能。
-GoogleがLLaMAに対抗するようにオープンソースで公開した。
-
 ```mermaid
 flowchart
 
 Transformer --> Evolved-Transformer --> Meena --> LaMDA --> Bard
 Transformer --> GLaM
-Transformer --> PaLM --> PaLM2
+Transformer --> PaLM --> PaLM-2 --> Gemini
 ```
 
 *Meena (2020.01.28 Google)*
@@ -461,7 +440,62 @@ Gopherなどの先行LLMではモデル規模を拡大しても性能向上の�
 
 5400億のパラメータ。
 
-*PaLM2*
+*PaLM 2 (2023.5.11 Google)*
+Google I/Oで発表されたPaLMの次世代モデル。
+Bardをはじめ、すでに多くのGoogleのサービスに使用されている。
+
+*Gemini*
+GoogleのPaLM 2の次世代モデル。
+開発中。
+
+
+```mermaid
+flowchart
+
+Transformer --> T5 --> Flan-T5/Flan-PaLM
+Transformer --> PaLM --> Flan-T5/Flan-PaLM
+Flan --> Flan-T5/Flan-PaLM
+```
+
+*Flan-T5/Flan-PaLM (2022.10.20 Google)*
+指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
+GPT-3レベルのオープンソース言語モデル。
+
+
+*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
+Unified Language Learnerの略。
+データセットやセットアップによらずに言語モデルの性能を上げる手法。
+2種類の言語モデルの長所を併せ持つ。
+
+20B
+
+
+
+
+```mermaid
+flowchart
+
+UL2 --> Flan-UL2
+Flan --> Flan-UL2
+Flan --> Flan-U-PaLM
+UL2 --> UL2R --> Flan-U-PaLM
+Transformer --> PaLM --> Flan-U-PaLM
+```
+
+
+*Flan-UL2*
+指示調整タスクのFlan Collectionを使って学習したUL2モデル。
+商用利用可能。
+GoogleがLLaMAに対抗するようにオープンソースで公開した。
+
+*UL2R*
+UL2Rは様々なサイズの言語モデルを指示微調整することを目的としている。
+
+*Flan-U-PaLM*
+UL2RとFlanでPaLMを追加学習させたもの。
+U-PaLMやFlan-PaLMを上回るパフォーマンスを発揮した。
+MMLUベンチマーク75.4%でスコアを更新した。
+
 
 ```mermaid
 flowchart
@@ -550,7 +584,11 @@ AlpacaをShareGPTのデータで微調整したもの。
 Dolly-v2
 Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
 
-MPT-7B
+*MPT-7B (MosaicML)*
+商用利用が可能なオープンソースのモデル。
+テキストとコードの1Tのトークンで訓練された。
+440のGPUで9.5日間かけて訓練された。
+200万ドル(約3,000万円)かかったとされる。
 
 
 StableLM
@@ -559,15 +597,26 @@ StableDiffusionによる、クリーンかつ自由なモデル。
 HuggingChat
 
 
+*OpenLLaMA*
+LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
+2000億トークンで訓練したOpenLLaMA 7Bのモデルがある。
+RedPajamaデータセットで訓練している。
 
 
 ```mermaid
 flowchart
 
 RNN --> RWKV --> Raven
+Transformer --> RWKV
 ```
 
+RWKV
+Read-Write Key Value の略。
+RNNとTransformerのいいとこどり。
+7Bと14Bのモデルがある。
+GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
 
+14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
 
 
 
