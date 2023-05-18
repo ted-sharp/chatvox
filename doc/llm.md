@@ -23,12 +23,12 @@ ELIZA(DOCTOR)と通信し話題となった。
 AIML(Artificial Intelligence Markup Language)というXMLベースで条件を記述できた。
 AIMLはGPLライセンスで公開されたため、後の多くのチャットボットがGPLで作成されることとなった。
 ローブナー賞(Loebner Prize)というチャットボットが人間と区別できないほどの会話能力を持つか評価するコンテストで優勝して話題となった。
-ローブナー賞で2000年、2001年、2004年に受賞している。
+ローブナー賞を2000年、2001年、2004年に受賞している。
 
 *[Jabberwacky](https://ja.wikipedia.org/wiki/Jabberwacky) (1997)*
 ユーモラスな人間同士の自然な会話をシミュレートすることを目的としていた。
 ユーザーとの会話の大規模なデータベースを構築し、言語と文脈を学習することができた。
-ローブナー賞で2003年、2005年、2006年に受賞している。
+ローブナー賞を2003年、2005年、2006年に受賞している。
 
 *[人工無能](https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%84%A1%E8%84%B3) (1995)*
 一方日本では、ゆいぼっとや人工無能うずらが流行っていた。
@@ -59,7 +59,7 @@ Androidに搭載され話題となった。
 
 *[Mitsuku](https://en.wikipedia.org/wiki/Kuki_AI) (2013)*
 A.L.I.C.E.で開発されたAIMLを基にしている。
-2013年から2019年の間にローブナー賞で5回受賞している。
+2013年から2019年の間にローブナー賞を5回受賞している。
 これ以降はローブナー賞は中止された。
 
 2021年にはKuki AIという名前に代わり、メタバースに進出した。
@@ -105,7 +105,8 @@ RNNの考え自体は昔からあった。
 しかし再帰的な処理は計算コストが高く、ハードウェアの性能が足りなかった。
 また勾配消失があり学習が収束しない問題があった。
 そのため、RNN以外の研究に移っていった。
-その後、CNNでDeep Learningが注目を集め、RNNにも注目が戻ってきた。
+
+CNNでDeep Learningが注目を集め、RNNにも注目が戻ってきた。
 
 *[LSTM](https://ja.wikipedia.org/wiki/%E9%95%B7%E3%83%BB%E7%9F%AD%E6%9C%9F%E8%A8%98%E6%86%B6) (1997, 2007)*
 RNNの勾配消失を解決するためにLSTMが登場した。
@@ -116,24 +117,26 @@ LSTMよりも簡単な構造を持ち、パラメータ数が少なく、計算�
 いくつかの問題ではLSTMに類似する性能が発揮された。
 しかし、LSTMの優位性を上回ることができなかった。
 
-*[Word2Vec](https://ja.wikipedia.org/wiki/Word2vec) (2013)*
+*[Word2Vec](https://ja.wikipedia.org/wiki/Word2vec) (2013 Google)*
 Word2Vecというワードをベクトル化して計算できる手法が登場した。
 
-*[GloVe](https://en.wikipedia.org/wiki/GloVe) (2014)*
+*[GloVe](https://en.wikipedia.org/wiki/GloVe) (2014.01.02 Stanford)*
 Word2Vecの局所的(local)な表現と、大局的(Global)な表現を組み合わせた手法。
+Global Vectors for Word Representation
 
-*[fastText](https://en.wikipedia.org/wiki/FastText) (2015)*
+*[fastText](https://en.wikipedia.org/wiki/FastText) (2015 Facebook)*
 [facebookresearch/fastText](https://github.com/facebookresearch/fastText)
 Self-Attentionの原型。
 
-*[Seq2Seq](https://en.wikipedia.org/wiki/Seq2seq) (2014)*
+*[Seq2Seq](https://en.wikipedia.org/wiki/Seq2seq) (2014 Google)*
 EncoderとDecoderを搭載したSeq2Seqという手法が登場した。
 Seq2Seqは、翻訳や対話システム、要約などの様々な自然言語処理のタスクで、高い精度を達成することができた。
 
-*[Attention](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92)) (2014)*
+*[Attention](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92)) (2015.09)*
 ニューラル機械翻訳において、従来のSeq2SeqにAttentionメカニズムを導入することで、翻訳の品質を向上させることができた。
+Effective Approaches to Attention-based Neural Machine Translation
 
-*[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12)*
+*[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12 Google)*
 RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コストが増大する問題があった。
 Self-Attentionを用いることで、効率的に処理できるようになった。
 
@@ -161,6 +164,7 @@ GPT-3 --> GPT-4
 ```
 
 *[GPT](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 OpenAI)*
+パラメータ数: 110M
 TransformerのDecoderを用いて、大規模テキストデータで学習したものがGPTとなる。
 Transformerが12層連なっているためモデルが大きい。
 
@@ -170,15 +174,15 @@ ELMoのLSTMが特徴抽出が十分でなかったため、Transformerを使用�
 
 GPTの初期モデル。
 BookCorpus 7000冊のデータ4.5GB を事前学習に用いた。
-1.2億個のパラメータ。
 
 *[GPT-2](https://ja.wikipedia.org/wiki/GPT-2) (2019.02.14 OpenAI)*
+パラメータ数: 1.5B
 人間が読んでも違和感が少ない一貫した内容の文章を生成できるようになった。
 
 WEBから収集した40GBのデータ。
-15億パラメータ。
 
 *[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.05.28 OpenAI)*
+パラメータ数: 175B
 GPT-3を超えたあたりでとても優秀になった。
 OpenAIはGPT-3はClosed-Sourceとした。
 
@@ -186,7 +190,6 @@ OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
 
 WEBから収集した570GBのデータ。
-1750億個パラメータ。
 
 *InstructGPT*
 GPT-3の小型版を使用して、RLHFを取り入れたモデル。
@@ -224,6 +227,7 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 なお、価格は同じで、レスポンスはAzureの方が早い模様。
 
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
+パラメータ数: 非公表
 マルチモーダル。
 
 ```mermaid
@@ -235,25 +239,21 @@ GPT-NeoX --> Pythia
 ```
 
 *GPT-Neo (2021.03 EleutherAI)*
+パラメータ数: 1.3B, 2.7B
 GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
 GPT-2のクローンを作ろうとしたものをもとにしている。
 GPT-3以降Closed-Sourceのものが増えた。
 
 *[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.05 EleutherAI)*
-60億パラメータ。
-The Pileデータセットで訓練された。
+パラメータ数: 6B
 公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
+The Pileデータセットで訓練された。
 
 *GPT-NeoX (2022.02 EleutherAI)*
-200億パラメータ。
+パラメータ数: 20B
 Microsoft DeepSpeedを使って学習を高速化している。
 Nvidia Megatronを使って分散して学習した。
 公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
-
-*Pythia (2023.02.13 EleutherAI)*
-[Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
-[EleutherAI/pythia](https://github.com/EleutherAI/pythia)
-
 
 GPT4ALL
 ローカルで動くChatGPTを目指したもの？
@@ -261,22 +261,13 @@ GPT4ALL
 GPT4ALL-J
 GPT-Jをファインチューニングしたモデルを使用している。
 
-Pythia
+*Pythia (2023.02.13 EleutherAI)*
+パラメータ数: 70M-12B および各モデルの154のチェックポイント
+[Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
+[EleutherAI/pythia](https://github.com/EleutherAI/pythia)
+
 LLMの訓練とスケーリングを分析するために作成された。
-70Mから12Bまでのパラメータのモデルがある。
-さらに各モデルの154のチェックポイントを公開している。
 
-
-
-
-Megatron-NL(nVidia)
-8.3B
-
-Turing-NLG (2020.02.13 Microsoft)
-https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
-170B
-
-MT-NLG
 
 ```mermaid
 flowchart
@@ -299,7 +290,7 @@ MLM(Masked Language Modeling)という手法を用いて、ラベリングなし
 GPT-1を超えて最高スコアを更新し、応用も効くため話題となった。
 その後GPT-3が発表されるまでBERT系が多く登場することとなった。
 
-*[RoBERTa](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/) (2019.07.26 Facebook AI Research)*
+*[RoBERTa](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/) (2019.07.26 Facebook)*
 Robustly optimized BERT approachの略。
 BERTの仕組みをそのままに、パラメータの調整やデータ量を増大させたもの。
 
@@ -323,7 +314,7 @@ MLMは文章中のマスクした15%を学習できない問題点があった�
 ELECTRAではReplaced Token Detectionという手法を用いて、より少ないデータで効率的な事前学習ができる。
 RoBERTaの1/4の学習量で同等の精度を達成した。
 
-*[LUKE](https://arxiv.org/abs/2010.01057) (2020.04)*
+*[LUKE](https://arxiv.org/abs/2010.01057) (2020.10.02 山田郁哉)*
 RoBERTaベース。
 entity-aware self-attentionという仕組みを導入した。
 日本人を中心としたチームが開発したモデル。
@@ -341,7 +332,7 @@ Transformer --> BERT --> XLNet
 Transformer --> Transformer-XL --> XLNet
 ```
 
-*[Transformer-XL](https://arxiv.org/abs/1901.02860) (2019.01.09)*
+*[Transformer-XL](https://arxiv.org/abs/1901.02860) (2019.01.09 Google)*
 Transformer Extra Largeの略。
 Transformerではdot-product attentionの性質上、固定長パラメータしか扱えなかった。
 そしてパラメータの全ての組み合わせを考慮するため、二乗の計算量が必要となり、長大なパラメータを持たせることは現実的ではなかった。
@@ -363,6 +354,18 @@ Transformer --> GPT --> BART
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
+
+
+
+Megatron-NL(nVidia)
+8.3B
+
+Turing-NLG (2020.02.13 Microsoft)
+https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
+170B
+
+MT-NLG
+
 
 ```mermaid
 flowchart
@@ -403,33 +406,34 @@ Transformer --> PaLM --> PaLM-2 --> Gemini
 ```
 
 *Meena (2020.01.28 Google)*
+パラメータ数: 2.6B
 Googleが開発したチャットボット。
 １つのEvolved Transformer Encoderと13のDecoderからなる。
 LaMDAの前身。
 
-26億のパラメータをもつ。
 パブリックドメインのソーシャルメディアの会話から341GBのテキストでトレーニングされている。
 
-*[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2021.05, 2022.01.21 Google)*
+*[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2021.05.18 DeepMind)*
+パラメータ数: 137B
 Language Model for Dialogue Applicationsの略。
 もともとはMeenaとして開発されたが、のちにLaMDAとして発表された。
 Googleの社員が意識が宿ったと述べて話題となった。
 
-1370億のパラメータを持つ。
 1.56T words。
 
-*Bard*
+*Bard (2023.02.06 Google)*
 ChatGPTのに対抗して、LaMDAベースで作成したもの
 
 *GLaM (2021.12.09 Google)*
+パラメータ数: 1.2T
 Generalist Language Modelの略。
-1.2兆のパラメータを持つ重量級モデル。
 ただし、特定の入力に特化したExpertをサブモデルに持っている。
 そのため推論時には、2つのExpert層のみ、970億(1.2Tの8%)のサブネットワークのみが活性化される。
 この2つだけ活性化させるスパース性を利用して効率的に学習、実行できるようにした。
 活性化時のパラメータはGPT-3より少ないが、GPT-3と遜色ない性能を発揮することができた。
 
 *PaLM (2022.04.04 Google)*
+パラメータ数: 540B
 Pathways Language Modelの略。
 1つのモデルで何でもできる汎用(Pathways)をめざしたモデル。
 GPTと同じDecoderタイプのTransformerを採用している。
@@ -438,9 +442,8 @@ GPTと同じDecoderタイプのTransformerを採用している。
 OpenAIのスケーリング則を追検証した形となる。
 Gopherなどの先行LLMではモデル規模を拡大しても性能向上の恩恵はあまり見られなかった。
 
-5400億のパラメータ。
-
 *PaLM 2 (2023.5.11 Google)*
+パラメータ数: 非公表
 Google I/Oで発表されたPaLMの次世代モデル。
 Bardをはじめ、すでに多くのGoogleのサービスに使用されている。
 
@@ -457,19 +460,11 @@ Transformer --> PaLM --> Flan-T5/Flan-PaLM
 Flan --> Flan-T5/Flan-PaLM
 ```
 
+Flan
+
 *Flan-T5/Flan-PaLM (2022.10.20 Google)*
 指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
 GPT-3レベルのオープンソース言語モデル。
-
-
-*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
-Unified Language Learnerの略。
-データセットやセットアップによらずに言語モデルの性能を上げる手法。
-2種類の言語モデルの長所を併せ持つ。
-
-20B
-
-
 
 
 ```mermaid
@@ -483,15 +478,23 @@ Transformer --> PaLM --> Flan-U-PaLM
 ```
 
 
+
+*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
+パラメータ数: 20B
+Unified Language Learnerの略。
+データセットやセットアップによらずに言語モデルの性能を上げる手法。
+2種類の言語モデルの長所を併せ持つ。
+
+
 *Flan-UL2*
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
 商用利用可能。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 
-*UL2R*
+*UL2R (2022.05.22 Google)*
 UL2Rは様々なサイズの言語モデルを指示微調整することを目的としている。
 
-*Flan-U-PaLM*
+*Flan-U-PaLM (2022.11.29 Google)*
 UL2RとFlanでPaLMを追加学習させたもの。
 U-PaLMやFlan-PaLMを上回るパフォーマンスを発揮した。
 MMLUベンチマーク75.4%でスコアを更新した。
@@ -508,26 +511,26 @@ BLOOM --> BLOOM+1
 ```
 
 *[Gopher](https://arxiv.org/abs/2112.11446) (2021.12.08 DeepMind)*
-2800億のパラメータを持つ。
+パラメータ数: 280B
 Massive Textと呼ばれる10.5TBの英語テキストデータを作成し、学習に用いた。
 124種中100種のタスクで最高記録を更新して話題となった。
 
 GopherCite
 
 *[Chinchilla](https://en.wikipedia.org/wiki/Chinchilla_AI) (2022.03.29 DeepMind)*
-700億のパラメータを持つ。
+パラメータ数: 70B
 言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
 
 SparrowはChinchillaのプロンプトバージョンです。
 
 *Cerebras-GPT (2023.03.28 Cerebras)*
-chinchillaのスケーリング則を参考。
-111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13Bのモデルがある。
+パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
+Chinchillaのスケーリング則を参考に調整されている。
 オープンなデータセットを使用。
 オープンソース。
 
 *OPT (2022.05.02 Meta)*
-1750億のパラメータを持つ。
+パラメータ数: 175B
 
 OPT-IML
 
@@ -563,65 +566,77 @@ LLaMA --> RedPajama-INCITE
 ```
 
 LLaMA (2023.02.24 Meta)
+パラメータ数: 7B, 13B, 65B
 商用利用禁止、研究目的にのみ使用可能。
 
 65Bと33Bは1.4兆トークンでトレーニングされている。
 7Bは1兆個のトークン。
-
-65B
-
 LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている。
 
 
-Alpaca (2023.03 Stanford)
+Alpaca (2023.03.14 Stanford)
+パラメータ数: 7B
 LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整したもの。
 A100 8枚で3hかかった。
 もとになったMLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
 
-Vicuna
+*Vicuna (2023.05.04 Stability AI)*
+パラメータ数: 7B
 AlpacaをShareGPTのデータで微調整したもの。
+
+*StableVicuna (2023.05.04 Stability AI)*
+
+*Dolly (2023.04.12 Databricks)*
 
 Dolly-v2
 Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
 
-*MPT-7B (MosaicML)*
+*MPT-7B (2023.05.05 MosaicML)*
+パラメータ数: 7B
+
 商用利用が可能なオープンソースのモデル。
 テキストとコードの1Tのトークンで訓練された。
 440のGPUで9.5日間かけて訓練された。
 200万ドル(約3,000万円)かかったとされる。
 
+Mosaic-20B も同日？
 
-StableLM
+
+*StableLM (2023.04.20 Stability AI)*
 StableDiffusionによる、クリーンかつ自由なモデル。
 
-HuggingChat
+*HuggingChat (2023.04.27 Hugging Face)*
 
 
-*OpenLLaMA*
+*OpenLLaMA (2023.04.28 OpenLM Research)*
+パラメータ数: 7B
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
 2000億トークンで訓練したOpenLLaMA 7Bのモデルがある。
 RedPajamaデータセットで訓練している。
 
+*RedPajama-INCITE (2023.05.05 Together)*
+
+*AlexaTM (2022.08.02 Amazon)*
+
+*TogetherAI (2023.05.05 Together)*
 
 ```mermaid
 flowchart
 
-RNN --> RWKV --> Raven
+RNN --> RWKV
 Transformer --> RWKV
 ```
 
-RWKV
+RWKV 2022.05.20 DeepMind
+*RWKV (2023.02.21 Stability, EleutherAI)*
+パラメータ数: 7B, 14B
 Read-Write Key Value の略。
 RNNとTransformerのいいとこどり。
-7Bと14Bのモデルがある。
 GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
 
 14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
 
 
-
-
-Falcon
 
 
 Archi: Pretraining Architecture
