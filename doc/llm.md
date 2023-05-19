@@ -141,6 +141,7 @@ RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コス�
 Self-Attentionを用いることで、効率的に処理できるようになった。
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
+パラメータ数: 300M
 Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
 
@@ -164,7 +165,7 @@ GPT-3 --> GPT-4
 ```
 
 *[GPT](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 OpenAI)*
-パラメータ数: 110M
+パラメータ数: 110M(12層)
 TransformerのDecoderを用いて、大規模テキストデータで学習したものがGPTとなる。
 Transformerが12層連なっているためモデルが大きい。
 
@@ -176,15 +177,15 @@ GPTの初期モデル。
 BookCorpus 7000冊のデータ4.5GB を事前学習に用いた。
 
 *[GPT-2](https://ja.wikipedia.org/wiki/GPT-2) (2019.02.14 OpenAI)*
-パラメータ数: 1.5B
+パラメータ数: 1.5B(48層)
 人間が読んでも違和感が少ない一貫した内容の文章を生成できるようになった。
 
 WEBから収集した40GBのデータ。
 
 *[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.05.28 OpenAI)*
-パラメータ数: 175B
+パラメータ数: 175B(96層)
 GPT-3を超えたあたりでとても優秀になった。
-OpenAIはGPT-3はClosed-Sourceとした。
+OpenAIはGPT-3はClosed-Sourceとし、これ以降LLMでClosed-Sourceとされることが増えた。
 
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
@@ -197,10 +198,9 @@ RLHF(Reinforcement Learning from Human Feedback)は、
 人間からのフィードバックでファインチューニングする手法。
 
 *[OpenAI Codex](https://ja.wikipedia.org/wiki/OpenAI_Codex) (2021.08 OpenAI)*
+パラメータ数: 12B
 自然言語からコードを生成するためのモデル。
 GitHub Copilotで使われている。
-
-120億個パラメータ。
 
 Microsoft CodeBERT
 NovelAI Genji(GPT-Jベース)
@@ -212,11 +212,10 @@ text-davinci-002
 code-davinci-002
 
 *GPT-3.5v2 (2022.11.28 OpenAI)*
+パラメータ数: 355B
 改良バージョン
 gpt-3.5-turbo 会話用
 text-davinci-003
-
-3550億個パラメータ。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11.30 OpenAI)*
 InstructGPTの兄弟モデル。
@@ -256,9 +255,11 @@ Nvidia Megatronを使って分散して学習した。
 公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
 
 GPT4ALL
+パラメータ数: 7B
 ローカルで動くChatGPTを目指したもの？
 
 GPT4ALL-J
+パラメータ数: 6B
 GPT-Jをファインチューニングしたモデルを使用している。
 
 *Pythia (2023.02.13 EleutherAI)*
@@ -273,7 +274,7 @@ LLMの訓練とスケーリングを分析するために作成された。
 flowchart
 
 Transformer --> BERT
-ELMo --> BERT --> RoBERTa --> LUKE
+ELMo --> BERT --> RoBERTa
 BERT --> DistilBERT
 BERT --> ALBERT
 BERT --> ELECTRA
@@ -281,6 +282,7 @@ BERT --> DeBERTa
 ```
 
 *[BERT](https://ja.wikipedia.org/wiki/BERT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.10.11 Google)*
+パラメータ数: BERT-base=110M, BERT-large=340M
 Pretraining Architecture: Encoder
 Bidirectional Encoder Representations from Transformersの略。
 GPTとは違い、TransformerのEncoderを使用し、文章の先頭と末尾からの双方向(Bidirectional)なAttention層が追加されている。
@@ -291,15 +293,17 @@ GPT-1を超えて最高スコアを更新し、応用も効くため話題とな
 その後GPT-3が発表されるまでBERT系が多く登場することとなった。
 
 *[RoBERTa](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/) (2019.07.26 Facebook)*
+パラメータ数: RoBERTa-base=123M, RoBERTa-large=354M
 Robustly optimized BERT approachの略。
 BERTの仕組みをそのままに、パラメータの調整やデータ量を増大させたもの。
 
 *DistilBERT (2019.08.02 Huggingface)*
+パラメータ数: 66M
 BERTを蒸留したもの。
 
 *[ALBERT](https://medium.com/syncedreview/googles-albert-is-a-leaner-bert-achieves-sota-on-3-nlp-benchmarks-f64466dd583) (2019.09.20 Google)*
+Num. Params: Base = 12M, Large = 18M, XLarge = 60M, xxlarge=235M
 Pretraining Task: MLM/NSP
-Num. Params: Base = 12M, Large = 18M, XLarge = 60M
 A Lite BERTの略。
 パラメータの因数分解と冗長性を排除することで、軽量化したモデル。
 
@@ -314,13 +318,6 @@ MLMは文章中のマスクした15%を学習できない問題点があった�
 ELECTRAではReplaced Token Detectionという手法を用いて、より少ないデータで効率的な事前学習ができる。
 RoBERTaの1/4の学習量で同等の精度を達成した。
 
-*[LUKE](https://arxiv.org/abs/2010.01057) (2020.10.02 山田郁哉)*
-RoBERTaベース。
-entity-aware self-attentionという仕組みを導入した。
-日本人を中心としたチームが開発したモデル。
-5つのタスクでスコアを更新し話題となった。
-その後も日本語の最高スコアを維持し続けていた。
-
 *[DeBERTa](https://github.com/microsoft/DeBERTa) (2020.06.13 Microsoft)*
 Decoding-enhanced BERT with Disentangled Attentionの略。
 SuperGLUEのベンチマークで人間の基準を上回るスコアを記録し話題となった。
@@ -333,6 +330,7 @@ Transformer --> Transformer-XL --> XLNet
 ```
 
 *[Transformer-XL](https://arxiv.org/abs/1901.02860) (2019.01.09 Google)*
+パラメータ数: 257M
 Transformer Extra Largeの略。
 Transformerではdot-product attentionの性質上、固定長パラメータしか扱えなかった。
 そしてパラメータの全ての組み合わせを考慮するため、二乗の計算量が必要となり、長大なパラメータを持たせることは現実的ではなかった。
@@ -340,6 +338,7 @@ Transformer-XLではセグメントに分けて、長文に対応できるよう
 またRelative Positional Encodingsという手法で単語の位置情報も学習に取り入れた。
 
 *[XLNet](https://arxiv.org/abs/1906.08237) (2019.06.19 Google)*
+パラメータ数: 340M
 BERTの改良版。
 20のタスクでBERTを超えたと話題になった。
 しかし計算量も増大した。
@@ -352,6 +351,7 @@ Transformer --> GPT --> BART
 ```
 
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
+パラメータ数: 140M
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
@@ -376,6 +376,7 @@ mT5 --> mT0
 ```
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
+パラメータ数: T5-base=223M, T5-large=739M, ?=11B
 Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
 T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使用している。
 
@@ -384,7 +385,6 @@ T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使�
 
 Colossal Clean Crawled Corpus(C4)を作成して、学習に利用している。
 
-110億のパラメタ。
 C4データセットを使用。
 
 MT5
@@ -422,10 +422,11 @@ Googleの社員が意識が宿ったと述べて話題となった。
 1.56T words。
 
 *Bard (2023.02.06 Google)*
+パラメータ数: Bard-PaLM2=340B
 ChatGPTのに対抗して、LaMDAベースで作成したもの
 
 *GLaM (2021.12.09 Google)*
-パラメータ数: 1.2T
+パラメータ数: 1.2T(97B)
 Generalist Language Modelの略。
 ただし、特定の入力に特化したExpertをサブモデルに持っている。
 そのため推論時には、2つのExpert層のみ、970億(1.2Tの8%)のサブネットワークのみが活性化される。
@@ -461,6 +462,7 @@ Flan --> Flan-T5/Flan-PaLM
 ```
 
 Flan
+パラメータ数: 137B
 
 *Flan-T5/Flan-PaLM (2022.10.20 Google)*
 指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
@@ -492,6 +494,7 @@ Unified Language Learnerの略。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 
 *UL2R (2022.05.22 Google)*
+パラメータ数: 137B
 UL2Rは様々なサイズの言語モデルを指示微調整することを目的としている。
 
 *Flan-U-PaLM (2022.11.29 Google)*
@@ -530,11 +533,13 @@ Chinchillaのスケーリング則を参考に調整されている。
 オープンソース。
 
 *OPT (2022.05.02 Meta)*
-パラメータ数: 175B
+パラメータ数: 125M, 175B
 
 OPT-IML
+パラメータ数: 175B
 
 *BLOOM (2022.07 BigScience)*
+パラメータ数: 176B
 BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 70以上の国と250以上の機関の1000人を超える研究者の協力で作成された多言語LLM。
 46の自然言語と13のプログラミング言語を扱える。
@@ -547,6 +552,7 @@ GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるの�
 1Bのモデルだと12GBのGPUで動かすことができる。
 
 BLOOMZ
+パラメータ数: 560M, 176B
 BLOOMをファインチューニングしたもの。
 
 ```mermaid
@@ -581,7 +587,7 @@ A100 8枚で3hかかった。
 もとになったMLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
 
 *Vicuna (2023.05.04 Stability AI)*
-パラメータ数: 7B
+パラメータ数: 7B, 13B
 AlpacaをShareGPTのデータで微調整したもの。
 
 *StableVicuna (2023.05.04 Stability AI)*
@@ -635,6 +641,29 @@ RNNとTransformerのいいとこどり。
 GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
 
 14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
+
+
+```mermaid
+flowchart
+
+RoBERTa --> LUKE
+```
+
+*[LUKE](https://arxiv.org/abs/2010.01057) (2020.10.02 山田郁哉)*
+RoBERTaベース。
+entity-aware self-attentionという仕組みを導入した。
+日本人を中心としたチームが開発したモデル。
+5つのタスクでスコアを更新し話題となった。
+その後も日本語の最高スコアを維持し続けていた。
+
+OpenCALM
+パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
+Cyber-Agentが公開したモデル。
+
+rinna
+パラメータ数: 3.6B
+japanese-gpt-neox-3.6b
+japanese-gpt-neox-3.6b-instruction-sft
 
 
 
