@@ -354,24 +354,12 @@ Transformer --> GPT --> BART
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
-
-
-Megatron-NL(nVidia)
-8.3B
-
-Turing-NLG (2020.02.13 Microsoft)
-https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
-170B
-
-MT-NLG
-
+mBART
 
 ```mermaid
 flowchart
 
-Transformer --> T5 --> mT5
-T5 --> T0
-mT5 --> mT0
+Transformer --> T5
 ```
 
 *[T5](https://arxiv.org/abs/1910.10683) (2019.10.23 Google)*
@@ -380,21 +368,45 @@ Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
 T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使用している。
 
 多数のLLMが開発され、評価が困難になってきた。
-何が最も転移学習を有効にしているのか？を調査した結果、誕生したのがT5となる。
+何が最も転移学習を有効にしているのかを調査した結果、誕生したのがT5となる。
 
 Colossal Clean Crawled Corpus(C4)を作成して、学習に利用している。
 
 C4データセットを使用。
 
-MT5
+mT5
 Multilingual-T5
 
 T0
 ゼロショット向けに調整したT5
 
-MT0
-MT5をファインチューニングしたもの。
+mT0
+mT5をファインチューニングしたもの。
 BLOOMZと同時に発表された？
+
+
+```mermaid
+flowchart
+
+Transformer --> Megatron-NL --> MT-NLG
+Transformer --> Turing-NLG --> MT-NLG
+```
+
+*Megatron-LM (2019.09.17 NVIDIA)*
+モデルの垂直分割による並列化とAttentionの水平分割による並列化する方法。
+GPT, BERT, T5 など様々なタイプのTransformerベースのモデルを並列化することができた。
+後の様々なLLMsで使われるようになった。
+https://github.com/NVIDIA/Megatron-LM
+https://arxiv.org/abs/1909.08053
+
+*Turing-NLG (2020.02.13 Microsoft)*
+https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
+170B
+
+*MT-NLG*
+530B(105層)
+
+
 
 ```mermaid
 flowchart
@@ -507,9 +519,8 @@ flowchart
 
 Transformer --> GPT --> Gopher --> Chinchilla
 Chinchilla --> Cerebras-GPT
-GPT --> OPT --> OPT-IML
-GPT --> BLOOM --> BLOOMZ
-BLOOM --> BLOOM+1
+GPT --> OPT
+GPT --> BLOOM
 ```
 
 *[Gopher](https://arxiv.org/abs/2112.11446) (2021.12.08 DeepMind)*
@@ -523,7 +534,7 @@ QAに特化したGopherCiteというモデルもある。
 パラメータ数: 70B
 言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
 
-SparrowはChinchillaのプロンプトバージョンです。
+SparrowはChinchillaのプロンプトバージョン。
 
 *Cerebras-GPT (2023.03.28 Cerebras)*
 パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
@@ -531,11 +542,12 @@ Chinchillaのスケーリング則を参考に調整されている。
 オープンなデータセットを使用。
 オープンソース。
 
-*OPT (2022.05.02 Meta)*
-パラメータ数: 125M, 175B
+*OPT-175B (2022.05.02 Meta)*
+パラメータ数: 175B
+非営利のみ。
+オープンソース。
 
 OPT-IML
-パラメータ数: 175B
 
 *BLOOM (2022.07 BigScience)*
 パラメータ数: 176B
@@ -553,6 +565,9 @@ GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるの�
 BLOOMZ
 パラメータ数: 560M, 176B
 BLOOMをファインチューニングしたもの。
+
+BLOOM+1
+
 
 ```mermaid
 flowchart
@@ -653,16 +668,16 @@ entity-aware self-attentionという仕組みを導入した。
 5つのタスクでスコアを更新し話題となった。
 その後も日本語の最高スコアを維持し続けていた。
 
-OpenCALM
+*OpenCALM (2023.05 サイバーエージェント)*
 パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
-Cyber-Agentが公開したモデル。
+サイバーエージェントが公開した日本語モデル。
 GPT-NeoXを使用している。
 
-rinna
+*rinna (2023.05 rinna)*
 パラメータ数: 3.6B
 japanese-gpt-neox-3.6b
 japanese-gpt-neox-3.6b-instruction-sft
-
+りんなが公開した日本語モデル。
 
 
 
