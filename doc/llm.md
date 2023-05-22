@@ -229,6 +229,7 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 パラメータ数: 非公表
 マルチモーダル。
 システムメッセージという仕組みを導入した。
+司法試験や大学入試試験(SAT)で受験者の上位10%に入る成績を出して話題となった。
 
 ```mermaid
 flowchart
@@ -255,7 +256,7 @@ JAXライブラリを使用していたのでGPT-Jと名づけられた。
 Common Crawlデータセットで訓練された。
 
 *GPT-NeoX (2022.02 EleutherAI)*
-パラメータ数: 20B
+パラメータ数: 20B(44層)
 EleutherAIが公開したLLM学習用のライブラリ、およびそれを用いてトレーニングされたモデル。
 Microsoft DeepSpeedを使って学習を高速化している。
 Nvidia Megatronを使って分散して学習した。
@@ -395,25 +396,24 @@ Transformer --> Turing-NLG --> MT-NLG
 *Megatron-LM (2019.09.17 NVIDIA)*
 モデルの垂直分割による並列化とAttentionの水平分割による並列化する方法。
 GPT, BERT, T5 など様々なタイプのTransformerベースのモデルを並列化することができた。
-後の様々なLLMsで使われるようになった。
 https://github.com/NVIDIA/Megatron-LM
 https://arxiv.org/abs/1909.08053
 
 *Turing-NLG (2020.02.13 Microsoft)*
 https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
-170B
 
-*MT-NLG*
-530B(105層)
-
-
+*MT-NLG (2021.10.12 Microsoft, NVIDIA)*
+パラメータ数: 530B(105層)
+MicrosoftとNVIDIAの研究協力のもと作成されたモノリシックでは最大規模のモデルとなる。
+GPT-3の3倍のパラメータ数となり、様々なタスクですばらしい精度を発揮した。
+MegatronやDeepSpeedの仕組みは後の様々なLLMs(GPT-NeoXやBLOOMなど)で使われるようになった。
 
 ```mermaid
 flowchart
 
-Transformer --> Evolved-Transformer --> Meena --> LaMDA --> Bard
+Transformer --> Meena --> LaMDA --> Bard
 Transformer --> GLaM
-Transformer --> PaLM --> PaLM-2 --> Gemini
+Transformer --> PaLM --> PaLM-2
 ```
 
 *Meena (2020.01.28 Google)*
@@ -434,7 +434,8 @@ Googleの社員が意識が宿ったと述べて話題となった。
 
 *Bard (2023.02.06 Google)*
 パラメータ数: Bard-PaLM2=340B
-ChatGPTのに対抗して、LaMDAベースで作成したもの
+ChatGPTのに対抗して、LaMDAベースで作成したもの。
+PaLM 2ベースになっている。
 
 *GLaM (2021.12.09 Google)*
 パラメータ数: 1.2T(97B)
@@ -454,14 +455,16 @@ GPTと同じDecoderタイプのTransformerを採用している。
 OpenAIのスケーリング則を追検証した形となる。
 Gopherなどの先行LLMではモデル規模を拡大しても性能向上の恩恵はあまり見られなかった。
 
+*Minerva (2022.07.03 Google)*
+PaLMベースのMinervaが三角関数の文章問題を解いて話題となった。
+MATHデータセットのPaLMの正答率が8.8%だったのに対して、Minervaは50.3%と飛躍的に向上している。
+
 *PaLM 2 (2023.5.11 Google)*
 パラメータ数: 非公表
 Google I/Oで発表されたPaLMの次世代モデル。
 Bardをはじめ、すでに多くのGoogleのサービスに使用されている。
 
-*Gemini*
-GoogleのPaLM 2の次世代モデル。
-開発中。
+GoogleのPaLM 2の次世代モデルはGeminiと呼ばれ、開発中。
 
 
 ```mermaid
@@ -548,6 +551,10 @@ Chinchillaのスケーリング則を参考に調整されている。
 オープンソース。
 
 OPT-IML
+
+Galactica (2022.11.15 Meta)
+科学技術系のコーパスから学習されたモデル。
+ハルシネーションが原因でわずか3日で公開が中止された。
 
 *BLOOM (2022.07 BigScience)*
 パラメータ数: 176B
