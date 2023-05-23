@@ -192,6 +192,7 @@ GPT-3を超えたあたりでとても優秀になった。
 OpenAIはGPT-3はClosed-Sourceとし、これ以降LLMでClosed-Sourceとされることが増えた。
 
 WEBから収集した570GBのデータで学習した。
+約100万ドルかかったと報告されている。
 
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
@@ -367,6 +368,7 @@ Transformer --> BERT --> BART
 
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
 パラメータ数: 140M
+[BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension](https://arxiv.org/abs/1910.13461)
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
@@ -396,10 +398,6 @@ Multilingual-T5
 T0
 ゼロショット向けに調整したT5
 
-mT0
-mT5をファインチューニングしたもの。
-BLOOMZと同時に発表された？
-
 
 ```mermaid
 flowchart
@@ -409,6 +407,7 @@ Transformer --> Turing-NLG --> MT-NLG
 ```
 
 *Megatron-LM (2019.09.17 NVIDIA)*
+パラメータ数: 8.3B
 モデルの垂直分割による並列化とAttentionの水平分割による並列化する方法。
 GPT, BERT, T5 など様々なタイプのTransformerベースのモデルを並列化することができた。
 https://github.com/NVIDIA/Megatron-LM
@@ -417,12 +416,21 @@ https://arxiv.org/abs/1909.08053
 *Turing-NLG (2020.02.13 Microsoft)*
 パラメータ数: 17B
 https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
+モデル自体を複数のGPUのメモリに分割して学習。
 
 *MT-NLG (2021.10.12 Microsoft, NVIDIA)*
 パラメータ数: 530B(105層)
 MicrosoftとNVIDIAの研究協力のもと作成されたモノリシックでは最大規模のモデルとなる。
 GPT-3の3倍のパラメータ数となり、様々なタスクですばらしい精度を発揮した。
 MegatronやDeepSpeedの仕組みは後の様々なLLMs(GPT-NeoXやBLOOMなど)で使われるようになった。
+
+*DeepSpeed-Chat (Microsoft)*
+https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese
+DeepSpeedの仕組みを利用したLLM構築フレームワーク。
+GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
+Azure上でNVIDIA A100を64台用いた場合は、
+OPT-13Bモデルは7.5h(2,000ドル)、
+BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
 
 ```mermaid
 flowchart
@@ -434,6 +442,8 @@ Transformer --> PaLM --> PaLM-2
 
 *Meena (2020.01.28 Google)*
 パラメータ数: 2.6B
+[Towards a Human-like Open-Domain Chatbot](https://arxiv.org/abs/2001.09977)
+[The Evolved Transformer](https://arxiv.org/abs/1901.11117)
 Googleが開発したチャットボット。
 １つのEvolved Transformer Encoderと13のDecoderからなる。
 LaMDAの前身。
@@ -463,6 +473,7 @@ Generalist Language Modelの略。
 
 *PaLM (2022.04.04 Google)*
 パラメータ数: 540B
+[PaLM: Scaling Language Modeling with Pathways](https://arxiv.org/abs/2204.02311)
 Pathways Language Modelの略。
 1つのモデルで何でもできる汎用(Pathways)をめざしたモデル。
 GPTと同じDecoderタイプのTransformerを採用している。
@@ -472,13 +483,27 @@ OpenAIのスケーリング則を追検証した形となる。
 Gopherなどの先行LLMではモデル規模を拡大しても性能向上の恩恵はあまり見られなかった。
 
 *Minerva (2022.07.03 Google)*
+[Solving Quantitative Reasoning Problems with Language Models](https://arxiv.org/abs/2206.14858)
 PaLMベースのMinervaが三角関数の文章問題を解いて話題となった。
 MATHデータセットのPaLMの正答率が8.8%だったのに対して、Minervaは50.3%と飛躍的に向上している。
+
+Med-PaLM
+
+PaLM-Coder
+
+*PaLM-E (2023.03.06 Google)*
+パラメータ数: 562B
+PaLMに視覚処理(Vision Transformer)を組み込んだモデル。
+視覚情報を基に様々なタスクをこなせるようになった。
+[PaLM-E: An Embodied Multimodal Language Model](https://arxiv.org/abs/2303.03378)
+https://palm-e.github.io/
+
 
 *PaLM 2 (2023.5.11 Google)*
 パラメータ数: 非公表
 Google I/Oで発表されたPaLMの次世代モデル。
 Bardをはじめ、すでに多くのGoogleのサービスに使用されている。
+GPT-4と同水準。
 
 GoogleのPaLM 2の次世代モデルはGeminiと呼ばれ、開発中。
 
@@ -551,9 +576,14 @@ QAに特化したGopherCiteというモデルもある。
 
 *[Chinchilla](https://en.wikipedia.org/wiki/Chinchilla_AI) (2022.03.29 DeepMind)*
 パラメータ数: 70B
-言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3やGopherの性能を上回った。
+[Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556)
+言語モデルのパラメータとサイズ、トレーニングに使用されるデータ量を見直すことで、GPT-3, Gopher, MT-NLGの性能を上回った。
 
 SparrowはChinchillaのプロンプトバージョン。
+
+FlamingoはChinchillaに画像エンコーダーをつないだもの。
+画像からテキストを生成できる。
+[Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
 
 *Cerebras-GPT (2023.03.28 Cerebras)*
 パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
@@ -563,6 +593,8 @@ Chinchillaのスケーリング則を参考に調整されている。
 
 *OPT-175B (2022.05.02 Meta)*
 パラメータ数: 175B
+[OPT: Open Pre-trained Transformer Language Models](https://arxiv.org/abs/2205.01068)
+[Democratizing access to large-scale language models with OPT-175B](https://ai.facebook.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/)
 Open Pre-trained Transformersのモデルのひとつ。 
 非営利のみ。
 オープンソース。
@@ -570,7 +602,8 @@ Open Pre-trained Transformersのモデルのひとつ。
 
 *OPT-IML*
 OPTをInstructionチューニングしたもの。
-
+[OPT-IML: Scaling Language Model Instruction Meta Learning through the Lens of Generalization](https://arxiv.org/abs/2212.12017)
+[OPT-IML](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT-IML)
 
 *Galactica (2022.11.15 Meta)*
 科学技術系のコーパスから学習されたモデル。
@@ -580,6 +613,7 @@ OPTをInstructionチューニングしたもの。
 
 *BLOOM (2022.07 BigScience)*
 パラメータ数: 176B
+[BLOOM: A 176B-Parameter Open-Access Multilingual Language Model](https://arxiv.org/abs/2211.05100)
 BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 70以上の国と250以上の機関の1000人を超える研究者の協力で作成された多言語LLM。
 46の自然言語と13のプログラミング言語を扱える。
@@ -591,9 +625,12 @@ BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるので、動かすだけでも24GBのGPUが14枚以上必要とされる。
 1Bのモデルだと12GBのGPUで動かすことができる。
 
-BLOOMZ
-パラメータ数: 560M, 176B
+*BLOOMZ (2022.11.03 BigScience)*
+パラメータ数: 176B
 BLOOMをファインチューニングしたもの。
+[Crosslingual Generalization through Multitask Finetuning](https://arxiv.org/abs/2211.01786)
+[BLOOMZ and mT0](https://github.com/bigscience-workshop/xmtf)
+
 
 BLOOM+1
 
@@ -617,6 +654,9 @@ LLaMA (2023.02.24 Meta)
 65Bと33Bは1.4兆トークンでトレーニングされている。
 7Bは1兆個のトークン。
 LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている。
+
+訓練費用は100万ドル。
+2048個のA100 80GB GPUで21日間トレーニングしたと報告されている。
 
 
 Alpaca (2023.03.14 Stanford)
@@ -824,6 +864,7 @@ FlexGen
 [Multi-task Language Understanding on MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu)
 [LLMSurvey](https://github.com/rucaibox/llmsurvey)
 [The Practical Guides for Large Language Models](https://github.com/mooler0410/llmspracticalguide)
+[LLM as a Chatbot Service](https://github.com/deep-diver/LLM-As-Chatbot)
 
 [WebBigdata - 人工知能/機械学習 - モデル](https://webbigdata.jp/category/ai-ml/models/)
 [百花繚乱の大規模言語モデル　その現状まとめ【2023年4月末版】](https://www.itmedia.co.jp/news/articles/2304/25/news156.html)
