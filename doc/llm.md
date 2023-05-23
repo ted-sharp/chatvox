@@ -165,7 +165,7 @@ Transformer --> GPT --> GPT-2 --> GPT-3
 GPT-3 --> InstructGPT --> ChatGPT
 GPT-3 --> Codex --> ChatGPT
 GPT-3 --> GPT-3.5 --> ChatGPT
-GPT-3 --> GPT-4
+GPT-3.5 --> GPT-4
 ```
 
 *[GPT](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 OpenAI)*
@@ -191,10 +191,13 @@ WEBから収集した40GBのデータで学習した。
 GPT-3を超えたあたりでとても優秀になった。
 OpenAIはGPT-3はClosed-Sourceとし、これ以降LLMでClosed-Sourceとされることが増えた。
 
+WEBから収集した570GBのデータで学習した。
+
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
 パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
 
-WEBから収集した570GBのデータで学習した。
+飛躍的にスコアが上がり、創発が起こったと話題となった。
+しかし、単にスコア用のテストがある一定以上の水準がないといけないという研究結果が出ている。
 
 *InstructGPT*
 GPT-3の小型版を使用して、RLHFを取り入れたモデル。
@@ -202,12 +205,9 @@ RLHF(Reinforcement Learning from Human Feedback)は、
 人間からのフィードバックでファインチューニングする手法。
 
 *[OpenAI Codex](https://ja.wikipedia.org/wiki/OpenAI_Codex) (2021.08 OpenAI)*
-パラメータ数: 12B
 自然言語からプログラムのソースコードを生成するためのモデル。
-GitHub Copilotで使われている。
 
 *GPT-3.5 (2022.03.15 OpenAI)*
-パラメータ数: 355B
 初期バージョン
 text-davinci-002
 code-davinci-002
@@ -230,6 +230,12 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 マルチモーダル。
 システムメッセージという仕組みを導入した。
 司法試験や大学入試試験(SAT)で受験者の上位10%に入る成績を出して話題となった。
+
+1億ドル以上かかったとされる。
+
+モデル規模を拡大することで得られる効果は逓減すると発表された。
+https://arxiv.org/abs/2303.08774
+
 
 ```mermaid
 flowchart
@@ -273,7 +279,7 @@ LLMの訓練とスケーリングを分析するために作成されたため�
 flowchart
 
 Transformer --> BERT
-ELMo --> BERT --> RoBERTa
+ELMo --> BERT --> RoBERTa --> LUKE
 BERT --> DistilBERT
 BERT --> ALBERT
 BERT --> ELECTRA
@@ -313,14 +319,23 @@ BERT-baseモデルを軽量化すると、12MパラメータのALBERT-baseモデ
 ALBERT-xxlarge構成では最新のスコアを更新した。
 
 *[ELECTRA](https://arxiv.org/abs/2003.10555) (20219.09.26 Stanford, Google)*
+パラメータ数: ELECTRA-small=14M, ELECTRA-base=110M, ELECTRA-large=335M
 GANの手法を取り入れて、BERTの事前学習手法を改良した。
 MLMは文章中のマスクした15%を学習できない問題点があった。
 ELECTRAではReplaced Token Detectionという手法を用いて、より少ないデータで効率的な事前学習ができる。
 RoBERTaの1/4の学習量で同等の精度を達成した。
 
 *[DeBERTa](https://github.com/microsoft/DeBERTa) (2020.06.13 Microsoft)*
+パラメータ数: 184M, 1.5B(48層)
 Decoding-enhanced BERT with Disentangled Attentionの略。
 SuperGLUEのベンチマークで人間の基準を上回るスコアを記録し話題となった。
+
+*[LUKE](https://arxiv.org/abs/2010.01057) (2020.10.02 山田郁哉)*
+RoBERTaベース。
+entity-aware self-attentionという仕組みを導入した。
+日本人を中心としたチームが開発したモデル。
+5つのタスクでスコアを更新し話題となった。
+その後も日本語の最高スコアを維持し続けていた。
 
 ```mermaid
 flowchart
@@ -346,8 +361,8 @@ BERTの改良版。
 ```mermaid
 flowchart
 
-Transformer --> BERT --> BART
 Transformer --> GPT --> BART
+Transformer --> BERT --> BART
 ```
 
 *[BART](https://arxiv.org/abs/1910.13461) (2019.10.29 Meta)*
@@ -400,6 +415,7 @@ https://github.com/NVIDIA/Megatron-LM
 https://arxiv.org/abs/1909.08053
 
 *Turing-NLG (2020.02.13 Microsoft)*
+パラメータ数: 17B
 https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/
 
 *MT-NLG (2021.10.12 Microsoft, NVIDIA)*
@@ -547,14 +563,20 @@ Chinchillaのスケーリング則を参考に調整されている。
 
 *OPT-175B (2022.05.02 Meta)*
 パラメータ数: 175B
+Open Pre-trained Transformersのモデルのひとつ。 
 非営利のみ。
 オープンソース。
 
-OPT-IML
 
-Galactica (2022.11.15 Meta)
+*OPT-IML*
+OPTをInstructionチューニングしたもの。
+
+
+*Galactica (2022.11.15 Meta)*
 科学技術系のコーパスから学習されたモデル。
-ハルシネーションが原因でわずか3日で公開が中止された。
+ハルシネーション(Hallucination)が原因でわずか3日で公開が中止された。
+
+ハルシネーションとは、LLMの仕組み上、もっともらしいウソが構築されてしまう現象のこと。
 
 *BLOOM (2022.07 BigScience)*
 パラメータ数: 176B
@@ -612,6 +634,7 @@ AlpacaをShareGPTのデータで微調整したもの。
 *Dolly (2023.04.12 Databricks)*
 
 Dolly-v2
+パラメータ数: 12B
 Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
 
 *MPT-7B (2023.05.05 MosaicML)*
@@ -626,6 +649,7 @@ Mosaic-20B も同日？
 
 
 *StableLM (2023.04.20 Stability AI)*
+パラメータ数: 3B, 7B ほんと？
 StableDiffusionによる、クリーンかつ自由なモデル。
 
 *HuggingChat (2023.04.27 Hugging Face)*
@@ -640,6 +664,7 @@ RedPajamaデータセットで訓練している。
 *RedPajama-INCITE (2023.05.05 Together)*
 
 *AlexaTM (2022.08.02 Amazon)*
+パラメータ数: 20B(Enc 46層, Dec 32層)
 
 *TogetherAI (2023.05.05 Together)*
 
@@ -663,17 +688,9 @@ RNNで高い性能を示し話題となった。
 ```mermaid
 flowchart
 
-RoBERTa --> LUKE
 GPT-NeoX --> OpenCALM
 GPT-NeoX --> Rinna
 ```
-
-*[LUKE](https://arxiv.org/abs/2010.01057) (2020.10.02 山田郁哉)*
-RoBERTaベース。
-entity-aware self-attentionという仕組みを導入した。
-日本人を中心としたチームが開発したモデル。
-5つのタスクでスコアを更新し話題となった。
-その後も日本語の最高スコアを維持し続けていた。
 
 *OpenCALM (2023.05 サイバーエージェント)*
 パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
