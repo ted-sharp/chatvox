@@ -142,6 +142,7 @@ flowchart
 Attention --> Transformer
 LSTM --> ELMo
 LSTM --> ULMFiT
+Transformer --> Reformer
 ```
 
 *[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12 Google)*
@@ -157,6 +158,12 @@ Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を�
 *ULMFiT (2018.02.18)*
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
 事前学習とファインチューニングという今のLLMの原型となるもの。
+
+*Reformer (2020)*
+
+[Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
+Transformerは Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例する。
+LSTMに比べて計算速度が速いが、数千語になると計算負荷が高い。
 
 ```mermaid
 flowchart
@@ -206,7 +213,9 @@ RLHF(Reinforcement Learning from Human Feedback)は、
 人間からのフィードバックでファインチューニングする手法。
 
 *[OpenAI Codex](https://ja.wikipedia.org/wiki/OpenAI_Codex) (2021.08 OpenAI)*
+[Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374)
 自然言語からプログラムのソースコードを生成するためのモデル。
+GPT-3をプログラミングのソースコードで微調整したもの。
 
 *GPT-3.5 (2022.03.15 OpenAI)*
 初期バージョン
@@ -311,7 +320,7 @@ DistilBERTはオリジナルのBERTと比べ約40%のパラメータを削減で
 
 *[ALBERT](https://medium.com/syncedreview/googles-albert-is-a-leaner-bert-achieves-sota-on-3-nlp-benchmarks-f64466dd583) (2019.09.20 Google)*
 パラメータ数: ALBERT-base=12M, ALBERT-large=18M, ALBERT-xlarge=60M, ALBERT-xxlarge=235M, ALBERT-xxlarge v2=233M
-A Lite BERTの略。
+[ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/abs/1909.11942)
 パラメータの因数分解と冗長性を排除することで、軽量化したモデル。
 
 BERT-baseモデルを軽量化すると、12MパラメータのALBERT-baseモデルが作成できた。
@@ -399,6 +408,10 @@ T0
 ゼロショット向けに調整したT5
 
 
+*AlexaTM (2022.08.02 Amazon)*
+パラメータ数: 20B(Enc 46層, Dec 32層)
+
+
 ```mermaid
 flowchart
 
@@ -450,13 +463,15 @@ LaMDAの前身。
 
 パブリックドメインのソーシャルメディアの会話から341GBのテキストでトレーニングされている。
 
-*[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2021.05.18 DeepMind)*
+*[LaMDA](https://ja.wikipedia.org/wiki/LaMDA) (2021.05.18 Google)*
 パラメータ数: 137B
 Language Model for Dialogue Applicationsの略。
 もともとはMeenaとして開発されたが、のちにLaMDAとして発表された。
 Googleの社員が意識が宿ったと述べて話題となった。
 
 1.56T words。
+
+*LaMDA 2*
 
 *Bard (2023.02.06 Google)*
 パラメータ数: Bard-PaLM2=340B
@@ -473,6 +488,7 @@ Generalist Language Modelの略。
 
 *PaLM (2022.04.04 Google)*
 パラメータ数: 540B
+[PaLM](https://ja.wikipedia.org/wiki/PaLM)
 [PaLM: Scaling Language Modeling with Pathways](https://arxiv.org/abs/2204.02311)
 Pathways Language Modelの略。
 1つのモデルで何でもできる汎用(Pathways)をめざしたモデル。
@@ -581,11 +597,22 @@ QAに特化したGopherCiteというモデルもある。
 
 SparrowはChinchillaのプロンプトバージョン。
 
+
+AlphaCode (DeepMind)
+パラメータ数: 41.4B
+[Competition-Level Code Generation with AlphaCode](https://arxiv.org/abs/2203.07814)
+OpenAI Codexを競技プログラミングレベルに引き上げたもの。
+
+*Flamingo*
 FlamingoはChinchillaに画像エンコーダーをつないだもの。
 画像からテキストを生成できる。
 [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
 
-*Cerebras-GPT (2023.03.28 Cerebras)*
+*OpenFlamingo (LAION)*
+[OpenFlamingo](https://github.com/mlfoundations/open_flamingo)
+Flamingoをオープンソースで再現したもの。
+
+*Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
 パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
 Chinchillaのスケーリング則を参考に調整されている。
 オープンなデータセットを使用。
@@ -635,20 +662,20 @@ BLOOMをファインチューニングしたもの。
 BLOOM+1
 
 
+
 ```mermaid
 flowchart
 
-GPT-3 --> LLaMA --> Alpaca
-Alpaca --> Vicuna
-Alpaca --> Dolly
-GPT-Neo --> Dolly
-LLaMA --> OpenLLaMA
-LLaMA --> RedPajama-INCITE
+GPT-3 --> LLaMA --> Alpaca --> Vicuna
+LLaMA --> Alpaca-LoRA
+LLaMA --> GPT4ALL
 
 ```
 
-LLaMA (2023.02.24 Meta)
+
+*LLaMA (2023.02.24 Meta)*
 パラメータ数: 7B, 13B, 65B
+[LLaMA](https://github.com/facebookresearch/llama)
 商用利用禁止、研究目的にのみ使用可能。
 
 65Bと33Bは1.4兆トークンでトレーニングされている。
@@ -658,23 +685,58 @@ LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている
 訓練費用は100万ドル。
 2048個のA100 80GB GPUで21日間トレーニングしたと報告されている。
 
-
-Alpaca (2023.03.14 Stanford)
+*Alpaca (2023.03.14 Stanford)*
 パラメータ数: 7B
-LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整したもの。
-A100 8枚で3hかかった。
+[Stanford Alpaca: An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca)
+LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tuning)したもの。
 もとになったMLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
+
+A100 8枚で3hかかった。
+[スタンフォード大学がChatGPTレベルのAIを600ドル未満で構築](https://texal.jp/2023/03/21/stanford-university-builds-chatgpt-level-ai-for-less-than-600/)
+
+*Alpaca-LoRA*
+Alpacaのデータセットを使って、LLaMAをLoRAで微調整したモデル。
+[Alpaca-LoRA](https://github.com/tloen/alpaca-lora)
 
 *Vicuna (2023.05.04 Stability AI)*
 パラメータ数: 7B, 13B
 AlpacaをShareGPTのデータで微調整したもの。
+ShareGPTはChatGPTの対話データを収集したもの。
+ChatGPTの90%程度の性能を達成できるとされる。
+
+*GPT4ALL (Nomic AI)*
+[GPT4All](https://github.com/nomic-ai/gpt4all)
+名前が紛らわしいが、OpenAIのGPT-4とは関係ない。
+gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
+ローカルで単一GPUで動くチャットボットを構築することを目指した。
+GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承するため商用利用は禁止。
 
 *StableVicuna (2023.05.04 Stability AI)*
+RLHFで学習したVicuna。
+
+*Koara (UC Berkeley)*
+カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
+
+
+
+
+
+```mermaid
+flowchart
+
+GPT-3 --> LLaMA --> Alpaca
+Alpaca --> Dolly
+GPT-Neo --> Dolly
+LLaMA --> OpenLLaMA
+LLaMA --> RedPajama-INCITE
+
+```
 
 *Dolly (2023.04.12 Databricks)*
 
-Dolly-v2
+Dolly 2.0
 パラメータ数: 12B
+Pythiaベースのモデル。
 Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
 
 *MPT-7B (2023.05.05 MosaicML)*
@@ -689,24 +751,24 @@ Mosaic-20B も同日？
 
 
 *StableLM (2023.04.20 Stability AI)*
-パラメータ数: 3B, 7B ほんと？
-StableDiffusionによる、クリーンかつ自由なモデル。
+パラメータ数: 3B, 7B
 
 *HuggingChat (2023.04.27 Hugging Face)*
 
 
 *OpenLLaMA (2023.04.28 OpenLM Research)*
 パラメータ数: 7B
+[OpenLLaMA: An Open Reproduction of LLaMA](https://github.com/openlm-research/open_llama)
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
 2000億トークンで訓練したOpenLLaMA 7Bのモデルがある。
 RedPajamaデータセットで訓練している。
 
 *RedPajama-INCITE (2023.05.05 Together)*
 
-*AlexaTM (2022.08.02 Amazon)*
-パラメータ数: 20B(Enc 46層, Dec 32層)
-
 *TogetherAI (2023.05.05 Together)*
+
+
+
 
 ```mermaid
 flowchart
@@ -718,12 +780,15 @@ Transformer --> RWKV
 RWKV 2022.05.20 DeepMind
 *RWKV-LM (2023.02.21 Stability, EleutherAI)*
 パラメータ数: 7B, 14B
+[The RWKV Language Model (and my LM tricks)](https://github.com/BlinkDL/RWKV-LM)
 RWKVの名前の由来は4つの重要なパラメータを並べたもの。
 RNNとTransformerのいいとこどり。
 GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
 RNNで高い性能を示し話題となった。
 
 14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
+
+AlpacaやShareGPTで微調整されたRavenというモデルもある。
 
 ```mermaid
 flowchart
@@ -792,10 +857,7 @@ T=trillion=1兆
 |2023.03|Stanford, and others|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 
-TODO: Cerebras
 TODO: ？？？
-
-JurassicはOpenAIっぽいAPI提供なので省略か・・・？
 
 TODO: 論文あるときは、論文のタイトルとリンク
 TODO: データセット
