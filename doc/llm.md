@@ -152,8 +152,8 @@ RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コス�
 Self-AttentionとScaled-Dot-Product-Attentionを用いることで、長期依存関係を効率的に処理できるようになった。
 また、RNNとは違い、全ての位置の計算を同時に行うことが可能となり、GPUを効率的に使用できるようになった。
 
-Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例 $n^2$ する。
-LSTMに比べて計算速度は速いが、入力が長くなると計算負荷が高い問題がある。
+Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例する。
+LSTMに比べて計算速度は速いが、入力が長くなると計算負荷が高い。
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 パラメータ数: 300M
@@ -164,17 +164,17 @@ Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を�
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
 事前学習とファインチューニングという今のLLMの原型となるもの。
 
-*Sparse Transformer (2019.4.23 OpenAI)*
+*Sparse Transformer (2019.04.23 OpenAI)*
 [Generating Long Sequences with Sparse Transformers](https://arxiv.org/abs/1904.10509)
 通常のTransformerでは、トークンが他の全てのトークンと相互作用する全結合となっているが、
 Sparse Transformerでは、一部のトークンのみと相互作用する手法を用いてメモリ効率を改善している。
-$n\sqrt{n}$
+通常のTransformerが $O(n^2)$ に対し、Sparse Transformerは $O(n\sqrt{n})$ となる。
 
 *Reformer (2020.01.16 Google)*
 [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
 Transformerと比べ大幅にメモリ効率を改善した手法。
+通常のTransformerが $O(n^2)$ に対し、Reformerは $O(n\log{n})$ となる。
 RevNetとLSHという仕組みを用いている。
-$n\log{n}$
 
 RevNet(Reversible Residual Network)とは、
 ニューラルネットワークの各層の入力を保存する代わりに、前の層の入力を再計算することでメモリ使用量を減らす手法。
