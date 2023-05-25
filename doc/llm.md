@@ -142,13 +142,18 @@ flowchart
 Attention --> Transformer
 LSTM --> ELMo
 LSTM --> ULMFiT
+Transformer --> Sparse-Transformer
 Transformer --> Reformer
+
 ```
 
 *[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12 Google)*
 RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コストが増大する問題があった。
-Self-AttentionまたはScaled-Dot-Product-Attentionを用いることで、長期依存関係を効率的に処理できるようになった。
+Self-AttentionとScaled-Dot-Product-Attentionを用いることで、長期依存関係を効率的に処理できるようになった。
 また、RNNとは違い、全ての位置の計算を同時に行うことが可能となり、GPUを効率的に使用できるようになった。
+
+Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例 $n^2$ する。
+LSTMに比べて計算速度は速いが、入力が長くなると計算負荷が高い問題がある。
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 パラメータ数: 300M
@@ -159,11 +164,23 @@ Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を�
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
 事前学習とファインチューニングという今のLLMの原型となるもの。
 
-*Reformer (2020)*
+*Sparse Transformer (2019.4.23 OpenAI)*
+[Generating Long Sequences with Sparse Transformers](https://arxiv.org/abs/1904.10509)
+通常のTransformerでは、トークンが他の全てのトークンと相互作用する全結合となっているが、
+Sparse Transformerでは、一部のトークンのみと相互作用する手法を用いてメモリ効率を改善している。
+$n\sqrt{n}$
 
+*Reformer (2020.01.16 Google)*
 [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
-Transformerは Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例する。
-LSTMに比べて計算速度が速いが、数千語になると計算負荷が高い。
+Transformerと比べ大幅にメモリ効率を改善した手法。
+RevNetとLSHという仕組みを用いている。
+$n\log{n}$
+
+RevNet(Reversible Residual Network)とは、
+ニューラルネットワークの各層の入力を保存する代わりに、前の層の入力を再計算することでメモリ使用量を減らす手法。
+
+LSH(Locality-Sensitive Hashing)とは、
+ベクトルの近似的な最近傍を効率的に検索するための手法。
 
 ```mermaid
 flowchart
