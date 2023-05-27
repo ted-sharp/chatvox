@@ -234,6 +234,9 @@ RLHF(Reinforcement Learning from Human Feedback)は、
 自然言語からプログラムのソースコードを生成するためのモデル。
 GPT-3をプログラミングのソースコードで微調整したもの。
 
+GitHub Copilotを動かしていた初期モデル
+code-cushman-001
+
 *GPT-3.5 (2022.03.15 OpenAI)*
 初期バージョン
 text-davinci-002
@@ -398,7 +401,7 @@ Transformer --> BERT --> BART
 Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
-mBART
+*mBART (2020.01.22 Meta)*
 
 ```mermaid
 flowchart
@@ -412,7 +415,7 @@ Text-to-Text Transfer Transformerで、Tが5つあるのでT5と略される。
 T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使用している。
 
 多数のLLMが開発され、評価が困難になってきた。
-何が最も転移学習を有効にしているのかを調査した結果、誕生したのがT5となる。
+現状で、何が最も転移学習を有効にしているのかを調査した結果、誕生したのがT5となる。
 
 Colossal Clean Crawled Corpus(C4)を作成して、学習に利用している。
 
@@ -549,7 +552,7 @@ Transformer --> PaLM --> Flan-T5/Flan-PaLM
 Flan --> Flan-T5/Flan-PaLM
 ```
 
-Flan
+*Flan (2023.02.01 Google)* ちがいそう
 パラメータ数: 137B
 
 *Flan-T5/Flan-PaLM (2022.10.20 Google)*
@@ -576,7 +579,7 @@ Unified Language Learnerの略。
 2種類の言語モデルの長所を併せ持つ。
 
 
-*Flan-UL2*
+*Flan-UL2 (2023.03.03 Google)*
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 商用利用可能。
@@ -614,20 +617,27 @@ QAに特化したGopherCiteというモデルもある。
 
 SparrowはChinchillaのプロンプトバージョン。
 
-
-AlphaCode (DeepMind)
-パラメータ数: 41.4B
-[Competition-Level Code Generation with AlphaCode](https://arxiv.org/abs/2203.07814)
-OpenAI Codexを競技プログラミングレベルに引き上げたもの。
-
-*Flamingo*
+*Flamingo (2022.04.28 DeepMind)*
 FlamingoはChinchillaに画像エンコーダーをつないだもの。
 画像からテキストを生成できる。
 [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
 
-*OpenFlamingo (LAION)*
+*Gato (2022.05 DeepMind)*
+ロボットなどの行動生成まで行える。
+
+*OpenFlamingo (2023.03.28 LAION)*
 [OpenFlamingo](https://github.com/mlfoundations/open_flamingo)
 Flamingoをオープンソースで再現したもの。
+
+
+
+AlphaCode (2022.02.02 DeepMind)
+パラメータ数: 41.4B
+[Competition-Level Code Generation with AlphaCode](https://arxiv.org/abs/2203.07814)
+OpenAI Codexを競技プログラミングレベルに引き上げたもの。
+DeepMindのAlphaGoやAlphaZeroのAlphaシリーズのコード生成版。
+
+
 
 *Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
 パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
@@ -684,7 +694,6 @@ BLOOM+1
 flowchart
 
 GPT-3 --> LLaMA --> Alpaca --> Vicuna
-LLaMA --> Alpaca-LoRA
 LLaMA --> GPT4ALL
 
 ```
@@ -711,9 +720,8 @@ LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tu
 A100 8枚で3hかかった。
 [スタンフォード大学がChatGPTレベルのAIを600ドル未満で構築](https://texal.jp/2023/03/21/stanford-university-builds-chatgpt-level-ai-for-less-than-600/)
 
-*Alpaca-LoRA*
-Alpacaのデータセットを使って、LLaMAをLoRAで微調整したモデル。
-[Alpaca-LoRA](https://github.com/tloen/alpaca-lora)
+*Koala (2023.04.03 UC Berkeley)*
+カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
 
 *Vicuna (2023.05.04 Stability AI)*
 パラメータ数: 7B, 13B
@@ -721,18 +729,14 @@ AlpacaをShareGPTのデータで微調整したもの。
 ShareGPTはChatGPTの対話データを収集したもの。
 ChatGPTの90%程度の性能を達成できるとされる。
 
-*GPT4ALL (Nomic AI)*
+*GPT4ALL (2023.03.26 Nomic AI)*
 [GPT4All](https://github.com/nomic-ai/gpt4all)
-名前が紛らわしいが、OpenAIのGPT-4とは関係ない。
 gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
 ローカルで単一GPUで動くチャットボットを構築することを目指した。
 GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承するため商用利用は禁止。
 
 *StableVicuna (2023.05.04 Stability AI)*
 RLHFで学習したVicuna。
-
-*Koara (UC Berkeley)*
-カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
 
 
 
@@ -750,14 +754,23 @@ LLaMA --> RedPajama-INCITE
 ```
 
 *Dolly (2023.04.12 Databricks)*
+AlpacaをChatGPTの出力で微調整したもの。
+そのため、LLaMAの制限とChatGPTの制限がある。
+LLaMAの制限は商用利用禁止、ChatGPTは競合モデルの作成の禁止。
 
-Dolly 2.0
+わずか30ドルで訓練された。
+
+*Dolly 2.0 (2023.04.26 Databricks)*
 パラメータ数: 12B
 Pythiaベースのモデル。
-Databricksは自社の社員による1.5万回の会話データセットを作り、Dolly-v2として公開した。
+Databricksは自社の社員による1.5万回の会話データセットを作り、LLaMAとChatGPTの制限をはずし、商用利用可能としてDolly 2.0を公開した。
+オープンソース。
 
 *MPT-7B (2023.05.05 MosaicML)*
 パラメータ数: 7B
+GPT-4の二倍の長さの文章を入力できる。
+
+LLaMA-7Bと同等の品質
 
 商用利用が可能なオープンソースのモデル。
 テキストとコードの1Tのトークンで訓練された。
