@@ -149,10 +149,11 @@ Transformer --> Reformer
 
 *[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12 Google)*
 RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コストが増大する問題があった。
-Self-AttentionとScaled-Dot-Product-Attentionを用いることで、長期依存関係を効率的に処理できるようになった。
-また、RNNとは違い、全ての位置の計算を同時に行うことが可能となり、GPUを効率的に使用できるようになった。
+Scaled Dot-Product Attentionを用いることで、長期依存関係を効率的に処理できるようになった。
+またAttentionを複数のヘッドで並列にするMulti-Head Attentionの形態を取る。
+RNNとは違い、全ての位置の計算を同時に行うことが可能となり、GPUを効率的に使用できるようになった。
 
-Scaled Dot-Product Attentionを使用しているが、必要なメモリが文章の長さの二乗に比例する。
+Scaled Dot-Product AttentionはSelf-Attentionの一種で、必要なメモリが文章の長さの二乗に比例する。
 LSTMに比べて計算速度は速いが、入力が長くなると計算負荷が高い。
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
@@ -402,6 +403,9 @@ Bidirectional Auto-Regressive Transformerの略です。
 BERTのEncoderとGPTのDecoderを組み合わせたもの。
 
 *mBART (2020.01.22 Meta)*
+Multilingual BART
+25の言語で事前学習し、微調整されている。
+翻訳などの多言語間のタスクで優れた性能を示した。
 
 ```mermaid
 flowchart
@@ -428,10 +432,6 @@ T0
 ゼロショット向けに調整したT5
 
 
-*AlexaTM (2022.08.02 Amazon)*
-パラメータ数: 20B(Enc 46層, Dec 32層)
-
-
 ```mermaid
 flowchart
 
@@ -456,14 +456,6 @@ https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-
 MicrosoftとNVIDIAの研究協力のもと作成されたモノリシックでは最大規模のモデルとなる。
 GPT-3の3倍のパラメータ数となり、様々なタスクですばらしい精度を発揮した。
 MegatronやDeepSpeedの仕組みは後の様々なLLMs(GPT-NeoXやBLOOMなど)で使われるようになった。
-
-*DeepSpeed-Chat (Microsoft)*
-https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese
-DeepSpeedの仕組みを利用したLLM構築フレームワーク。
-GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
-Azure上でNVIDIA A100を64台用いた場合は、
-OPT-13Bモデルは7.5h(2,000ドル)、
-BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
 
 ```mermaid
 flowchart
@@ -523,17 +515,12 @@ Gopherなどの先行LLMではモデル規模を拡大しても性能向上の�
 PaLMベースのMinervaが三角関数の文章問題を解いて話題となった。
 MATHデータセットのPaLMの正答率が8.8%だったのに対して、Minervaは50.3%と飛躍的に向上している。
 
-Med-PaLM
-
-PaLM-Coder
-
 *PaLM-E (2023.03.06 Google)*
 パラメータ数: 562B
 PaLMに視覚処理(Vision Transformer)を組み込んだモデル。
 視覚情報を基に様々なタスクをこなせるようになった。
 [PaLM-E: An Embodied Multimodal Language Model](https://arxiv.org/abs/2303.03378)
 https://palm-e.github.io/
-
 
 *PaLM 2 (2023.5.11 Google)*
 パラメータ数: 非公表
@@ -543,7 +530,6 @@ GPT-4と同水準。
 
 GoogleのPaLM 2の次世代モデルはGeminiと呼ばれ、開発中。
 
-
 ```mermaid
 flowchart
 
@@ -552,25 +538,21 @@ Transformer --> PaLM --> Flan-T5/Flan-PaLM
 Flan --> Flan-T5/Flan-PaLM
 ```
 
-*Flan (2023.02.01 Google)* ちがいそう
+*Flan (2021.10.06 Google)*
 パラメータ数: 137B
 
 *Flan-T5/Flan-PaLM (2022.10.20 Google)*
 指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
 
-
-
 ```mermaid
 flowchart
 
+Transformer --> PaLM --> Flan-U-PaLM
+UL2 --> UL2R --> Flan-U-PaLM
+Flan --> Flan-U-PaLM
 UL2 --> Flan-UL2
 Flan --> Flan-UL2
-Flan --> Flan-U-PaLM
-UL2 --> UL2R --> Flan-U-PaLM
-Transformer --> PaLM --> Flan-U-PaLM
 ```
-
-
 
 *[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
 パラメータ数: 20B
@@ -578,21 +560,21 @@ Unified Language Learnerの略。
 データセットやセットアップによらずに言語モデルの性能を上げる手法。
 2種類の言語モデルの長所を併せ持つ。
 
-
-*Flan-UL2 (2023.03.03 Google)*
-指示調整タスクのFlan Collectionを使って学習したUL2モデル。
-GoogleがLLaMAに対抗するようにオープンソースで公開した。
-商用利用可能。
-
 *UL2R (2022.05.22 Google)*
 パラメータ数: 137B
 UL2Rは様々なサイズの言語モデルを指示微調整することを目的としている。
 
 *Flan-U-PaLM (2022.11.29 Google)*
+パラメータ数: 540B
 UL2RとFlanでPaLMを追加学習させたもの。
 U-PaLMやFlan-PaLMを上回るパフォーマンスを発揮した。
 MMLUベンチマーク75.4%でスコアを更新した。
 
+*Flan-UL2 (2023.03.03 Google)*
+パラメータ数: 20B
+指示調整タスクのFlan Collectionを使って学習したUL2モデル。
+GoogleがLLaMAに対抗するようにオープンソースで公開した。
+商用利用可能。
 
 ```mermaid
 flowchart
@@ -618,6 +600,7 @@ QAに特化したGopherCiteというモデルもある。
 SparrowはChinchillaのプロンプトバージョン。
 
 *Flamingo (2022.04.28 DeepMind)*
+パラメータ数: 80B
 FlamingoはChinchillaに画像エンコーダーをつないだもの。
 画像からテキストを生成できる。
 [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
@@ -730,6 +713,7 @@ ShareGPTはChatGPTの対話データを収集したもの。
 ChatGPTの90%程度の性能を達成できるとされる。
 
 *GPT4ALL (2023.03.26 Nomic AI)*
+パラメータ数: 7B
 [GPT4All](https://github.com/nomic-ai/gpt4all)
 gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
 ローカルで単一GPUで動くチャットボットを構築することを目指した。
@@ -738,8 +722,10 @@ GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承する�
 *StableVicuna (2023.05.04 Stability AI)*
 RLHFで学習したVicuna。
 
-
-
+*Gorilla  (UC Berkeley, Microsoft)*
+適切なAPIを呼び出せるモデル。
+TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している。
+https://gorilla.cs.berkeley.edu/
 
 
 ```mermaid
@@ -800,6 +786,16 @@ RedPajamaデータセットで訓練している。
 
 
 
+*DeepSpeed-Chat (2023.04.12 Microsoft)*
+https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese
+DeepSpeedの仕組みを利用したLLM構築フレームワーク。
+GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
+Azure上でNVIDIA A100を64台用いた場合は、
+OPT-13Bモデルは7.5h(2,000ドル)、
+BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
+
+
+
 ```mermaid
 flowchart
 
@@ -829,7 +825,7 @@ GPT-NeoX --> Rinna
 
 *OpenCALM (2023.05 サイバーエージェント)*
 パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
-サイバーエージェントが公開した日本語モデル。
+サイバーエージェントが公開した微調整前の日本語モデル。
 GPT-NeoXを使用している。
 
 *rinna (2023.05 rinna)*
