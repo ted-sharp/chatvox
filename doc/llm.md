@@ -719,6 +719,9 @@ AlpacaをShareGPTのデータで微調整したもの。
 ShareGPTはChatGPTの対話データを収集したもの。
 ChatGPTの90%程度の性能を達成できるとされる。
 
+*StableLM (2023.04.20 Stability AI) 非商用*
+パラメータ数: 3B, 7B
+
 *StableVicuna (2023.05.04 Stability AI) 非商用*
 RLHFで学習したVicuna。
 
@@ -755,11 +758,6 @@ Pythiaベースのモデル。
 Databricksは自社の社員による1.5万回の会話データセットを作り、LLaMAとChatGPTの制限をはずし、商用利用可能としてDolly 2.0を公開した。
 オープンソース。
 
-*StableLM (2023.04.20 Stability AI)*
-パラメータ数: 3B, 7B
-
-*HuggingChat (2023.04.27 Hugging Face)*
-
 *OpenLLaMA (2023.04.28 OpenLM Research)*
 パラメータ数: 7B
 [OpenLLaMA: An Open Reproduction of LLaMA](https://github.com/openlm-research/open_llama)
@@ -780,14 +778,15 @@ LLaMA-7Bと同等の品質
 440のGPUで9.5日間かけて訓練された。
 200万ドル(約3,000万円)かかったとされる。
 
-Mosaic-20B も同日？
-
-
 ```mermaid
 flowchart
-
+InstructGPT --> OpenAssistant
 MT-NLG --> DeepSpeed-Chat
 ```
+
+*OpenAssistant (LAION-AI) Apache2.0*
+
+Hugginface-Chat
 
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
 [GitHub - DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
@@ -796,12 +795,6 @@ GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
 Azure上でNVIDIA A100を64台用いた場合は、
 OPT-13Bモデルは7.5h(2,000ドル)、
 BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
-
-実際にAI開発を行いたい場合は次の段階を踏むとよい。
-
-1. APIを使用する
-2. 既存モデルを微調整する
-3. モデルを構築する
 
 ```mermaid
 flowchart
@@ -870,16 +863,6 @@ T=trillion=1兆
 |2023.03|Stanford, and others|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
 |★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
 
-### 向いているタスク
-
-BERTで使用されている、Encoderのみを使用する構造は、テキスト分類や固有表現抽出に向いている。
-GPTで使用されている、Decoderのみを用いる構造は、文章生成に向いている。
-T5で使用されている、Encoder、Decoderの構造は、翻訳や要約に向いている。
-
-0-shotとは、追加学習なしの状態を示す。
-few-shotは、わずかな追加学習をして、タスクに適応させたあとの状態を示す。
-
-最先端(SOTA:State-Of-The-Art)
 
 ## Datasets
 
@@ -892,8 +875,6 @@ GitHub
 Flan Collection
 指示調整タスク
 
-思考連鎖プロンプト(CoT:Chain of Thought prompting)
-
 ## Others
 
 Megatron
@@ -904,6 +885,18 @@ bitsandbytes
 
 FlexGen
 
+
+## LLMを開発するには？
+
+実際にAI開発を行いたい場合は次の段階を踏むとよい。
+
+1. APIを使用する
+2. 既存モデルを微調整する
+3. モデルを構築する
+
+また学習にはGoogle Colaboratoryなどのクラウドプラットフォームを活用するのが簡単。
+DeepSpeed-ChatやGPT-NeoXなどのフレームワークを利用するのもよい。
+データセットを作成するにはオープンソースのLLMを利用するとよい。
 
 ## 参考
 
