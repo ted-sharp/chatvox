@@ -462,6 +462,25 @@ MegatronやDeepSpeedの仕組みは後の様々なLLMs(GPT-NeoXやBLOOMなど)�
 ```mermaid
 flowchart
 
+RNN --> RWKV
+Transformer --> RWKV
+```
+
+*RWKV-LM (2021.08.13 BlinkDL) Apache2.0*
+パラメータ数: 7B, 14B
+[The RWKV Language Model (and my LM tricks)](https://github.com/BlinkDL/RWKV-LM)
+RWKVの名前の由来は4つの重要なパラメータを並べたもの。
+RNNとTransformerのいいとこどり。
+GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
+RNNで高い性能を示し話題となった。
+
+14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
+
+AlpacaやShareGPTで微調整されたRavenというモデルもある。
+
+```mermaid
+flowchart
+
 Transformer --> Meena --> LaMDA --> Bard
 Transformer --> GLaM
 Transformer --> PaLM --> PaLM-2
@@ -626,6 +645,10 @@ OpenAI Codexを競技プログラミングレベルに引き上げたもの。
 [OPT: Open Pre-trained Transformer Language Models](https://arxiv.org/abs/2205.01068)
 Open Pre-trained Transformersのモデルのひとつ。 
 
+FlexGenを使えば、GPUのVRAMをCPUのRAMにスワップできる。
+つまり、175Bに必要な400GB近くのメモリを通常のRAMで動かすことができる。
+FlexGenはBLOOMへの対応もロードマップに挙げている。
+
 *[OPT-IML](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT-IML)*
 [OPT-IML: Scaling Language Model Instruction Meta Learning through the Lens of Generalization](https://arxiv.org/abs/2212.12017)
 OPTをInstructionチューニングしたもの。
@@ -649,36 +672,23 @@ BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるので、動かすだけでも24GBのGPUが14枚以上必要とされる。
 1Bのモデルだと12GBのGPUで動かすことができる。
 
+176Bモデルを作成後、bitsandbytesを用いて8bit量子化が検討された。
+176Bモデルの329GBが8bit量子化で200GBで動作可能となる。
+
+*BLOOM+1 (2022.10.19 BigScience)*
+[BLOOM+1: Adding Language Support to BLOOM for Zero-Shot Prompting](https://arxiv.org/abs/2212.09535)
+BLOOMをゼロショット用に微調整したもの。
+
 *BLOOMZ (2022.11.03 BigScience)*
-パラメータ数: 176B
 [GitHub - BLOOMZ and mT0](https://github.com/bigscience-workshop/xmtf)
 [Crosslingual Generalization through Multitask Finetuning](https://arxiv.org/abs/2211.01786)
-BLOOMをファインチューニングしたもの。
+BLOOMを微調整したもので、多言語一般化を実現したもの。
 
 ```mermaid
 flowchart
 
-RNN --> RWKV
-Transformer --> RWKV
-```
-
-RWKV 2022.05.20 DeepMind
-*RWKV-LM (2023.02.21 Stability, EleutherAI)*
-パラメータ数: 7B, 14B
-[The RWKV Language Model (and my LM tricks)](https://github.com/BlinkDL/RWKV-LM)
-RWKVの名前の由来は4つの重要なパラメータを並べたもの。
-RNNとTransformerのいいとこどり。
-GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
-RNNで高い性能を示し話題となった。
-
-14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
-
-AlpacaやShareGPTで微調整されたRavenというモデルもある。
-
-```mermaid
-flowchart
-
-GPT-3 --> LLaMA --> Alpaca --> Vicuna
+GPT-3 --> LLaMA --> Alpaca --> Dolly
+Alpaca --> Vicuna
 LLaMA --> GPT4ALL
 LLaMA --> Koala
 ```
@@ -708,42 +718,11 @@ A100 8枚で3hかかった。
 [GitHub - GPT4All](https://github.com/nomic-ai/gpt4all)
 gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
 ローカルで単一GPUで動くチャットボットを構築することを目指した。
+GPUなしのCPUのみでも動かすことができる。
 GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承するため商用利用は禁止。
 
 *Koala (2023.04.03 UC Berkeley) 非商用*
 カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
-
-*Vicuna (2023.05.04 Stability AI) 非商用*
-パラメータ数: 7B, 13B
-AlpacaをShareGPTのデータで微調整したもの。
-ShareGPTはChatGPTの対話データを収集したもの。
-ChatGPTの90%程度の性能を達成できるとされる。
-
-*StableLM (2023.04.20 Stability AI) 非商用*
-パラメータ数: 3B, 7B
-
-*StableVicuna (2023.05.04 Stability AI) 非商用*
-RLHFで学習したVicuna。
-
-*[Gorilla](https://gorilla.cs.berkeley.edu/) (2023.05.26 UC Berkeley, Microsoft)*
-適切なAPIを呼び出せるモデル。
-TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している。
-
-```mermaid
-flowchart
-
-GPT-3 --> LLaMA
-GPT-3 --> Cerebras-GPT
-LLaMA --> Alpaca --> Dolly
-LLaMA --> OpenLLaMA
-LLaMA --> RedPajama-INCITE
-
-```
-
-*Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
-パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
-Chinchillaのスケーリング則を参考に学習されている。
-オープンなデータセットを使用。
 
 *Dolly (2023.04.12 Databricks) 非商用*
 AlpacaをChatGPTの出力で微調整したもの。
@@ -752,26 +731,61 @@ LLaMAの制限は商用利用禁止、ChatGPTは競合モデルの作成の禁�
 
 わずか30ドルで訓練された。
 
+*Vicuna (2023.05.04 Stability AI) 非商用*
+パラメータ数: 7B, 13B
+AlpacaをShareGPTのデータで微調整したもの。
+ShareGPTはChatGPTの対話データを収集したもの。
+ChatGPTの90%程度の性能を達成できるとされる。
+
+*[Gorilla](https://gorilla.cs.berkeley.edu/) (2023.05.26 UC Berkeley, Microsoft)*
+適切なAPIを呼び出せるモデル。
+TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している。
+
+```mermaid
+flowchart
+
+GPT-3 --> Cerebras-GPT
+Pythia --> Dolly2.0
+```
+
+*Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
+パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
+Chinchillaのスケーリング則を参考に学習されている。
+オープンなデータセットを使用。
+
 *Dolly 2.0 (2023.04.26 Databricks) 商用可*
 パラメータ数: 12B
 Pythiaベースのモデル。
 Databricksは自社の社員による1.5万回の会話データセットを作り、LLaMAとChatGPTの制限をはずし、商用利用可能としてDolly 2.0を公開した。
-オープンソース。
 
-*OpenLLaMA (2023.04.28 OpenLM Research)*
+```mermaid
+flowchart
+
+LLaMA --> OpenLLaMA
+LLaMA --> RedPajama-INCITE
+```
+
+*OpenLLaMA (2023.04.28 OpenLM Research) 商用可*
 パラメータ数: 7B
 [OpenLLaMA: An Open Reproduction of LLaMA](https://github.com/openlm-research/open_llama)
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
 アルゴリズムやパラメータ等はLLaMAと同じにしている。
-RedPajamaデータセットで訓練したOpenLLaMA 7Bのモデルがある。
 
-*RedPajama-INCITE (2023.05.05 Together)*
+JAXベースのEasyLMを使用した。
+RedPajamaデータセットを用いた。
+
+*RedPajama-INCITE (2023.05.05 Together) 商用可*
+パラメータ数: 3B, 7B
+LLaMAを忠実に再現することを目的としたモデル。
+RedPajama-Data-1Tという高品質、広範囲のデータセットを作成した。
+
+3Bモデルは同パラメータ帯の他と比べて優秀で、RTX 2070でも動作する。
+7BモデルはPythia 7Bを上回る性能を示したとされる。
 
 *MPT-7B (2023.05.05 MosaicML) 商用可*
 パラメータ数: 7B
-GPT-4の二倍の長さの文章を入力できる。
-
-LLaMA-7Bと同等の品質
+ALiBiのおかげで84kまで入力できる。
+FlashAttentionとFasterTransformerを使用している。
 
 商用利用が可能なオープンソースのモデル。
 テキストとコードの1Tのトークンで訓練された。
@@ -784,9 +798,8 @@ InstructGPT --> OpenAssistant
 MT-NLG --> DeepSpeed-Chat
 ```
 
-*OpenAssistant (LAION-AI) Apache2.0*
-
-Hugginface-Chat
+*OpenAssistant (2022.10.18 LAION) Apache2.0*
+人間が入力した高品質なサンプルを集めるためのモデル。
 
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
 [GitHub - DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
@@ -806,85 +819,12 @@ GPT-NeoX --> Rinna
 *OpenCALM (2023.05 サイバーエージェント)*
 パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
 サイバーエージェントが公開した微調整前の日本語モデル。
-GPT-NeoXを使用している。
 
 *rinna (2023.05 rinna)*
 パラメータ数: 3.6B
 japanese-gpt-neox-3.6b
 japanese-gpt-neox-3.6b-instruction-sft
 りんなが公開した日本語モデル。
-
-## The Table of LLMs
-
-Archi: Pretraining Architecture
-Task: Pretraining Task
-
-M=million=100万
-B=billion=10億
-T=trillion=1兆
-
-<!-- <div style="overflow-x:scroll"> -->
-
-|Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|--|--|--|--|--|--|--|--|--|--|--|
-|2018.06.11|OpenAI|GPT|Transformer|Decoder|LM|117M|BookCorpus 4.5GB|8GPUs 1month, 1.7e19 FLOP||
-|2019.02.14|OpenAI|GPT-2|GPT|Decoder|LM|1.5B|40GB webtext, 10B tokens|1.5e21 FLOP|MIT|
-|2020.05.28|OpenAI|GPT-3|GPT|Decoder|LM|175B|570GB plaintext, 499B tokens|3.1e23 FLOP|API||
-|2023.03.14|OpenAI|GPT-4|GPT|Decoder|LM, RLHF|-|-|Estimated 2.1e25 FLOP|API||
-|2021.03|EleutherAI|GPT-Neo|GPT-2|Decoder|LM|125M, 350M, 1.3B, 2.7B (XL)|Pile||MIT||
-|2021.05|EleutherAI|GPT-J|GPT-2|Decoder|LM|6B|Pile||Apache2.0|||
-|2022.04|EleutherAI|GPT-NeoX|GPT-3|Decoder|LM|20B|Pile||Apache2.0||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|2018.02.15|UW, AllenAI|ELMo|-|LSTM|-|94M||||||
-|2018.10.11|Google|BERT|Transformer|Encoder|MLM/NSP|Base = 110M, Large = 340M|3.3B words: Toronto Book Corpus and Wikipedia||Apache2.0||
-|2019.07.26|UW, Google|RoBERTa|BERT|Encoder|MLM(Dynamic)|Base = 125M, Large = 356M|Same as BERT + CC News + OpenWebText + Stories(33B words)||||
-|2019.08.02|Huggingface|DistilBERT|BERT|Encoder|MLM/NSP|66M|Same as BERT||||
-|2019.09.20|Google|ALBERT|BERT|Encoder|MLM/NSP|Base = 12M, Large = 18M, XLarge = 60M|Same as BERT||||
-|2019.09.26|Stanford, Google|ELECTRA|BERT|Encoder|RTD|Small = 14M, Base = 110M, Large = 330M|Same as BERT except for Large with is same as XLNet||||
-|2020.06.13|Microsoft|DeBERTa|BERT|Encoder|MLM|750M (xlarge)|English Wikipedia, BookCorpus, OPENWEBTEXT and STORIES||MIT||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|2019.06.19|CMU, Google|XLNet|Transformer XL|Decoder|PLM|Base=117M, Large=360M|33B words: Same as BERT + Giga5 (16GB text) + and aggressively filtered ClueWeb 2012-B (19GB), Common Crawl (110 GB)||Apache2.0|||
-|2019.10.29|Facebook|BART|BERT for encoder, GPT for Decoder|Encoder/Decoder|DAE|10% more than BERT|Same as RoBERTa|||||
-|2019.10.23|Google|T5|Transformer|Encoder/Decoder|DAE|60M, 220M, 770M, 3B, 11B|C4(750GB)||||
-|2021.01|Google|Switch|T5|Encoder/Decoder, MoE|DAE|1T|C4||||
-|2022.10.14|Google|UL2|Transformer|Encoder/Decoder|Mixture-of-Denoisers|20B|4C||Apache2.0||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|2021.12.09|Google|GLaM|Transformer|Decoder, MoE|LM|1.2T across 64 experts, but only 96B get activated for inference|1.6T tokens including web pages filtered by Wikipedia and books for quality||||
-|2022.01.21|Google|LaMDA|Transformer|Decoder|LM|137B|1.56T words, 168B tokens||||
-|2022.04.04|Google|PaLM|GPT|Decoder|LM|8B, 62B, 540B|780B tokens||||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|2021.12.08|DeepMind|Gopher|GPT|Decoder|LM|280B|MassiveText 10.5TB, 300B tokens||||
-|2022.03.29|DeepMind|Chinchilla|Gopher|Decoder|LM|70B|1.4T tokens, Massive Text||||
-|2022.05.02|Facebook|OPT|GPT-3|Decoder|LM|175B|180B tokens = RoBERTa + the Pile + PushShift.io Reddit||||
-|2022.07|BigScience|BLOOM|GPT|Decoder|LM|560m, 1.1B, 1.7B, 3B, 7.1B, 176B|366B tokens (1.5 TB of text data) multilingual dataset||||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-|2023.02.24|Meta|LLaMA|GPT|Decoder|LM|6.7B, 13.0B, 32.5B, 65.2B|English CommonCrawl + C4 + Github + Wikipedia + Gutenberg and Books3 + ArXiv + Stack Exchange||学術用途のみ||
-|2023.03|Stanford|Alpaca|LLaMA|Decoder|LM|7B|Alpaca Dataset: 1.4T||学術用途のみ||
-|2023.03|Stanford, and others|Vicuna|LLaMA|Decoder|human instructions|13B|ShareGPT||学術用途のみ||
-|★Date|Lab|Name|Family|Archi|Task|Params|Corpus|Cost|License|Note|
-
-
-## Datasets
-
-Pile
-C4
-MassiveText (DeepMind)
-Wikipedia
-GitHub
-
-Flan Collection
-指示調整タスク
-
-## Others
-
-Megatron
-
-DeepSpeed
-
-bitsandbytes
-
-FlexGen
-
 
 ## LLMを開発するには？
 
@@ -894,9 +834,12 @@ FlexGen
 2. 既存モデルを微調整する
 3. モデルを構築する
 
-また学習にはGoogle Colaboratoryなどのクラウドプラットフォームを活用するのが簡単。
+学習にはGoogle Colaboratoryなどのクラウドプラットフォームを活用するのが簡単。
 DeepSpeed-ChatやGPT-NeoXなどのフレームワークを利用するのもよい。
 データセットを作成するにはオープンソースのLLMを利用するとよい。
+
+さらに独自開発を進める場合は、最新の様々なTransformerを検討する。
+Megatron, DeepSpeed, bitsandbytes, FlexGenなどの学習や推論の効率化を検討する。
 
 ## 参考
 
