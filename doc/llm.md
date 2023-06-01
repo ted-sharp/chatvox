@@ -420,11 +420,11 @@ Multilingual BART
 ```mermaid
 flowchart
 
-Transformer --> T5
+Transformer --> T5 --> UL2
 ```
 
 *T5 (2019.10.23 Google)*
-パラメータ数: T5-base=223M, T5-large=739M, ?=11B
+パラメータ数: t5-base=223M, t5-large=739M, t5-3b=3B, t5-11b=11B
 [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://arxiv.org/abs/1910.10683)
 Text-to-Text Transfer Transformerで、Tが5つあるのでT5と呼ばれる。
 T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使用している。
@@ -432,7 +432,25 @@ T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使�
 多数のLLMが開発され、評価が困難になってきた。
 現状で、何が最も転移学習を有効にしているのかを調査した結果、誕生したのがT5となる。
 
+入力にはプレフィックスを用いると良好に機能する。
+
 C4(Colossal Clean Crawled Corpus)データセットを作成して、学習に利用している。
+
+*T5v1.1 (2020.08.06 Google)*
+パラメータ数: small=77M, base=250M, large=800M, xl=3B, xxl=11B
+活性化関数としてReLUではなくGEGLUを使用。
+事前学習でのドロップアウトはオフにして、質の向上を目指す。
+
+*mT5 (2020.08.22 Google)*
+[mT5: A massively multilingual pre-trained text-to-text transformer](https://arxiv.org/abs/2010.11934)
+101の言語をカバーする新しいCommon Crawlで学習された。
+微調整前のモデル。
+
+*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
+パラメータ数: 20B
+[UL2: Unifying Language Learning Paradigms](https://arxiv.org/abs/2205.05131)
+T5v1.1と同じアーキテクチャを持つが、GEGLUではなく、Gated-SiLUを使用している。
+ノイズ除去(denoising)することで精度を上げている。
 
 ```mermaid
 flowchart
@@ -578,12 +596,6 @@ UL2 --> Flan-UL2
 Flan --> Flan-UL2
 ```
 
-*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
-パラメータ数: 20B
-[UL2: Unifying Language Learning Paradigms](https://arxiv.org/abs/2205.05131)
-データセットやセットアップによらずに言語モデルの性能を上げる手法。
-2種類の言語モデルの長所を併せ持つ。
-
 *[UL2R](https://ai.googleblog.com/2022/11/better-language-models-without-massive.html) (2022.05.22 Google)*
 パラメータ数: 137B
 UL2Rは様々なサイズの言語モデルを指示微調整することを目的としている。
@@ -708,7 +720,7 @@ LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている
 パラメータ数: 7B
 [Stanford Alpaca: An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca)
 LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tuning)したもの。
-もとになったMLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
+もとになったLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
 
 [スタンフォード大学がChatGPTレベルのAIを600ドル未満で構築](https://texal.jp/2023/03/21/stanford-university-builds-chatgpt-level-ai-for-less-than-600/)
 A100 8枚で3hかかった。
@@ -776,6 +788,7 @@ RedPajamaデータセットを用いた。
 
 *RedPajama-INCITE (2023.05.05 Together) 商用可*
 パラメータ数: 3B, 7B
+名前の由来はLlama Llama Red Pajamaから。
 LLaMAを忠実に再現することを目的としたモデル。
 RedPajama-Data-1Tという高品質、広範囲のデータセットを作成した。
 
@@ -799,7 +812,7 @@ MT-NLG --> DeepSpeed-Chat
 ```
 
 *OpenAssistant (2022.10.18 LAION) Apache2.0*
-人間が入力した高品質なサンプルを集めるためのモデル。
+人間が入力した高品質なサンプルを集めるためのチャットボット。
 
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
 [GitHub - DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
@@ -816,11 +829,11 @@ GPT-NeoX --> OpenCALM
 GPT-NeoX --> Rinna
 ```
 
-*OpenCALM (2023.05 サイバーエージェント)*
+*OpenCALM (2023.05.25 サイバーエージェント)*
 パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
 サイバーエージェントが公開した微調整前の日本語モデル。
 
-*rinna (2023.05 rinna)*
+*rinna (2023.05.26 rinna)*
 パラメータ数: 3.6B
 japanese-gpt-neox-3.6b
 japanese-gpt-neox-3.6b-instruction-sft
