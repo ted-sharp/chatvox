@@ -94,7 +94,7 @@ flowchart
 
 RNN --> LSTM --> Word2Vec --> GloVe
 Word2Vec --> fastText
-LSTM --> Seq2Seq --> Attention
+LSTM --> Seq2Seq --> Attention --> Transformer
 RNN --> GRU
 ```
 
@@ -136,17 +136,6 @@ Seq2Seqは、翻訳や対話システム、要約などの様々な自然言語�
 [Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/abs/1508.04025)
 ニューラル機械翻訳において、従来のSeq2SeqにAttentionメカニズムを導入することで、翻訳の品質を向上させることができた。
 
-```mermaid
-flowchart
-
-Attention --> Transformer
-LSTM --> ELMo
-LSTM --> ULMFiT
-Transformer --> Sparse-Transformer
-Transformer --> Reformer
-
-```
-
 *[Transformer](https://ja.wikipedia.org/wiki/Transformer_(%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%83%A2%E3%83%87%E3%83%AB)) (2017.06.12 Google)*
 [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 RNNやLSTMは再帰的に処理を行うため、長い文脈だと計算コストが増大する問題があった。
@@ -156,6 +145,16 @@ RNNとは違い、全ての位置の計算を同時に行うことが可能と�
 
 Scaled Dot-Product AttentionはSelf-Attentionの一種で、必要なメモリが文章の長さの二乗に比例する。
 LSTMに比べて計算速度は速いが、入力が長くなると計算負荷が高い。
+
+```mermaid
+flowchart
+
+LSTM --> ELMo
+LSTM --> ULMFiT
+Transformer --> Sparse-Transformer
+Transformer --> Reformer
+
+```
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 パラメータ数: 300M
@@ -255,6 +254,8 @@ code-davinci-002
 改良バージョン
 gpt-3.5-turbo 会話用
 text-davinci-003
+
+GPT-3.5 TurboはGPT-3に比べてトークンあたりのコストが1/10と言われている。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11.30 OpenAI)*
 InstructGPTの兄弟モデル。
@@ -813,6 +814,18 @@ MT-NLG --> DeepSpeed-Chat
 
 *OpenAssistant (2022.10.18 LAION) Apache2.0*
 人間が入力した高品質なサンプルを集めるためのチャットボット。
+
+*PEFT (2023.02.11 Hugging Face)*
+[GitHub - State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods](https://github.com/huggingface/peft)
+効率的なFine-Tuningのためのライブラリ。
+通常のFine-Tuningはパラメータ数が多くなるほど必要なメモリが膨大になり、多大なコストが発生する。
+そのため全体の微調整ではなく、少数のパラメータのみを微調整する方法が考えられた。
+
+[LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
+LoRA, Prefix Tuning, P-Tuning, Prompt Tuning, AdaLoRAの手法が使える。
+
+DeepSpeedも使える。
+3Bモデルで、通常の微調整だとGPU 48GBが必要なのに対して、PEFT-LoRA DeepSpeedでGPU 10GB程度になる。
 
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
 [GitHub - DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
