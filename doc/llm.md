@@ -284,8 +284,8 @@ GPT-2 --> GPT-J
 GPT-2 --> Pythia
 ```
 
-*GPT-Neo (2021.03 [EleutherAI](https://en.wikipedia.org/wiki/EleutherAI))*
-パラメータ数: 125M, 1.3B, 2.7B
+*GPT-Neo (2021.03.21 [EleutherAI](https://en.wikipedia.org/wiki/EleutherAI), Together) Apache2.0*
+パラメータ数: 125M, 1.3B, 2.7B / Finetuned
 GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
 GPT-2のクローンを作ろうとしたものをもとにしている。
 256トークンのウィンドウサイズに区切ったLocal Attentionを使用している。
@@ -293,12 +293,12 @@ Local Attentionはウィンドウ外へアクセスできないため、パフ�
 
 The Pileデータセットで訓練された。
 
-*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.05 EleutherAI)*
-パラメータ数: 6B
+*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.06.09 EleutherAI) Apache2.0*
+パラメータ数: 6B / Finetuned, Instruct tuned
 JAXライブラリを使用していたのでGPT-Jと名づけられた。
 公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
 
-Common Crawlデータセットで訓練された。
+The Pileデータセットで訓練された。
 
 *GPT-NeoX (2022.02 EleutherAI)*
 パラメータ数: 20B(44層)
@@ -307,12 +307,14 @@ Microsoft DeepSpeedを使って学習を高速化している。
 Nvidia Megatronを使って分散して学習した。
 公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
 
-*Pythia (2023.02.13 EleutherAI)*
-パラメータ数: 70M-12B および各モデルの154のチェックポイント
+*Pythia (2023.02.13 EleutherAI, Together) Apache-2.0*
+パラメータ数: 70M-12B および各モデルの154のチェックポイント / Finetuned
 [Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
 [EleutherAI/pythia](https://github.com/EleutherAI/pythia)
 
 LLMの訓練とスケーリングを分析するために作成されたため、多数のチェックポイントを残している。
+
+The Pileデータセットで訓練された。
 
 ```mermaid
 flowchart
@@ -447,7 +449,7 @@ C4(Colossal Clean Crawled Corpus)データセットを作成して、学習に�
 101の言語をカバーする新しいCommon Crawlで学習された。
 微調整前のモデル。
 
-*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html)* (2020.10.14 Google)
+*[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html) (2020.10.14 Google) Apache2.0*
 パラメータ数: 20B
 [UL2: Unifying Language Learning Paradigms](https://arxiv.org/abs/2205.05131)
 T5v1.1と同じアーキテクチャを持つが、GEGLUではなく、Gated-SiLUを使用している。
@@ -583,7 +585,7 @@ FLAN --> Flan-T5/Flan-PaLM
 [The Flan Collection: Designing Data and Methods for Effective Instruction Tuning](https://arxiv.org/abs/2301.13688)
 微調整によりゼロショットの能力を向上させるために作成されたモデル。
 
-*Flan-T5/Flan-PaLM (2022.10.20 Google)*
+*Flan-T5/Flan-PaLM (2022.12.06 Google) Apache2.0*
 [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
 
@@ -607,15 +609,15 @@ UL2RとFlanでPaLMを追加学習させたもの。
 U-PaLMやFlan-PaLMを上回るパフォーマンスを発揮した。
 MMLUベンチマーク75.4%でスコアを更新した。
 
-*Flan-UL2 (2023.03.03 Google) 商用可OSS*
-パラメータ数: 20B
+*[Flan-UL2](https://www.yitay.net/blog/flan-ul2-20b) (2023.03.03 Google) Apache2.0, 商用可*
+パラメータ数: 20B / Finetuned, Instruct tuned
 指示調整タスクのFlan Collectionを使って学習したUL2モデル。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 
 ```mermaid
 flowchart
 
-Transformer --> GPT --> Gopher --> Chinchilla
+GPT --> Gopher --> Chinchilla
 GPT --> OPT
 GPT --> BLOOM
 ```
@@ -653,9 +655,10 @@ FlamingoはChinchillaに画像エンコーダーをつないだもの。
 DeepMindのAlphaGoやAlphaZeroのAlphaシリーズのコード生成版。
 OpenAI Codexを競技プログラミングレベルに引き上げたもの。
 
-*[OPT-175B](https://ai.facebook.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/) (2022.05.02 Meta) 非商用OSS*
-パラメータ数: 175B
+*[OPT-175B](https://ai.facebook.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/) (2022.05.03 Meta) 非商用*
+パラメータ数: 1.3B, 2.7B, 6.7B, 13B, 30B, 66B, 175B / Finetuned, Instruct tuned
 [OPT: Open Pre-trained Transformer Language Models](https://arxiv.org/abs/2205.01068)
+[GitHub - OPT](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT)
 Open Pre-trained Transformersのモデルのひとつ。 
 
 FlexGenを使えば、GPUのVRAMをCPUのRAMにスワップできる。
@@ -672,8 +675,8 @@ OPTをInstructionチューニングしたもの。
 
 ハルシネーションとは、LLMの仕組み上、もっともらしいウソが構築されてしまう現象のこと。
 
-*BLOOM (2022.07 BigScience) OSS*
-パラメータ数: 176B
+*[BLOOM](https://bigscience.huggingface.co/blog/bloom) (2022.07.06 BigScience) OSS*
+パラメータ数: 1.1B, 1.7B, 3B, 7.1B, 176B / Finetuned
 [BLOOM: A 176B-Parameter Open-Access Multilingual Language Model](https://arxiv.org/abs/2211.05100)
 BigScience Large Open-Science Open-Access Multilingual Language Modelの略。
 70以上の国と250以上の機関の1000人を超える研究者の協力で作成された多言語LLM。
@@ -704,10 +707,12 @@ GPT-3 --> LLaMA --> Alpaca --> Dolly
 Alpaca --> Vicuna
 LLaMA --> GPT4ALL
 LLaMA --> Koala
+Alpaca --> Guanaco
 ```
 
-*LLaMA (2023.02.24 Meta) 非商用*
-パラメータ数: 7B, 13B, 65B
+*[LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) (2023.02.24 Meta) 非商用*
+パラメータ数: 7B, 13B, 33B, 65B / Finetuned
+[LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971)
 [GitHub - LLaMA](https://github.com/facebookresearch/llama)
 
 65Bと33Bは1.4兆トークンでトレーニングされている。
@@ -717,8 +722,8 @@ LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている
 訓練費用は100万ドル。
 2048個のA100 80GB GPUで21日間トレーニングしたと報告されている。
 
-*Alpaca (2023.03.14 Stanford) 非商用*
-パラメータ数: 7B
+*[Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html) (2023.03.13 Stanford) Apache-2.0, 非商用*
+パラメータ数: 7B / Finetuned, Instruct Tuned
 [Stanford Alpaca: An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca)
 LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tuning)したもの。
 もとになったLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
@@ -726,29 +731,48 @@ LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tu
 [スタンフォード大学がChatGPTレベルのAIを600ドル未満で構築](https://texal.jp/2023/03/21/stanford-university-builds-chatgpt-level-ai-for-less-than-600/)
 A100 8枚で3hかかった。
 
-*GPT4ALL (2023.03.26 Nomic AI) 非商用*
-パラメータ数: 7B
-[GitHub - GPT4All](https://github.com/nomic-ai/gpt4all)
-gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
-ローカルで単一GPUで動くチャットボットを構築することを目指した。
-GPUなしのCPUのみでも動かすことができる。
-GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承するため商用利用は禁止。
-
-*Koala (2023.04.03 UC Berkeley) 非商用*
-カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
-
-*Dolly (2023.04.12 Databricks) 非商用*
+*[Dolly](https://www.databricks.com/blog/2023/04/12/dolly-first-open-commercially-viable-instruction-tuned-llm) (2023.03.24 Databricks) MIT, 非商用*
+パラメータ数: 3B, 12B / Finetuned, Instruct tuned
 AlpacaをChatGPTの出力で微調整したもの。
 そのため、LLaMAの制限とChatGPTの制限がある。
 LLaMAの制限は商用利用禁止、ChatGPTは競合モデルの作成の禁止。
 
 わずか30ドルで訓練された。
 
-*Vicuna (2023.05.04 Stability AI) 非商用*
-パラメータ数: 7B, 13B
+*GPT4ALL (2023.03.26 Nomic AI) MIT, 非商用*
+パラメータ数: 7B, 13B / Finetuned, Instruct tuned
+[GitHub - GPT4All](https://github.com/nomic-ai/gpt4all)
+gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
+ローカルで単一GPUで動くチャットボットを構築することを目指した。
+GPUなしのCPUのみでも動かすことができる。
+GPT4ALL自体はMITだが、モデルはLLaMAのライセンスを継承するため商用利用は禁止。
+
+*[Vicuna](https://lmsys.org/blog/2023-03-30-vicuna/) (2023.03.30 UC Berkeley, ...) 非商用*
+パラメータ数: 13B / Finetuned, Instruct tuned
 AlpacaをShareGPTのデータで微調整したもの。
 ShareGPTはChatGPTの対話データを収集したもの。
 ChatGPTの90%程度の性能を達成できるとされる。
+
+*[Koala](https://bair.berkeley.edu/blog/2023/04/03/koala/) (2023.04.03 UC Berkeley) 非商用*
+パラメータ数: 7B, 13B / Finetuned, Instruct tuned
+カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
+
+*Guanaco (2023.05.23 UW) MIT, 非商用*
+パラメータ数: 7B, 13B, 33B, 65B / Finetuned, Instruct tuned
+[Guanaco - Generative Universal Assistant for Natural-language Adaptive Context-aware Omnilingual outputs](https://guanaco-model.github.io/)
+LLaMA 7BモデルをAlpacaデータセットと日本語を含む多言語(Multilingual)で微調整(Fine-tuning)したもの。
+ロールプレイをサポート。
+Multimodal Visual Question Answering (VQA)をサポート。
+
+[QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
+[GitHub - QLoRA: Efficient Finetuning of Quantized LLMs](https://github.com/artidoro/qlora)
+4bitのNormalFloat型というものを用いることで従来よりも精度を保ちつつメモリ使用量を大幅に削減できた。
+bitsandbytesやPEFTを使用している。
+
+65Bの微調整に780GB必要だったが、QLoRAで48GBとなった。
+33Bのモデルを24GBのGPUで12時間以内に微調整できた。
+
+Guanacoを使っているが本家とは別？
 
 *[Gorilla](https://gorilla.cs.berkeley.edu/) (2023.05.26 UC Berkeley, Microsoft)*
 適切なAPIを呼び出せるモデル。
@@ -762,7 +786,8 @@ Pythia --> Dolly2.0
 ```
 
 *Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
-パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B
+パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B / Finetuned
+AIアクセラレータの会社であるCerebrasのデモンストレーションで作成されたモデル。
 Chinchillaのスケーリング則を参考に学習されている。
 オープンなデータセットを使用。
 
@@ -778,8 +803,8 @@ LLaMA --> OpenLLaMA
 LLaMA --> RedPajama-INCITE
 ```
 
-*OpenLLaMA (2023.04.28 OpenLM Research) 商用可*
-パラメータ数: 7B
+*OpenLLaMA (2023.04.28 OpenLM Research) Apache2.0, 商用可*
+パラメータ数: 7B / Finetuned
 [OpenLLaMA: An Open Reproduction of LLaMA](https://github.com/openlm-research/open_llama)
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
 アルゴリズムやパラメータ等はLLaMAと同じにしている。
@@ -787,8 +812,8 @@ LLaMAは商用利用禁止のため、パブリックライセンスのオープ
 JAXベースのEasyLMを使用した。
 RedPajamaデータセットを用いた。
 
-*RedPajama-INCITE (2023.05.05 Together) 商用可*
-パラメータ数: 3B, 7B
+*[RedPajama-INCITE](https://www.together.xyz/blog/redpajama-models-v1) (2023.05.05 Together) Apache2.0, 商用可*
+パラメータ数: 3B, 7B / Finetuned, Instruct tuned
 名前の由来はLlama Llama Red Pajamaから。
 LLaMAを忠実に再現することを目的としたモデル。
 RedPajama-Data-1Tという高品質、広範囲のデータセットを作成した。
@@ -796,8 +821,8 @@ RedPajama-Data-1Tという高品質、広範囲のデータセットを作成し
 3Bモデルは同パラメータ帯の他と比べて優秀で、RTX 2070でも動作する。
 7BモデルはPythia 7Bを上回る性能を示したとされる。
 
-*MPT-7B (2023.05.05 MosaicML) 商用可*
-パラメータ数: 7B
+*[MPT-7B](https://www.mosaicml.com/blog/mpt-7b) (2023.05.05 MosaicML) Apache-2.0, 商用可*
+パラメータ数: 7B / Finetuned, Instruct tuned
 ALiBiのおかげで84kまで入力できる。
 FlashAttentionとFasterTransformerを使用している。
 
@@ -808,12 +833,10 @@ FlashAttentionとFasterTransformerを使用している。
 
 ```mermaid
 flowchart
-InstructGPT --> OpenAssistant
-MT-NLG --> DeepSpeed-Chat
-```
 
-*OpenAssistant (2022.10.18 LAION) Apache2.0*
-人間が入力した高品質なサンプルを集めるためのチャットボット。
+MT-NLG --> DeepSpeed-Chat
+InstructGPT --> OpenAssistant
+```
 
 *PEFT (2023.02.11 Hugging Face)*
 [GitHub - State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods](https://github.com/huggingface/peft)
@@ -834,6 +857,12 @@ GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
 Azure上でNVIDIA A100を64台用いた場合は、
 OPT-13Bモデルは7.5h(2,000ドル)、
 BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
+
+*[OpenAssistant](https://open-assistant.io/ja) (2023.04.15 LAION) Apache2.0*
+[LAION-AI/Open-Assistant](https://github.com/LAION-AI/Open-Assistant)
+ChatGPTに変わるオープンソースの提供を目的としている。
+人間が入力した高品質なサンプルを集めるためのチャットボット。
+Huggng FaceのHuggingChatの一部として提供されている。
 
 ```mermaid
 flowchart
@@ -866,6 +895,19 @@ DeepSpeed-ChatやGPT-NeoXなどのフレームワークを利用するのもよ�
 
 さらに独自開発を進める場合は、最新の様々なTransformerを検討する。
 Megatron, DeepSpeed, bitsandbytes, FlexGenなどの学習や推論の効率化を検討する。
+
+### モデルに必要なGPUメモリ数
+
+1パラメータ32ビットと考えると、1B * 4バイト = 4GBがロードするためだけでも最低限必要となる。
+7Bだと28GB、13Bだと52GB、70Bだと280GB、175Bだと700GB程度が必要となる。
+この他に、中間状態の保持、オプティマイザ、バッチデータ、など様々な追加メモリも必要とされる。
+さらに微調整(Fine-Tuning)となるとその倍はメモリが必要となってくる。
+
+NVIDIA DGX A100はA100 80GBが8枚搭載されているので640GBまで使える。
+価格は研究機関は2500万円、一般企業は5000万円とされる。
+A100 80GBは200万～300万円程度と思われる。
+なお、A100は当初40GBだったが、アップデートされたモデルは80GBとなっている。
+H100 80GBは500万円程度。
 
 ## 参考
 
