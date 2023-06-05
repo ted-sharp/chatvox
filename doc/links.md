@@ -14,10 +14,12 @@ ChatGPT API, Wisper API
 
 [VOICEVOX](https://voicevox.hiroshiba.jp/)
 クレジット表示必要。
+TTSControllerまたはREST APIに対応。
 
 [COEIROINK](https://coeiroink.com/)
 GUIにVOICEBOXをカスタムしたものを使用している。
 エンジンは別物。
+TTSControllerに対応。
 
 [音読さん](https://ondoku3.com/ja/)
 クレジット表示必要。
@@ -35,13 +37,17 @@ ChatGPTのレスポンスを読み上げてくれるChrome拡張がある。
 ### 有償パッケージ
 
 [VOICEPEAK](https://www.ah-soft.com/voice/narrator/)
+TTSControllerに対応。
+
 古い製品にVOICEROIDがあるが、そちらは違和感が残る音声となっている。
 
 [CeVIO AI](https://cevio.jp/)
+TTSControllerに対応。
 
 [A.I.VOICE](https://aivoice.jp/)
 AITalk5の技術を使用している。
 かんたん！AITalk5というソフトもある。
+TTSControllerに対応。
 
 [AquesTalk](https://www.a-quest.com/products/aquestalk.html)
 組み込みに使えるほど小型。
@@ -80,6 +86,9 @@ CAMEL
 [marcominerva/ChatGptNet](https://github.com/marcominerva/chatgptnet)
 
 [wieslawsoltes/ChatGPT](https://github.com/wieslawsoltes/chatgpt)
+
+[ksasao/TTSController](https://github.com/ksasao/TTSController)
+VOICEVOX, COEIROINK, VOICEPEAK, CeVIO AI, A.I.VOICEなどを統一的に扱うライブラリ。
 
 ## Refers
 
