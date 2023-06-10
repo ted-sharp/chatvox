@@ -151,8 +151,6 @@ flowchart
 
 LSTM --> ELMo
 LSTM --> ULMFiT
-Transformer --> Sparse-Transformer
-Transformer --> Reformer
 
 ```
 
@@ -164,6 +162,14 @@ Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を�
 *ULMFiT (2018.02.18 fast.ai)*
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/abs/1801.06146)
 事前学習(Pre-train)と微調整(Fine-tuning)という今のLLMの原型となるもの。
+
+```mermaid
+flowchart
+
+Transformer --> Sparse-Transformer
+Transformer --> Reformer
+
+```
 
 *Sparse Transformer (2019.04.23 OpenAI)*
 [Generating Long Sequences with Sparse Transformers](https://arxiv.org/abs/1904.10509)
@@ -182,6 +188,8 @@ RevNet(Reversible Residual Network)とは、
 
 LSH(Locality-Sensitive Hashing)とは、
 ベクトルの近似的な最近傍を効率的に検索するための手法。
+
+Transformerを改良したものは、この後も登場し、様々なLLMに搭載されることとなる。
 
 ```mermaid
 flowchart
@@ -221,21 +229,22 @@ WEBから収集した570GBのデータで学習した。
 
 [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
-パラメータ数N、データセットサイズD、計算予算Cの3つの変数のべき乗則に従う。
+パラメータ数N、データセットサイズD、学習計算予算Cの3つの変数のべき乗則に従う。
 
 [Are Emergent Abilities of Large Language Models a Mirage?](https://arxiv.org/abs/2304.15004)
-飛躍的にスコアが上がり、創発が起こったと話題となった。
-しかし、単にスコア用のテストがある一定以上の水準がないといけないという研究結果が出ている。
+モデル規模が大きくなった時、飛躍的にスコアが上がり、創発(新たな能力の獲得)が起こったと話題となった。
+しかし、単にスコア用のテストの指標が非線形あるいは不連続であると述べられている。
 
 *InstructGPT (2021.01 OpenAI)*
 パラメータ数: 1.3B
 [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155)
 GPT-3の小型版を使用して、RLHFを取り入れたモデル。
-GPT-3よりも人間の指示に従う能力が優れている。
+モデルを大きくするだけでは、人間の意図を適切にとらえることはできない。
+175BのGPT-3よりも1.3BのInstructGPTの方が、優れた結果を示した。
 
 [RLHF](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback)
 RLHF(Reinforcement Learning from Human Feedback)は、
-人間からのフィードバックでファインチューニングする手法。
+人間からのフィードバックで微調整(Fine-tuning)する手法。
 
 *[OpenAI Codex](https://ja.wikipedia.org/wiki/OpenAI_Codex) (2021.08 OpenAI)*
 [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374)
@@ -291,7 +300,8 @@ GPT-2のクローンを作ろうとしたものをもとにしている。
 256トークンのウィンドウサイズに区切ったLocal Attentionを使用している。
 Local Attentionはウィンドウ外へアクセスできないため、パフォーマンスとのトレードオフとなる。
 
-The Pileデータセットで訓練された。
+The Pileデータセット(800GB)で訓練された。
+The PileはLLM用に多様性のある22のデータセットの組み合わせで構成されている。
 
 *[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.06.09 EleutherAI) Apache2.0*
 パラメータ数: 6B / Finetuned, Instruct tuned
@@ -359,7 +369,7 @@ BERT-baseモデルを軽量化すると、12MパラメータのALBERT-baseモデ
 モデルサイズが縮小されたので、より大規模な構成を行えるようになった。
 ALBERT-xxlarge構成では最新のスコアを更新した。
 
-*ELECTRA (20219.09.26 Stanford, Google)*
+*[ELECTRA](https://ai.googleblog.com/2020/03/more-efficient-nlp-model-pre-training.html) (2020.03.10 Stanford, Google)*
 パラメータ数: ELECTRA-small=14M, ELECTRA-base=110M, ELECTRA-large=335M
 [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://arxiv.org/abs/2003.10555)
 GANの手法を取り入れて、BERTの事前学習手法を改良した。
@@ -438,6 +448,8 @@ T5はオリジナルのTransformerと同様にEncoderとDecorderの両方を使�
 入力にはプレフィックスを用いると良好に機能する。
 
 C4(Colossal Clean Crawled Corpus)データセットを作成して、学習に利用している。
+C4は名前の通り、Common Crawlの巨大でクリーンなものと謳っている。
+デフォルトだと800GBで提供されている。
 
 *T5v1.1 (2020.08.06 Google)*
 パラメータ数: small=77M, base=250M, large=800M, xl=3B, xxl=11B
@@ -446,8 +458,10 @@ C4(Colossal Clean Crawled Corpus)データセットを作成して、学習に�
 
 *mT5 (2020.08.22 Google)*
 [mT5: A massively multilingual pre-trained text-to-text transformer](https://arxiv.org/abs/2010.11934)
-101の言語をカバーする新しいCommon Crawlで学習された。
-微調整前のモデル。
+Multilingual T5のこと。
+微調整前のモデルとなる。
+
+101の言語からなるmC4データセット約40TBで学習している。
 
 *[UL2](https://ai.googleblog.com/2022/10/ul2-20b-open-source-unified-language.html) (2020.10.14 Google) Apache2.0*
 パラメータ数: 20B
@@ -830,6 +844,21 @@ FlashAttentionとFasterTransformerを使用している。
 テキストとコードの1Tのトークンで訓練された。
 440のGPUで9.5日間かけて訓練された。
 200万ドル(約3,000万円)かかったとされる。
+
+*[Falcon-LLM](https://techversions.com/news/falcon-big-language-model-is-introduced-by-the-uaes-technological-innovation-institute/) (2023.03.15TII) Apache-2.0*
+パラメータ数: 7B, 40B / Non-tuned
+[The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116)
+Hugging Faceのリーダーボードの1位を獲得し話題となった。
+Webからのデータだけでも適切なフィルタリングと重複排除により、性能を高めることに成功した。
+
+Common Crawlの5T tokensから厳選した600B tokensのRefinedWebコーパスを作成した。
+
+[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150)
+Munti-query attentionを採用することで、Key-Valueキャッシュを共有化し、メモリ消費量を抑えている。
+7Bを動作させるにはGPU 15GB程度が必要。
+40Bを動作させるにはGPU 90GBが必要。
+
+学習はAWS上で384 GPUで二か月かかったとされる。
 
 ```mermaid
 flowchart
