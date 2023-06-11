@@ -288,9 +288,8 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 ```mermaid
 flowchart
 
-GPT-2 --> GPT-Neo --> GPT-NeoX
+GPT-2 --> GPT-Neo --> GPT-NeoX --> Pythia
 GPT-2 --> GPT-J
-GPT-2 --> Pythia
 ```
 
 *GPT-Neo (2021.03.21 [EleutherAI](https://en.wikipedia.org/wiki/EleutherAI), Together) Apache2.0*
@@ -320,11 +319,12 @@ Nvidia Megatronを使って分散して学習した。
 *Pythia (2023.02.13 EleutherAI, Together) Apache-2.0*
 パラメータ数: 70M-12B および各モデルの154のチェックポイント / Finetuned
 [Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
+[Emergent and Predictable Memorization in Large Language Models](https://arxiv.org/abs/2304.11158)
 [EleutherAI/pythia](https://github.com/EleutherAI/pythia)
 
 LLMの訓練とスケーリングを分析するために作成されたため、多数のチェックポイントを残している。
 
-The Pileデータセットで訓練された。
+The Pileおよび重複排除されたデータセットで訓練された。
 
 ```mermaid
 flowchart
@@ -503,7 +503,7 @@ Transformer --> RWKV
 
 *RWKV-LM (2021.08.13 BlinkDL) Apache2.0*
 パラメータ数: 7B, 14B
-[The RWKV Language Model (and my LM tricks)](https://github.com/BlinkDL/RWKV-LM)
+[BlinkDL/RWKV-LM](https://github.com/BlinkDL/RWKV-LM)
 RWKVの名前の由来は4つの重要なパラメータを並べたもの。
 RNNとTransformerのいいとこどり。
 GPTのように並列で学習したが、実行はRNNなので少メモリで実行できる。
@@ -594,7 +594,7 @@ FLAN --> Flan-T5/Flan-PaLM
 
 *FLAN (2021.10.06 Google)*
 パラメータ数: 137B
-[GitHub - The FLAN Instruction Tuning Repository](https://github.com/google-research/FLAN/tree/main)
+[google-research/FLAN](https://github.com/google-research/FLAN/tree/main)
 [Finetuned Language Models Are Zero-Shot Learners](https://arxiv.org/abs/2109.01652)
 [The Flan Collection: Designing Data and Methods for Effective Instruction Tuning](https://arxiv.org/abs/2301.13688)
 微調整によりゼロショットの能力を向上させるために作成されたモデル。
@@ -608,9 +608,9 @@ flowchart
 
 Transformer --> PaLM --> Flan-U-PaLM
 UL2 --> UL2R --> Flan-U-PaLM
-Flan --> Flan-U-PaLM
+FLAN --> Flan-U-PaLM
 UL2 --> Flan-UL2
-Flan --> Flan-UL2
+FLAN --> Flan-UL2
 ```
 
 *[UL2R](https://ai.googleblog.com/2022/11/better-language-models-without-massive.html) (2022.05.22 Google)*
@@ -672,7 +672,7 @@ OpenAI Codexを競技プログラミングレベルに引き上げたもの。
 *[OPT-175B](https://ai.facebook.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/) (2022.05.03 Meta) 非商用*
 パラメータ数: 1.3B, 2.7B, 6.7B, 13B, 30B, 66B, 175B / Finetuned, Instruct tuned
 [OPT: Open Pre-trained Transformer Language Models](https://arxiv.org/abs/2205.01068)
-[GitHub - OPT](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT)
+[facebookresearch/metaseq//OPT](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT)
 Open Pre-trained Transformersのモデルのひとつ。 
 
 FlexGenを使えば、GPUのVRAMをCPUのRAMにスワップできる。
@@ -710,7 +710,7 @@ GPT-3と同様のパラメータを持つ軽量化モデルでも329GBあるの�
 BLOOMをゼロショット用に微調整したもの。
 
 *BLOOMZ (2022.11.03 BigScience)*
-[GitHub - BLOOMZ and mT0](https://github.com/bigscience-workshop/xmtf)
+[bigscience-workshop/xmtf](https://github.com/bigscience-workshop/xmtf)
 [Crosslingual Generalization through Multitask Finetuning](https://arxiv.org/abs/2211.01786)
 BLOOMを微調整したもので、多言語一般化を実現したもの。
 
@@ -727,7 +727,7 @@ Alpaca --> Guanaco
 *[LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) (2023.02.24 Meta) 非商用*
 パラメータ数: 7B, 13B, 33B, 65B / Finetuned
 [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971)
-[GitHub - LLaMA](https://github.com/facebookresearch/llama)
+[facebookresearch/LLaMA](https://github.com/facebookresearch/llama)
 
 65Bと33Bは1.4兆トークンでトレーニングされている。
 7Bは1兆個のトークン。
@@ -738,7 +738,7 @@ LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている
 
 *[Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html) (2023.03.13 Stanford) Apache-2.0, 非商用*
 パラメータ数: 7B / Finetuned, Instruct Tuned
-[Stanford Alpaca: An Instruction-following LLaMA Model](https://github.com/tatsu-lab/stanford_alpaca)
+[tatsu-lab/Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca)
 LLaMA 7BモデルをChatGPTとの1.3万回の会話データで微調整(Fine-tuning)したもの。
 もとになったLLaMAが研究目的限定で、さらにOpenAIの利用規定で、GPTの出力をもとに、GPTに対抗できるAIを作ってはいけない制約があるので、研究目的以外に使用することはできない。
 
@@ -755,7 +755,7 @@ LLaMAの制限は商用利用禁止、ChatGPTは競合モデルの作成の禁�
 
 *GPT4ALL (2023.03.26 Nomic AI) MIT, 非商用*
 パラメータ数: 7B, 13B / Finetuned, Instruct tuned
-[GitHub - GPT4All](https://github.com/nomic-ai/gpt4all)
+[nomic-ai/GPT4All](https://github.com/nomic-ai/gpt4all)
 gpt-3.5-turboを利用して収集したデータを用いてLLaMAを微調整したもの。
 ローカルで単一GPUで動くチャットボットを構築することを目指した。
 GPUなしのCPUのみでも動かすことができる。
@@ -779,7 +779,7 @@ LLaMA 7BモデルをAlpacaデータセットと日本語を含む多言語(Multi
 Multimodal Visual Question Answering (VQA)をサポート。
 
 [QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
-[GitHub - QLoRA: Efficient Finetuning of Quantized LLMs](https://github.com/artidoro/qlora)
+[artidoro/QLoRA](https://github.com/artidoro/qlora)
 4bitのNormalFloat型というものを用いることで従来よりも精度を保ちつつメモリ使用量を大幅に削減できた。
 bitsandbytesやPEFTを使用している。
 
@@ -795,9 +795,27 @@ TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している�
 ```mermaid
 flowchart
 
-GPT-3 --> Cerebras-GPT
-Pythia --> Dolly2.0
+Transformer --> GPT --> Pythia --> Dolly2.0
+GPT --> Falcon
+GPT --> Cerebras-GPT
+GPT --> MPT
 ```
+
+*[Falcon-LLM](https://techversions.com/news/falcon-big-language-model-is-introduced-by-the-uaes-technological-innovation-institute/) (2023.03.17 UAE TII)*
+パラメータ数: 7B, 40B / Non-tuned
+[The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116)
+Webからのデータだけでも適切なフィルタリングと重複排除により、性能を高めることに成功した。
+Hugging Faceのリーダーボードの1位を獲得し話題となった。
+2023.05.31 にモデルをApache-2.0で公開した。
+
+Common Crawlの5T tokensから厳選した600B tokensのRefinedWebコーパスを作成した。
+
+[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150)
+Munti-query attentionを採用することで、Key-Valueキャッシュを共有化し、メモリ消費量を抑えている。
+7Bを動作させるにはGPU 15GB程度が必要。
+40Bを動作させるにはGPU 90GBが必要。
+
+学習はAWS上で384 GPUで二か月かかったとされる。
 
 *Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
 パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B / Finetuned
@@ -810,6 +828,16 @@ Chinchillaのスケーリング則を参考に学習されている。
 Pythiaベースのモデル。
 Databricksは自社の社員による1.5万回の会話データセットを作り、LLaMAとChatGPTの制限をはずし、商用利用可能としてDolly 2.0を公開した。
 
+*[MPT-7B](https://www.mosaicml.com/blog/mpt-7b) (2023.05.05 MosaicML) Apache-2.0, 商用可*
+パラメータ数: 7B / Finetuned, Instruct tuned
+ALiBiのおかげで84kまで入力できる。
+FlashAttentionとFasterTransformerを使用している。
+
+商用利用が可能なオープンソースのモデル。
+テキストとコードの1Tのトークンで訓練された。
+440のGPUで9.5日間かけて訓練された。
+200万ドル(約3,000万円)かかったとされる。
+
 ```mermaid
 flowchart
 
@@ -819,7 +847,7 @@ LLaMA --> RedPajama-INCITE
 
 *OpenLLaMA (2023.04.28 OpenLM Research) Apache2.0, 商用可*
 パラメータ数: 7B / Finetuned
-[OpenLLaMA: An Open Reproduction of LLaMA](https://github.com/openlm-research/open_llama)
+[openlm-research/OpenLLaMA](https://github.com/openlm-research/open_llama)
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
 アルゴリズムやパラメータ等はLLaMAと同じにしている。
 
@@ -835,31 +863,6 @@ RedPajama-Data-1Tという高品質、広範囲のデータセットを作成し
 3Bモデルは同パラメータ帯の他と比べて優秀で、RTX 2070でも動作する。
 7BモデルはPythia 7Bを上回る性能を示したとされる。
 
-*[MPT-7B](https://www.mosaicml.com/blog/mpt-7b) (2023.05.05 MosaicML) Apache-2.0, 商用可*
-パラメータ数: 7B / Finetuned, Instruct tuned
-ALiBiのおかげで84kまで入力できる。
-FlashAttentionとFasterTransformerを使用している。
-
-商用利用が可能なオープンソースのモデル。
-テキストとコードの1Tのトークンで訓練された。
-440のGPUで9.5日間かけて訓練された。
-200万ドル(約3,000万円)かかったとされる。
-
-*[Falcon-LLM](https://techversions.com/news/falcon-big-language-model-is-introduced-by-the-uaes-technological-innovation-institute/) (2023.03.15TII) Apache-2.0*
-パラメータ数: 7B, 40B / Non-tuned
-[The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116)
-Hugging Faceのリーダーボードの1位を獲得し話題となった。
-Webからのデータだけでも適切なフィルタリングと重複排除により、性能を高めることに成功した。
-
-Common Crawlの5T tokensから厳選した600B tokensのRefinedWebコーパスを作成した。
-
-[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150)
-Munti-query attentionを採用することで、Key-Valueキャッシュを共有化し、メモリ消費量を抑えている。
-7Bを動作させるにはGPU 15GB程度が必要。
-40Bを動作させるにはGPU 90GBが必要。
-
-学習はAWS上で384 GPUで二か月かかったとされる。
-
 ```mermaid
 flowchart
 
@@ -868,7 +871,7 @@ InstructGPT --> OpenAssistant
 ```
 
 *PEFT (2023.02.11 Hugging Face)*
-[GitHub - State-of-the-art Parameter-Efficient Fine-Tuning (PEFT) methods](https://github.com/huggingface/peft)
+[huggingface/PEFT](https://github.com/huggingface/peft)
 効率的なFine-Tuningのためのライブラリ。
 通常のFine-Tuningはパラメータ数が多くなるほど必要なメモリが膨大になり、多大なコストが発生する。
 そのため全体の微調整ではなく、少数のパラメータのみを微調整する方法が考えられた。
@@ -880,7 +883,7 @@ DeepSpeedも使える。
 3Bモデルで、通常の微調整だとGPU 48GBが必要なのに対して、PEFT-LoRA DeepSpeedでGPU 10GB程度になる。
 
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
-[GitHub - DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
+[microsoft/DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
 DeepSpeedの仕組みを利用したLLM構築フレームワーク。
 GPU1台で10B、GPU複数台で100B超のモデルを学習できる。
 Azure上でNVIDIA A100を64台用いた場合は、
@@ -901,7 +904,7 @@ GPT-NeoX --> Rinna
 ```
 
 *OpenCALM (2023.05.25 サイバーエージェント)*
-パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B
+パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B / Non-tuned
 サイバーエージェントが公開した微調整前の日本語モデル。
 
 *rinna (2023.05.26 rinna)*
