@@ -207,7 +207,7 @@ GPTの初期モデル。
 TransformerのDecoderを用いて、大規模テキストデータで学習したものがGPTとなる。
 Transformerが12層連なっているためモデルが大きい。
 
-ELMoのLSTMが特徴抽出が十分でなかったため、Transformerを使用する手法が考えられた。
+ELMoのLSTMが特徴抽出が十分でなかったため、Transformerを使用するGPTが考えられた。
 しかし、双方向ではなくなり、後のBERTの登場につながった。
 一方向から推測するので、BERTよりテキスト生成タスクに向いている。
 
@@ -284,47 +284,6 @@ Azure OpenAI Serviceからも同じモデルのAPIを使用することができ
 
 [GPT-4 Technical Report](https://arxiv.org/abs/2303.08774)
 モデル規模を拡大することで得られる効果は逓減すると発表された。
-
-```mermaid
-flowchart
-
-GPT-2 --> GPT-Neo --> GPT-NeoX --> Pythia
-GPT-2 --> GPT-J
-```
-
-*GPT-Neo (2021.03.21 [EleutherAI](https://en.wikipedia.org/wiki/EleutherAI), Together) Apache2.0*
-パラメータ数: 125M, 1.3B, 2.7B / Finetuned
-GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
-GPT-2のクローンを作ろうとしたものをもとにしている。
-256トークンのウィンドウサイズに区切ったLocal Attentionを使用している。
-Local Attentionはウィンドウ外へアクセスできないため、パフォーマンスとのトレードオフとなる。
-
-The Pileデータセット(800GB)で訓練された。
-The PileはLLM用に多様性のある22のデータセットの組み合わせで構成されている。
-
-*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.06.09 EleutherAI) Apache2.0*
-パラメータ数: 6B / Finetuned, Instruct tuned
-JAXライブラリを使用していたのでGPT-Jと名づけられた。
-公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
-
-The Pileデータセットで訓練された。
-
-*GPT-NeoX (2022.02 EleutherAI)*
-パラメータ数: 20B(44層)
-EleutherAIが公開したLLM学習用のライブラリ、およびそれを用いてトレーニングされたモデル。
-Microsoft DeepSpeedを使って学習を高速化している。
-Nvidia Megatronを使って分散して学習した。
-公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
-
-*Pythia (2023.02.13 EleutherAI, Together) Apache-2.0*
-パラメータ数: 70M-12B および各モデルの154のチェックポイント / Finetuned
-[Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
-[Emergent and Predictable Memorization in Large Language Models](https://arxiv.org/abs/2304.11158)
-[EleutherAI/pythia](https://github.com/EleutherAI/pythia)
-
-LLMの訓練とスケーリングを分析するために作成されたため、多数のチェックポイントを残している。
-
-The Pileおよび重複排除されたデータセットで訓練された。
 
 ```mermaid
 flowchart
@@ -584,6 +543,15 @@ GPT-4と同水準。
 
 GoogleのPaLM 2の次世代モデルはGeminiと呼ばれ、開発中。
 
+*Claude (2023.03.14 Anthropic)*
+元OpenAIのチームが設立したAIスタートアップの会社により開発されたモデル。
+MicrosoftがOpenAIに出資してChatGPTがAzure上で動いているのに対し、
+GoogleがAnthropicに出資してGoogle Cloud上で動いている。
+性能としては、GPT-3.5とGPT-4の中間と言われている。
+
+2023.05.11には入力トークンを9kから100kに拡張したことを発表した。
+GPT-4は32kトークンとなるので、約3倍の長さの入力を受け付けられるようになった。
+
 ```mermaid
 flowchart
 
@@ -601,12 +569,12 @@ FLAN --> Flan-T5/Flan-PaLM
 
 *Flan-T5/Flan-PaLM (2022.12.06 Google) Apache2.0*
 [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
-指示調整タスクのFlan Collectionを使って学習したT5とPaLMのモデル。
+指示調整タスクのFlan Collectionを使って微調整したT5とPaLMのモデル。
 
 ```mermaid
 flowchart
 
-Transformer --> PaLM --> Flan-U-PaLM
+PaLM --> Flan-U-PaLM
 UL2 --> UL2R --> Flan-U-PaLM
 FLAN --> Flan-U-PaLM
 UL2 --> Flan-UL2
@@ -619,13 +587,13 @@ UL2Rは様々なサイズの言語モデルを指示微調整することを目�
 
 *Flan-U-PaLM (2022.11.29 Google)*
 パラメータ数: 540B
-UL2RとFlanでPaLMを追加学習させたもの。
+UL2RとFlanでPaLMを微調整したもの。
 U-PaLMやFlan-PaLMを上回るパフォーマンスを発揮した。
 MMLUベンチマーク75.4%でスコアを更新した。
 
 *[Flan-UL2](https://www.yitay.net/blog/flan-ul2-20b) (2023.03.03 Google) Apache2.0, 商用可*
 パラメータ数: 20B / Finetuned, Instruct tuned
-指示調整タスクのFlan Collectionを使って学習したUL2モデル。
+指示調整タスクのFlan Collectionを使って微調整したUL2モデル。
 GoogleがLLaMAに対抗するようにオープンソースで公開した。
 
 ```mermaid
@@ -713,6 +681,47 @@ BLOOMをゼロショット用に微調整したもの。
 [bigscience-workshop/xmtf](https://github.com/bigscience-workshop/xmtf)
 [Crosslingual Generalization through Multitask Finetuning](https://arxiv.org/abs/2211.01786)
 BLOOMを微調整したもので、多言語一般化を実現したもの。
+
+```mermaid
+flowchart
+
+GPT-2 --> GPT-Neo --> GPT-NeoX --> Pythia
+GPT-2 --> GPT-J
+```
+
+*GPT-Neo (2021.03.21 [EleutherAI](https://en.wikipedia.org/wiki/EleutherAI), Together) Apache2.0*
+パラメータ数: 125M, 1.3B, 2.7B / Finetuned
+GPT-3がClosed-Sourceだったので、Open-SourceのGPT-3を作成することを目的としたモデル。
+GPT-2のクローンを作ろうとしたものをもとにしている。
+256トークンのウィンドウサイズに区切ったLocal Attentionを使用している。
+Local Attentionはウィンドウ外へアクセスできないため、パフォーマンスとのトレードオフとなる。
+
+The Pileデータセット(800GB)で訓練された。
+The PileはLLM用に多様性のある22のデータセットの組み合わせで構成されている。
+
+*[GPT-J](https://en.wikipedia.org/wiki/GPT-J) (2021.06.09 EleutherAI) Apache2.0*
+パラメータ数: 6B / Finetuned, Instruct tuned
+JAXライブラリを使用していたのでGPT-Jと名づけられた。
+公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
+
+The Pileデータセットで訓練された。
+
+*GPT-NeoX (2022.02 EleutherAI)*
+パラメータ数: 20B(44層)
+EleutherAIが公開したLLM学習用のライブラリ、およびそれを用いてトレーニングされたモデル。
+Microsoft DeepSpeedを使って学習を高速化している。
+Nvidia Megatronを使って分散して学習した。
+公開された当時は、GPT-3スタイルのモデルとして世界最大のものだった。
+
+*Pythia (2023.02.13 EleutherAI, Together) Apache-2.0*
+パラメータ数: 70M-12B および各モデルの154のチェックポイント / Finetuned
+[Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling](https://arxiv.org/abs/2304.01373)
+[Emergent and Predictable Memorization in Large Language Models](https://arxiv.org/abs/2304.11158)
+[EleutherAI/pythia](https://github.com/EleutherAI/pythia)
+
+LLMの訓練とスケーリングを分析するために作成されたため、多数のチェックポイントを残している。
+
+The Pileおよび重複排除されたデータセットで訓練された。
 
 ```mermaid
 flowchart
