@@ -67,6 +67,7 @@ A.L.I.C.E.で開発されたAIMLを基にしている。
 *[Alexa](https://ja.wikipedia.org/wiki/Amazon_Alexa) (2014)*
 Amazon Echoに搭載され話題となった。
 スキルと呼ばれるサードパーティ製のアプリを活用することができる。
+
 同時期にWindowsのCortanaなどがある。
 
 *[りんな](https://ja.wikipedia.org/wiki/%E3%82%8A%E3%82%93%E3%81%AA_(%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD)) (2015)*
@@ -82,10 +83,12 @@ Amazon Echoに搭載され話題となった。
 人間に近いオープンドメインのチャットボットとして公開された。
 感性を持って応答するように訓練されている。
 
+MeenaをもとにしたLaMDAは、Googleのエンジニアが「AIが感情や意識を持った」とリークし話題となった。
+
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022)*
 OpenAIが開発した大規模言語モデルGPT-3.5を利用したシステム。
 大規模言語モデルの特徴として、対話だけでなく、要約や翻訳などさまざまな自然言語処理を行うことができる。
-Codexなどを組み込み爆発的な人気を呼んだ。
+Codexなどを組み込み、チャット形式で簡単に使えるようにしたので爆発的な人気を呼んだ。
 
 ## The History of LLMs
 
@@ -105,12 +108,14 @@ RNNの考え自体は昔からあった。
 また勾配消失があり学習が収束しない問題があった。
 そのため、RNN以外の研究に移っていった。
 
-CNNでDeep Learningが注目を集め、RNNにも注目が戻ってきた。
+CNNの画像認識でDeep Learningが注目を集め、RNNに注目が戻ってきた。
 
-*[LSTM](https://ja.wikipedia.org/wiki/%E9%95%B7%E3%83%BB%E7%9F%AD%E6%9C%9F%E8%A8%98%E6%86%B6) (1997, 2007)*
+*[LSTM](https://ja.wikipedia.org/wiki/%E9%95%B7%E3%83%BB%E7%9F%AD%E6%9C%9F%E8%A8%98%E6%86%B6) (1997, 2012)*
 RNNの勾配消失を解決するためにLSTMが登場した。
 長期的な記憶を保持することができるようになった。
 しかし、実際には、非常に長い依存関係を適切にとらえることは難しかった。
+
+Deap Learningが注目を集め、LSTMもその一部として広く使われるようになった。
 
 *[GRU](https://ja.wikipedia.org/wiki/%E3%82%B2%E3%83%BC%E3%83%88%E4%BB%98%E3%81%8D%E5%9B%9E%E5%B8%B0%E5%9E%8B%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88) (2014)*
 LSTMよりも簡単な構造を持ち、パラメータ数が少なく、計算コストが低い。
@@ -118,6 +123,7 @@ LSTMよりも簡単な構造を持ち、パラメータ数が少なく、計算�
 しかし、LSTMの優位性を上回ることができなかった。
 
 *[Word2Vec](https://ja.wikipedia.org/wiki/Word2vec) (2013 Google)*
+[Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781)
 Word2Vecというワードをベクトル化して計算できる手法が登場した。
 
 *[GloVe](https://en.wikipedia.org/wiki/GloVe) (2014.01.02 Stanford)*
@@ -129,6 +135,7 @@ Word2Vecの局所的(local)な表現と、大局的(Global)な表現を組み合
 Self-Attentionの原型。
 
 *[Seq2Seq](https://en.wikipedia.org/wiki/Seq2seq) (2014 Google)*
+[Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
 EncoderとDecoderを搭載したSeq2Seqという手法が登場した。
 Seq2Seqは、翻訳や対話システム、要約などの様々な自然言語処理のタスクで、高い精度を達成することができた。
 
@@ -156,6 +163,7 @@ LSTM --> ULMFiT
 
 *[ELMo](https://en.wikipedia.org/wiki/ELMo) (2018.02.15 AllenAI)*
 パラメータ数: 300M
+[Deep contextualized word representations](https://arxiv.org/abs/1802.05365)
 Word2VecやGloVeでは単語のみのベクトル化だったので、文脈を考慮できるようにしたもの。
 2層のLSTMを2つ使った、双方向LSTM。
 
@@ -195,7 +203,7 @@ Transformerを改良したものは、この後も登場し、様々なLLMに搭
 flowchart
 
 Transformer --> GPT --> GPT-2 --> GPT-3
-GPT-3 --> InstructGPT --> ChatGPT
+Sparse-Transformer --> GPT-3 --> InstructGPT --> ChatGPT
 GPT-3 --> Codex --> ChatGPT
 GPT-3 --> GPT-3.5 --> ChatGPT
 GPT-3.5 --> GPT-4
@@ -203,6 +211,7 @@ GPT-3.5 --> GPT-4
 
 *[GPT](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 [OpenAI](https://ja.wikipedia.org/wiki/OpenAI))*
 パラメータ数: 110M(12層)
+[Improving Language Understanding by Generative Pre-Training](https://paperswithcode.com/paper/improving-language-understanding-by)
 GPTの初期モデル。
 TransformerのDecoderを用いて、大規模テキストデータで学習したものがGPTとなる。
 Transformerが12層連なっているためモデルが大きい。
@@ -215,21 +224,28 @@ BookCorpus 7000冊のデータ4.5GB を事前学習に用いた。
 
 *[GPT-2](https://ja.wikipedia.org/wiki/GPT-2) (2019.02.14 OpenAI)*
 パラメータ数: 1.5B(48層)
+[Language Models are Unsupervised Multitask Learners](https://paperswithcode.com/paper/language-models-are-unsupervised-multitask)
+GPT-1をそのまま10倍にスケールしたもの。
 人間が読んでも違和感が少ない一貫した内容の文章を生成できるようになった。
 
 WEBから収集した40GBのデータで学習した。
 
 *[GPT-3](https://ja.wikipedia.org/wiki/GPT-3) (2020.05.28 OpenAI)*
 パラメータ数: 175B(96層)
+[Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
 GPT-3を超えたあたりでとても優秀になった。
-OpenAIはGPT-3はClosed-Sourceとした。
+このレベルになると微調整(Fine-Tuning)なしでも高い能力を発揮できる。
+OpenAIが研究していたSparse Transformerの技術が取り込まれている。
 
 WEBから収集した570GBのデータで学習した。
+このデータはCommonCrawlをもとに、フィルタリング、重複削除、既知の高品質コーパスでの補完などが行われている。
 約100万ドルかかったと報告されている。
+
+OpenAIはGPT-2とは違い、GPT-3をClosed-Sourceとした。
 
 [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
 OpenAIはTransformerの仕組みはスケーリング則に則り、大規模化が可能との論文を発表した。
-パラメータ数N、データセットサイズD、学習計算予算Cの3つの変数のべき乗則に従う。
+パラメータ数N、データセットサイズD、学習計算量の3つの変数のべき乗則に従う。
 
 [Are Emergent Abilities of Large Language Models a Mirage?](https://arxiv.org/abs/2304.15004)
 モデル規模が大きくなった時、飛躍的にスコアが上がり、創発(新たな能力の獲得)が起こったと話題となった。
@@ -273,6 +289,9 @@ InstructGPTの兄弟モデル。
 APIは従量課金制。
 Azure OpenAI Serviceからも同じモデルのAPIを使用することができる。
 なお、価格は同じで、レスポンスはAzureの方が早い模様。
+
+プラグインやファンクションコールの機能が使えるようになった。
+Azureでもそのうち使えるようになる予定。
 
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
 パラメータ数: 非公表
