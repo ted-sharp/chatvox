@@ -393,7 +393,7 @@ BERTの改良版。
 ```mermaid
 flowchart
 
-Transformer --> GPT --> BART
+Transformer --> GPT --> BART --> mBART --> AlexaTM
 Transformer --> BERT --> BART
 ```
 
@@ -407,6 +407,17 @@ BERTのEncoderとGPTのDecoderを組み合わせたもの。
 Multilingual BART
 25の言語で事前学習し、微調整されている。
 翻訳などの多言語間のタスクで優れた性能を示した。
+
+*AlexaTM (2022.08 Amazon)*
+パラメータ数: 20B
+[Amazon-Science/Alexa-Teacher-Models](https://github.com/amazon-science/alexa-teacher-models)
+ノイズ除去(denoising)およびCasual LM(Prefix LMの一種)で訓練された。
+T5ではPrefix LMよりもDec-Encタイプのほうがスコアが高かったが、ノイズ除去とCLMを組み合わせることでスコアを伸ばした。
+
+1-shotの要約タスクで、PaLM 540Bを上回ったとされる。
+0-shotでもGPT-3 175Bを上回ったとされる。
+
+mC4の12言語で学習した。
 
 ```mermaid
 flowchart
