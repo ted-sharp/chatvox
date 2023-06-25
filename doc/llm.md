@@ -877,6 +877,28 @@ FlashAttentionとFasterTransformerを使用している。
 440のGPUで9.5日間かけて訓練された。
 200万ドル(約3,000万円)かかったとされる。
 
+*[phi-1](https://analyticsindiamag.com/microsoft-releases-1-3-bn-parameter-language-model-outperforms-llama/) (2023.06.21 Microsoft)*
+パラメータ数: phi-1-small=350M, phi-1-base=1.3B, phi-1=1.3B
+[Textbooks Are All You Need](https://arxiv.org/abs/2306.11644)
+教科書品質のデータセットを用いることにより、小さいサイズにもかかわらずHumanEvalで好成績を残したとして話題となった。
+モデルのパラメータ数を増やす代わりに、データの品質を高めることでパフォーマンスが上がる。
+baseモデルは未調整のものとなり、そこから微調整することにより20%は評価が向上している。
+FlashAttentionが使用されている。
+
+HumanEvalはコードを評価する指標となる。
+GPT-4の67%に比べ、phi-1(1.3B)で50.6%となる。
+さらに小さいphi-1-small(350M)でも45%を達成している。
+同水準の他のモデルはパラメータ数は100倍、1000倍以上となっている。
+
+WEBから厳選した6Bトークンの教科書品質のデータセットで事前訓練し、GPT-3.5から生成した1Bのトークンで微調整されている。
+A100 8台で4日間トレーニングされた。
+
+GPT-3.5からの高品質なトークンがなければ達成できなかったとされる。
+しかし他のLLMからのデータを学習することで、データポイズニングが問題となる可能性もある。
+
+[The Curse of Recursion: Training on Generated Data Makes Models Forget](https://arxiv.org/abs/2305.17493)
+またLLMからのデータばかりを学習することでモデル崩壊が起こることも指摘されている。
+
 ```mermaid
 flowchart
 
