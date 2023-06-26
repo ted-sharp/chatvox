@@ -14,12 +14,13 @@ ChatGPT API, Wisper API
 
 [VOICEVOX](https://voicevox.hiroshiba.jp/)
 クレジット表示必要。
-TTSControllerまたはREST APIに対応。
+TTSController(内部的にはREST API呼び出し)に対応。
+公式で REST API に対応。
 
 [COEIROINK](https://coeiroink.com/)
 GUIにVOICEBOXをカスタムしたものを使用している。
 エンジンは別物。
-TTSControllerに対応。
+TTSController(VOICEVOXと同じ)に対応。
 
 [音読さん](https://ondoku3.com/ja/)
 クレジット表示必要。
@@ -37,17 +38,31 @@ ChatGPTのレスポンスを読み上げてくれるChrome拡張がある。
 ### 有償パッケージ
 
 [VOICEPEAK](https://www.ah-soft.com/voice/narrator/)
-TTSControllerに対応。
+TTSController(内部的にはコマンドラインからのwav作成)に対応。
+未調整でもそれなりの品質になる。
+商用ナレーターセットは、商用利用できるが、それ以外は別途商用ライセンスが必要。
 
-古い製品にVOICEROIDがあるが、そちらは違和感が残る音声となっている。
+邪神ちゃん無料お試し版があるが制限がある。
+標準音声のみ、100文字、5ブロックまでとなっている。
+
+古い製品にVOICEROID、VOICEROID2があるが、そちらは違和感が残る音声となっている。
 
 [CeVIO AI](https://cevio.jp/)
-TTSControllerに対応。
+チェビオと読む。
+TTSController(.NETアセンブリ呼び出し)に対応。
+公式で .NET Framework 4.8 に対応。
+DLL名は CeVIO.Talk.RemoteService2.dll となる。
+
+2013年からCeVIO CS(Creative Studio)として発売されている。
+姉妹ソフトとしてOpen JTalkとSinsyがある。
+CeVIO AIの姉妹ブラントとしてVoiSona(旧CeVIO Pro(仮称))がある。
 
 [A.I.VOICE](https://aivoice.jp/)
 AITalk5の技術を使用している。
 かんたん！AITalk5というソフトもある。
-TTSControllerに対応。
+TTSController(.NETアセンブリ呼び出し)に対応。
+公式で .NET Framework 4.7.2 に対応。
+DLL名は AI.Talk.Editor.Api.dll となる。
 
 [AquesTalk](https://www.a-quest.com/products/aquestalk.html)
 組み込みに使えるほど小型。
@@ -78,6 +93,8 @@ HuggingGPT
 BabyAGI
 
 CAMEL
+
+JARVIS
 
 ## Libraries
 
