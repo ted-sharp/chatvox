@@ -9,63 +9,72 @@ ChatGPT API, Wisper API
 ## Text to speech
 
 有償でよければVOICEPEAKが無調整で一番自然な感じがする。
+リアルタイムが必要なければ、さらにボイスチェンジャーで変換するとよさそう。
 
 ### 無料
 
 [VOICEVOX](https://voicevox.hiroshiba.jp/)
+ボイボ。
+名工大のOpenJTalkを使用している。
 クレジット表示必要。
+
 TTSController(内部的にはREST API呼び出し)に対応。
 公式で REST API に対応。
 
 [COEIROINK](https://coeiroink.com/)
 GUIにVOICEBOXをカスタムしたものを使用している。
 エンジンは別物。
+
 TTSController(VOICEVOXと同じ)に対応。
 
 [音読さん](https://ondoku3.com/ja/)
 クレジット表示必要。
+
 ChatGPTのレスポンスを読み上げてくれるChrome拡張がある。
 
 [SpeechSynthesis](https://developer.mozilla.org/ja/docs/Web/API/SpeechSynthesis)
-ブラウザの音声合成
-
-[棒読みちゃん](https://chi.usamimi.info/Program/Application/BouyomiChan/)
-
-[SofTalk](https://w.atwiki.jp/softalk/)
+ブラウザの音声合成。
 
 [テキストーク](https://gui.jp.net/textalk/)
+名工大のOpenJTalkを使用している。
+VOICEVOXが如何に頑張っているかがよくわかる比較となる。
 
 ### 有償パッケージ
 
 [VOICEPEAK](https://www.ah-soft.com/voice/narrator/)
-TTSController(内部的にはコマンドラインからのwav作成)に対応。
-未調整でもそれなりの品質になる。
-商用ナレーターセットは、商用利用できるが、それ以外は別途商用ライセンスが必要。
+ボイスピ。
+Dreamtonics社のSyllaflowエンジンを使用している。
 
 邪神ちゃん無料お試し版があるが制限がある。
 標準音声のみ、100文字、5ブロックまでとなっている。
 
-古い製品にVOICEROID、VOICEROID2があるが、そちらは違和感が残る音声となっている。
+TTSController(内部的にはコマンドラインからのwav作成)に対応。
+未調整でもそれなりの品質になる。
+商用ナレーターセットは、商用利用できるが、それ以外は別途商用ライセンスが必要。
 
 [CeVIO AI](https://cevio.jp/)
-チェビオと読む。
-TTSController(.NETアセンブリ呼び出し)に対応。
-公式で .NET Framework 4.8 に対応。
-DLL名は CeVIO.Talk.RemoteService2.dll となる。
-
+チェビオ。
 2013年からCeVIO CS(Creative Studio)として発売されている。
 姉妹ソフトとしてOpen JTalkとSinsyがある。
 CeVIO AIの姉妹ブラントとしてVoiSona(旧CeVIO Pro(仮称))がある。
 
+TTSController(.NETアセンブリ呼び出し)に対応。
+公式で .NET Framework 4.8 に対応。
+DLL名は CeVIO.Talk.RemoteService2.dll となる。
+
 [A.I.VOICE](https://aivoice.jp/)
 AITalk5の技術を使用している。
 かんたん！AITalk5というソフトもある。
+AITalkを使っている古い製品にVOICEROID、VOICEROID2がある。
+
 TTSController(.NETアセンブリ呼び出し)に対応。
 公式で .NET Framework 4.7.2 に対応。
 DLL名は AI.Talk.Editor.Api.dll となる。
 
 [AquesTalk](https://www.a-quest.com/products/aquestalk.html)
 組み込みに使えるほど小型。
+ゆっくりボイスといえばコレ。
+AquesTalkを使う製品にSofTalk、UTAU、棒読みちゃん、ゆっくろいどなどがある。
 
 ### サブスク
 
