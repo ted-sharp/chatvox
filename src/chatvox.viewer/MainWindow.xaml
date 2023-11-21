@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:chatvox.viewer"
+        xmlns:chatvox="clr-namespace:chatvox;assembly=chatvox"
+        xmlns:webview="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <webview:BlazorWebView x:Name="blazorWebView" HostPage="wwwroot\index.html" Services="{DynamicResource serviceProvider}">
+            <webview:BlazorWebView.RootComponents>
+                <webview:RootComponent Selector="#app" ComponentType="{x:Type chatvox:App}"/>
+            </webview:BlazorWebView.RootComponents>
+        </webview:BlazorWebView>
     </Grid>
 </Window>
