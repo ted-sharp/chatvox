@@ -807,6 +807,7 @@ GPT-3 --> LLaMA --> Alpaca --> Dolly
 Alpaca --> Vicuna
 LLaMA --> GPT4ALL
 LLaMA --> Koala
+Vicuna --> LLaVA
 Alpaca --> Guanaco
 ```
 
@@ -857,6 +858,9 @@ ChatGPTの90%程度の性能を達成できるとされる。
 パラメータ数: 7B, 13B / Finetuned, Instruct tuned
 カリフォルニア大学バークレー校のアカデミックチームによる会話データでLLaMAを微調整したモデル。
 
+*[LLaVA](https://github.com/haotian-liu/LLaVA) (2023.04.17) 非商用*
+Vicunaベースで画像を認識できるようにしたもの。
+
 *Guanaco (2023.05.23 UW) MIT, 非商用*
 パラメータ数: 7B, 13B, 33B, 65B / Finetuned, Instruct tuned
 [Guanaco - Generative Universal Assistant for Natural-language Adaptive Context-aware Omnilingual outputs](https://guanaco-model.github.io/)
@@ -878,6 +882,37 @@ Guanacoを使っているが本家とは別？
 適切なAPIを呼び出せるモデル。
 TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している。
 
+
+```mermaid
+flowchart
+
+LLaMA --> LLaMA2 --> CodeLLaMA
+LLaMA2 --> ELYZA-japanese
+LLaMA2 --> Youri7B
+LLaMA2 --> LLaVA1.5
+```
+
+*[LLaMA 2](https://ai.meta.com/llama/) (2023.07.18 Meta) 商用可*
+パラメータ数: 7B, 13B, 70B / fine-tuned
+商用利用可能だが、月間ユーザーが7億人を超えると追加ライセンスが必要となる。
+
+2Tトークンで訓練された。
+コンテキスト長は4kトークン。
+
+*Code LLaMA (2023.08.24 Meta)*
+LLaMA2をベースに500BのCodeで訓練された。
+
+*[ELYZA-japanese-Llama-2-7b](https://rinna.co.jp/news/2023/10/20231031.html) (2023.08.29 ELYZA)*
+LLaMA2をもとに日本語で追加学習を行ったもの。
+日本語語彙を増やして性能を上げたモデルがある。
+
+*[Youri-7B](https://rinna.co.jp/news/2023/10/20231031.html) (2023.10.31 rinna)*
+LLaMA2をもとに日本語で追加学習を行ったもの。
+4bit量子化モデルもあるので[ローカルで動かしやすい](https://internet.watch.impress.co.jp/docs/column/shimizu/1533974.html)。
+
+*LLaVA-1.5 (2023.10.05)*
+LLaMA2がベースになった。
+
 ```mermaid
 flowchart
 
@@ -895,6 +930,10 @@ Hugging Faceのリーダーボードの1位を獲得し話題となった。
 2023.05.31 にモデルをApache-2.0で公開した。
 
 Common Crawlの5T tokensから厳選した600B tokensのRefinedWebコーパスを作成した。
+
+*[Falcon-180B](https://falconllm.tii.ae/falcon-180b.html) (2023.09.08 UAE TII)*
+商用利用可能だが、ホスティングは除く。
+HuggingFace登場時には、Leaderboardの最高得点を更新した。
 
 [Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150)
 Munti-query attentionを採用することで、Key-Valueキャッシュを共有化し、メモリ消費量を抑えている。
