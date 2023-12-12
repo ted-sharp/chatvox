@@ -18,17 +18,18 @@ ELIZA(DOCTOR)は心理療法士の会話を模したものが有名。
 PARRYは偏執病的統合失調症患者をシミュレートしようとしたもの。
 ELIZA(DOCTOR)と通信し話題となった。
 
+*[Jabberwacky](https://ja.wikipedia.org/wiki/Jabberwacky) (1982, 1988, 1997)*
+プロジェクト自体は1982年から開始されていたが、当初は学習機能は有していなかった。
+ユーモラスな人間同士の自然な会話をシミュレートすることを目的としていた。
+ユーザーとの会話の大規模なデータベースを構築し、言語と文脈を学習することができた。
+ローブナー賞を2003年 3位、2004年 2位、2005年(George)、2006年(Joan)に受賞している。
+
 *[A.L.I.C.E.](https://ja.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity) (1995)*
 ヒューリスティックパターンマッチングを使用している。
 AIML(Artificial Intelligence Markup Language)というXMLベースで条件を記述できた。
 AIMLはGPLライセンスで公開されたため、後の多くのチャットボットがGPLで作成されることとなった。
 ローブナー賞(Loebner Prize)というチャットボットが人間と区別できないほどの会話能力を持つか評価するコンテストで優勝して話題となった。
 ローブナー賞を2000年、2001年、2004年に受賞している。
-
-*[Jabberwacky](https://ja.wikipedia.org/wiki/Jabberwacky) (1997)*
-ユーモラスな人間同士の自然な会話をシミュレートすることを目的としていた。
-ユーザーとの会話の大規模なデータベースを構築し、言語と文脈を学習することができた。
-ローブナー賞を2003年、2005年、2006年に受賞している。
 
 *[人工無能](https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%84%A1%E8%84%B3) (1995)*
 一方日本では、ゆいぼっとや人工無能うずらが流行っていた。
@@ -43,13 +44,17 @@ JUMAN++ (2015)
 *[デスクトップ マスコット](https://ja.wikipedia.org/wiki/%E4%BC%BA%E3%81%8B) (1998)*
 その後、ペルソナウェア、偽ペルソナウェア、伺か、が流行っていた。
 
+*[SmarterChild](https://en.wikipedia.org/wiki/SmarterChild) (2001)*
+AOL、Windows Live、Yahooなどのメッセンジャーで利用できた。
+ニュース、天気、株式などの情報にアクセスできた。
+
 *[IBM Watson](https://en.wikipedia.org/wiki/IBM_Watson) (2011)*
 クイズ番組に出場させるために開発された。
 
 2013年には、Watsonにより人間味を持たせようと俗語辞書Urban Dictionaryを学習させたことにより、下品な言葉遣いになった事例がある。
 この試みは中断され、スマートフィルターが開発されることとなった。
 
-*[Siri](https://ja.wikipedia.org/wiki/Siri) (2011)*
+*[Siri](https://ja.wikipedia.org/wiki/Siri) (2010.02)*
 Hey, Siri!
 iPhoneに搭載され話題となった。
 
@@ -73,9 +78,9 @@ Amazon Echoに搭載され話題となった。
 *[りんな](https://ja.wikipedia.org/wiki/%E3%82%8A%E3%82%93%E3%81%AA_(%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD)) (2015)*
 女子高生AIとしてLINEに登場して話題となった。
 
-同時期にMicrosoft Tayが登場しているが、ユーザーとの会話を学習する機能により調教されたため、問題発言を繰り返し終了された。
+同時期にMicrosoft TayがTwitterで登場しているが、ユーザーとの会話を学習する機能により調教されたため、問題発言を繰り返し終了された。
 
-*[Googleアシスタント](https://ja.wikipedia.org/wiki/Google_%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88) (2017)*
+*[Googleアシスタント](https://ja.wikipedia.org/wiki/Google_%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88) (2016.05.18)*
 双方向の会話が可能となった。
 今までのGoogle Nowの仕組みと組み合わせて、音声でAndroidを操作することができる。
 
@@ -204,9 +209,8 @@ flowchart
 
 Transformer --> GPT --> GPT-2 --> GPT-3
 Sparse-Transformer --> GPT-3 --> InstructGPT --> ChatGPT
-GPT-3 --> Codex --> ChatGPT
-GPT-3 --> GPT-3.5 --> ChatGPT
-GPT-3.5 --> GPT-4
+GPT-3 --> Codex
+GPT-3 --> GPT-3.5 --> GPT-4
 ```
 
 *[GPT](https://ja.wikipedia.org/wiki/GPT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)) (2018.06.11 [OpenAI](https://ja.wikipedia.org/wiki/OpenAI))*
@@ -277,21 +281,22 @@ code-davinci-002
 
 *GPT-3.5v2 (2022.11.28 OpenAI)*
 改良バージョン
-gpt-3.5-turbo 会話用
 text-davinci-003
+gpt-3.5-turbo 会話用、4kトークンまで対応。
+gpt-3.5-turbo-16k 2023.06くらいに追加
 
 GPT-3.5 TurboはGPT-3に比べてトークンあたりのコストが1/10と言われている。
 
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022.11.30 OpenAI)*
-InstructGPTの兄弟モデル。
+InstructGPTの兄弟モデルが使用されたチャットベースのサービス。
 チャット向けに調整されている。
+使用モデルは順次最新版へ更新されていっている。
 
 APIは従量課金制。
 Azure OpenAI Serviceからも同じモデルのAPIを使用することができる。
 なお、価格は同じで、レスポンスはAzureの方が早い模様。
 
-プラグインやファンクションコールの機能が使えるようになった。
-Azureでもそのうち使えるようになる予定。
+ブラウザでの検索、コードの実行、マルチモーダルに対応した。
 
 *[GPT-4](https://ja.wikipedia.org/wiki/GPT-4) (2023.03.14 OpenAI)*
 パラメータ数: 非公表
@@ -303,6 +308,15 @@ Azureでもそのうち使えるようになる予定。
 
 [GPT-4 Technical Report](https://arxiv.org/abs/2303.08774)
 モデル規模を拡大することで得られる効果は逓減すると発表された。
+
+*GPT-4 Turbo (2023.11.06 OpenAI)*
+2023.04までのデータで学習。
+128kトークンに対応。
+単一メッセージで複数のFunction callingに対応。
+XMLなど特定の形式での返答の精度が向上。
+JSONモードが追加。
+
+同様にGPT-3.5 Turboも改良された。
 
 ```mermaid
 flowchart
@@ -529,9 +543,12 @@ Googleの社員が意識が宿ったと述べて話題となった。
 1.56T wordsで学習した。
 
 *[Bard](https://ja.wikipedia.org/wiki/Bard) (2023.02.06 Google)*
-パラメータ数: Bard-PaLM2=340B
-ChatGPTのに対抗して、LaMDAベースで作成したもの。
-PaLMやPaLM2に順次アップデートされていっている。
+ChatGPTのに対抗して、LaMDAを搭載したチャットベースのサービス。
+使用モデルはPaLM、PaLM2、Geminiと順次アップデートされていっている。
+
+2023.04.10 PaLM
+2023.05.10 PaLM2
+2023.12.06 Gemini
 
 *GLaM (2021.12.09 Google)*
 パラメータ数: 1.2T(97B)
@@ -571,16 +588,45 @@ Google I/Oで発表されたPaLMの次世代モデル。
 Bardをはじめ、すでに多くのGoogleのサービスに使用されている。
 GPT-4と同水準。
 
-GoogleのPaLM 2の次世代モデルはGeminiと呼ばれ、開発中。
+*[Gemini](https://en.wikipedia.org/wiki/Gemini_(language_model)) (2023.12.06 Google)*
+Googleが開発したマルチモーダル対応のモデル。
+Adob​​e Fireflyとの提携も発表されていたので、Geminiと連携している？
+GPT-4よりよいスコアだと発表されている。
 
-*Claude (2023.03.14 Anthropic)*
+4つのバージョンがある。
+Gemini Nano-1: 1.8B、低メモリデバイス用、4bit量子化
+Gemini Nano-2: 3.25B、高メモリデバイス用、4bit量子化
+Gemini Pro: 通常利用用、Turboのようなもの
+Gemini Ultra: 複雑な処理用
+
+Jaxでプログラム。
+Pathwaysモデル。
+
+```mermaid
+flowchart
+
+GPT --> Claude
+```
+
+*[Claude](https://en.wikipedia.org/wiki/Anthropic#Claude) (2023.03.14 Anthropic)*
 元OpenAIのチームが設立したAIスタートアップの会社により開発されたモデル。
 MicrosoftがOpenAIに出資してChatGPTがAzure上で動いているのに対し、
 GoogleがAnthropicに出資してGoogle Cloud上で動いている。
-性能としては、GPT-3.5とGPT-4の中間と言われている。
+Claude1の性能は、GPT-3.5とGPT-4の中間と言われている。
 
 2023.05.11には入力トークンを9kから100kに拡張したことを発表した。
 GPT-4は32kトークンとなるので、約3倍の長さの入力を受け付けられるようになった。
+
+*Claude 2 (2023.07.11 Anthropic)*
+100kトークンまで対応。(Pro限定)
+多言語対応になった。
+安全性が増した。
+
+2023.10.16 から日本でも使えるようになった。
+
+*Claude 2.1 (2023.11.21 Anthropic)*
+200kトークンまで対応。(Pro限定)
+ハルシネーションが半減。
 
 ```mermaid
 flowchart
@@ -658,8 +704,9 @@ RLHFで微調整されている。
 FlamingoはChinchillaに画像エンコーダーをつないだもの。
 画像からテキストを生成できる。
 
-*Gato (2022.05 DeepMind)*
-ロボットなどの行動生成まで行える。
+*[Gato](https://en.wikipedia.org/wiki/Gato_(DeepMind)) (2022.05.12 DeepMind)*
+Gatoはスペイン語で雄ネコ。
+マルチモーダルなモデルでロボットなどの行動生成まで行える。
 
 *AlphaCode (2022.02.02 DeepMind)*
 パラメータ数: 41.4B
@@ -683,9 +730,9 @@ OPTをInstructionチューニングしたもの。
 
 *Galactica (2022.11.15 Meta)*
 科学技術系のコーパスから学習されたモデル。
-ハルシネーション(Hallucination)が原因でわずか3日で公開が中止された。
+ハルシネーションが原因でわずか3日で公開が中止された。
 
-ハルシネーションとは、LLMの仕組み上、もっともらしいウソが構築されてしまう現象のこと。
+ハルシネーション(Hallucination)は、幻覚とも呼ばれ、LLMの仕組み上、もっともらしいウソが構築されてしまう現象のこと。
 
 *[BLOOM](https://bigscience.huggingface.co/blog/bloom) (2022.07.06 BigScience) OSS*
 パラメータ数: 1.1B, 1.7B, 3B, 7.1B, 176B / Finetuned
@@ -1006,7 +1053,7 @@ H100 80GBは500万円程度。
 
 [Wikipedia - LLM](https://en.wikipedia.org/wiki/Large_language_model)
 [Transformer models: an introduction and catalog — 2023 Edition](https://amatriain.net/blog/transformer-models-an-introduction-and-catalog-2d1e9039f376/)
-[A Catalog of Transformer Models](https://doi.org/10.48366/r585918)
+[A Catalog of Transformer Models](https://doi.org/10.48366/R656113)
 [Multi-task Language Understanding on MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu)
 [LLMSurvey](https://github.com/rucaibox/llmsurvey)
 [The Practical Guides for Large Language Models](https://github.com/mooler0410/llmspracticalguide)
