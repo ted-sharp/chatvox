@@ -12,23 +12,23 @@ ELIZA --> Chatbot --> 人工無能 --> Siri --> ChatGPT
 *[ELIZA](https://en.wikipedia.org/wiki/ELIZA) (1966)*
 初期の人工知能プログラムのひとつ。
 ルールベースの簡単なパターンマッチングで返答していた。
-ELIZA(DOCTOR)は心理療法士の会話を模したものが有名。
+心理療法士の会話を模したELIZA(DOCTOR)が有名。
 
 *[PARRY](https://ja.wikipedia.org/wiki/PARRY) (1972)*
 PARRYは偏執病的統合失調症患者をシミュレートしようとしたもの。
 ELIZA(DOCTOR)と通信し話題となった。
 
 *[Jabberwacky](https://ja.wikipedia.org/wiki/Jabberwacky) (1982, 1988, 1997)*
-プロジェクト自体は1982年から開始されていたが、当初は学習機能は有していなかった。
 ユーモラスな人間同士の自然な会話をシミュレートすることを目的としていた。
 ユーザーとの会話の大規模なデータベースを構築し、言語と文脈を学習することができた。
+プロジェクト自体は1982年から開始されていたが、当初は学習機能は有していなかった。
 ローブナー賞を2003年 3位、2004年 2位、2005年(George)、2006年(Joan)に受賞している。
+ローブナー賞(Loebner Prize)はチャットボットが人間と区別できないほどの会話能力を持つか評価するコンテストのこと。
 
 *[A.L.I.C.E.](https://ja.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity) (1995)*
 ヒューリスティックパターンマッチングを使用している。
 AIML(Artificial Intelligence Markup Language)というXMLベースで条件を記述できた。
 AIMLはGPLライセンスで公開されたため、後の多くのチャットボットがGPLで作成されることとなった。
-ローブナー賞(Loebner Prize)というチャットボットが人間と区別できないほどの会話能力を持つか評価するコンテストで優勝して話題となった。
 ローブナー賞を2000年、2001年、2004年に受賞している。
 
 *[人工無能](https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%84%A1%E8%84%B3) (1995)*
@@ -45,18 +45,19 @@ JUMAN++ (2015)
 その後、ペルソナウェア、偽ペルソナウェア、伺か、が流行っていた。
 
 *[SmarterChild](https://en.wikipedia.org/wiki/SmarterChild) (2001)*
-AOL、Windows Live、Yahooなどのメッセンジャーで利用できた。
+AOL、MSN、Yahooなどのメッセンジャーで利用できた。
 ニュース、天気、株式などの情報にアクセスできた。
+一時期はユニークユーザー数が1000万を超えた、1日に10億通のやり取りがあったとされる。
+
+*[Siri](https://ja.wikipedia.org/wiki/Siri) (2010.02)*
+Hey, Siri!
+iPhoneに搭載され話題となった。
 
 *[IBM Watson](https://en.wikipedia.org/wiki/IBM_Watson) (2011)*
 クイズ番組に出場させるために開発された。
 
 2013年には、Watsonにより人間味を持たせようと俗語辞書Urban Dictionaryを学習させたことにより、下品な言葉遣いになった事例がある。
 この試みは中断され、スマートフィルターが開発されることとなった。
-
-*[Siri](https://ja.wikipedia.org/wiki/Siri) (2010.02)*
-Hey, Siri!
-iPhoneに搭載され話題となった。
 
 *[Google Now](https://ja.wikipedia.org/wiki/Google_Now) (2012)*
 OK, Google!
@@ -67,7 +68,7 @@ A.L.I.C.E.で開発されたAIMLを基にしている。
 2013年から2019年の間にローブナー賞を5回受賞している。
 これ以降はローブナー賞は中止された。
 
-2021年にはKuki AIという名前に代わり、メタバースに進出した。
+2021年にはKuki AIという名前に変わり、メタバースに進出した。
 
 *[Alexa](https://ja.wikipedia.org/wiki/Amazon_Alexa) (2014)*
 Amazon Echoに搭載され話題となった。
@@ -93,7 +94,17 @@ MeenaをもとにしたLaMDAは、Googleのエンジニアが「AIが感情や�
 *[ChatGPT](https://ja.wikipedia.org/wiki/ChatGPT) (2022)*
 OpenAIが開発した大規模言語モデルGPT-3.5を利用したシステム。
 大規模言語モデルの特徴として、対話だけでなく、要約や翻訳などさまざまな自然言語処理を行うことができる。
-Codexなどを組み込み、チャット形式で簡単に使えるようにしたので爆発的な人気を呼んだ。
+プログラミング用のCodexなどを組み込まれている。
+チャット形式で簡単に使えるようにしたので爆発的な人気を呼んだ。
+
+GPT-4を搭載するようになりマルチモーダル化している。
+
+*[Bard](https://ja.wikipedia.org/wiki/Bard) (2023)*
+Googleが開発した大規模言語モデルを利用したシステム。
+Googleのさまざまなサービスにアクセスできる強味がある。
+
+LaMDA、PaLM、PaLM2、Geminiとアップデートされた。
+Geminiでマルチモーダル化した。
 
 ## The History of LLMs
 
@@ -521,7 +532,7 @@ flowchart
 
 Transformer --> Meena --> LaMDA --> Bard
 Transformer --> GLaM
-Transformer --> PaLM --> PaLM-2
+Transformer --> PaLM --> PaLM-2 --> Gemini
 ```
 
 *Meena (2020.01.28 Google)*
@@ -882,43 +893,11 @@ Guanacoを使っているが本家とは別？
 適切なAPIを呼び出せるモデル。
 TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している。
 
-
 ```mermaid
 flowchart
 
-LLaMA --> LLaMA2 --> CodeLLaMA
-LLaMA2 --> ELYZA-japanese
-LLaMA2 --> Youri7B
-LLaMA2 --> LLaVA1.5
-```
-
-*[LLaMA 2](https://ai.meta.com/llama/) (2023.07.18 Meta) 商用可*
-パラメータ数: 7B, 13B, 70B / fine-tuned
-商用利用可能だが、月間ユーザーが7億人を超えると追加ライセンスが必要となる。
-
-2Tトークンで訓練された。
-コンテキスト長は4kトークン。
-
-*Code LLaMA (2023.08.24 Meta)*
-LLaMA2をベースに500BのCodeで訓練された。
-
-*[ELYZA-japanese-Llama-2-7b](https://rinna.co.jp/news/2023/10/20231031.html) (2023.08.29 ELYZA)*
-LLaMA2をもとに日本語で追加学習を行ったもの。
-日本語語彙を増やして性能を上げたモデルがある。
-
-*[Youri-7B](https://rinna.co.jp/news/2023/10/20231031.html) (2023.10.31 rinna)*
-LLaMA2をもとに日本語で追加学習を行ったもの。
-4bit量子化モデルもあるので[ローカルで動かしやすい](https://internet.watch.impress.co.jp/docs/column/shimizu/1533974.html)。
-
-*LLaVA-1.5 (2023.10.05)*
-LLaMA2がベースになった。
-
-```mermaid
-flowchart
-
-Transformer --> GPT --> Pythia --> Dolly2.0
+GPT --> Pythia --> Dolly2.0
 GPT --> Falcon
-GPT --> Cerebras-GPT
 GPT --> MPT
 ```
 
@@ -942,12 +921,6 @@ Munti-query attentionを採用することで、Key-Valueキャッシュを共�
 
 学習はAWS上で384 GPUで二か月かかったとされる。
 
-*Cerebras-GPT (2023.03.28 Cerebras) Apache2.0*
-パラメータ数: 111M, 256m, 590M, 1.3B, 2.7B, 6.7B, 13B / Finetuned
-AIアクセラレータの会社であるCerebrasのデモンストレーションで作成されたモデル。
-Chinchillaのスケーリング則を参考に学習されている。
-オープンなデータセットを使用。
-
 *Dolly 2.0 (2023.04.26 Databricks) 商用可*
 パラメータ数: 12B
 Pythiaベースのモデル。
@@ -963,13 +936,29 @@ FlashAttentionとFasterTransformerを使用している。
 440のGPUで9.5日間かけて訓練された。
 200万ドル(約3,000万円)かかったとされる。
 
-*[phi-1](https://analyticsindiamag.com/microsoft-releases-1-3-bn-parameter-language-model-outperforms-llama/) (2023.06.21 Microsoft)*
+
+```mermaid
+flowchart
+
+LLaMA --> Orca --> OpenOrca
+LLaMA2 --> Orca-2
+GPT-2 --> Phi-1 --> Phi-1.5 --> Phi-2
+```
+
+*[Orca](https://www.microsoft.com/en-us/research/project/orca/) (2023.06.05 Microsoft)*
+[Orca: Progressive Learning from Complex Explanation Traces of GPT-4](https://arxiv.org/abs/2306.02707)
+
+*Orca-2 (2023.11.18 Microsoft)*
+[Orca 2: Teaching Small Language Models How to Reason](https://arxiv.org/abs/2311.11045)
+
+*[phi-1](https://huggingface.co/microsoft/phi-1) (2023.06.21 Microsoft)*
 パラメータ数: phi-1-small=350M, phi-1-base=1.3B, phi-1=1.3B
 [Textbooks Are All You Need](https://arxiv.org/abs/2306.11644)
+Pythonコード生成向けのモデル。
 教科書品質のデータセットを用いることにより、小さいサイズにもかかわらずHumanEvalで好成績を残したとして話題となった。
 モデルのパラメータ数を増やす代わりに、データの品質を高めることでパフォーマンスが上がる。
 baseモデルは未調整のものとなり、そこから微調整することにより20%は評価が向上している。
-FlashAttentionが使用されている。
+DeepSpeedとFlashAttentionが使用されている。
 
 HumanEvalはコードを評価する指標となる。
 GPT-4の67%に比べ、phi-1(1.3B)で50.6%となる。
@@ -985,6 +974,18 @@ GPT-3.5からの高品質なトークンがなければ達成できなかった�
 [The Curse of Recursion: Training on Generated Data Makes Models Forget](https://arxiv.org/abs/2305.17493)
 またLLMからのデータばかりを学習することでモデル崩壊が起こることも指摘されている。
 
+*[phi-1.5](https://huggingface.co/microsoft/phi-1_5) (2023.09.15 Microsoft)*
+[Textbooks Are All You Need II: phi-1.5 technical report](https://arxiv.org/abs/2309.05463)
+
+*[phi-2](https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/) (2023.12.11 Microsoft)*
+
+```mermaid
+flowchart
+
+GPT --> Mistral --> Mixtral
+Mistral --> OpenHermes
+```
+
 ```mermaid
 flowchart
 
@@ -996,6 +997,7 @@ LLaMA --> RedPajama-INCITE
 パラメータ数: 7B / Finetuned
 [openlm-research/OpenLLaMA](https://github.com/openlm-research/open_llama)
 LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
+LLaMA2は制限があるが商用利用可能になった。
 アルゴリズムやパラメータ等はLLaMAと同じにしている。
 
 JAXベースのEasyLMを使用した。
@@ -1013,9 +1015,63 @@ RedPajama-Data-1Tという高品質、広範囲のデータセットを作成し
 ```mermaid
 flowchart
 
-MT-NLG --> DeepSpeed-Chat
-InstructGPT --> OpenAssistant
+GPT-NeoX --> OpenCALM --> CALM-2
+GPT-NeoX --> Rinna
 ```
+
+*OpenCALM (2023.05.25 サイバーエージェント)*
+パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B / Non-tuned
+CALMはCyber Agent Language Modelと思われる。
+サイバーエージェントが公開した微調整前の日本語モデル。
+
+*rinna (2023.05.26 rinna)*
+パラメータ数: 3.6B
+japanese-gpt-neox-3.6b
+japanese-gpt-neox-3.6b-instruction-sft
+りんなが公開した日本語モデル。
+
+```mermaid
+flowchart
+
+LLaMA --> PLaMo
+```
+
+*[PLaMo](https://tech.preferred.jp/ja/blog/llm-plamo/) (2023.09.28 PFN) Apache 2.0*
+パラメータ数: 13B
+高い日本語性能と、そこそこの英語性能を備えたモデル。
+
+```mermaid
+flowchart
+
+LLaMA --> LLaMA2 --> CodeLLaMA
+LLaMA2 --> ELYZA-japanese
+LLaMA2 --> Youri-7B
+LLaMA2 --> LLaVA-1.5
+```
+
+*[LLaMA 2](https://ai.meta.com/llama/) (2023.07.18 Meta) 商用可*
+パラメータ数: 7B, 13B, 70B / Finetuned
+商用利用可能だが、月間ユーザーが7億人を超えると追加ライセンスが必要となる。
+
+2Tトークンで訓練された。
+コンテキスト長は4kトークン。
+
+*Code LLaMA (2023.08.24 Meta)*
+LLaMA2をベースに500BのCodeで訓練された。
+
+*[ELYZA-japanese-Llama-2-7b](https://rinna.co.jp/news/2023/10/20231031.html) (2023.08.29 ELYZA)*
+LLaMA2をもとに日本語で追加学習を行ったもの。
+日本語語彙を増やして性能を上げたモデルがある。
+
+*[Youri-7B](https://rinna.co.jp/news/2023/10/20231031.html) (2023.10.31 rinna)*
+Youriは妖狸(ようり)からつけられた。
+LLaMA2をもとに日本語で追加学習を行ったもの。
+4bit量子化モデルもあるので[ローカルで動かしやすい](https://internet.watch.impress.co.jp/docs/column/shimizu/1533974.html)。
+
+*LLaVA-1.5 (2023.10.05)*
+LLaMA2に視覚エンコーダー(CLIP ViT-L/14)を組み合わせたもの。
+
+## LLMを取り巻くフレームワークやツール
 
 *PEFT (2023.02.11 Hugging Face)*
 [huggingface/PEFT](https://github.com/huggingface/peft)
@@ -1043,22 +1099,24 @@ ChatGPTに変わるオープンソースの提供を目的としている。
 人間が入力した高品質なサンプルを集めるためのチャットボット。
 Huggng FaceのHuggingChatの一部として提供されている。
 
-```mermaid
-flowchart
+LammaIndex
+LlamaFile
+Llama.cpp
+LS Studio
+NeMo
 
-GPT-NeoX --> OpenCALM
-GPT-NeoX --> Rinna
-```
+FastChat
 
-*OpenCALM (2023.05.25 サイバーエージェント)*
-パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B / Non-tuned
-サイバーエージェントが公開した微調整前の日本語モデル。
+FlexGen
 
-*rinna (2023.05.26 rinna)*
-パラメータ数: 3.6B
-japanese-gpt-neox-3.6b
-japanese-gpt-neox-3.6b-instruction-sft
-りんなが公開した日本語モデル。
+SemanticKernel
+LangChain
+AutoGPT
+AgentGPT
+BabyAGI
+
+text-generation-webui
+
 
 ## LLMを開発するには？
 
@@ -1069,23 +1127,35 @@ japanese-gpt-neox-3.6b-instruction-sft
 3. モデルを構築する
 
 学習にはGoogle Colaboratoryなどのクラウドプラットフォームを活用するのが簡単。
-DeepSpeed-ChatやGPT-NeoXなどのフレームワークを利用するのもよい。
-データセットを作成するにはオープンソースのLLMを利用するとよい。
-
-さらに独自開発を進める場合は、最新の様々なTransformerを検討する。
+DeepSpeed-ChatやGPT-NeoX、JAX、vLLMなどのフレームワークを利用するのもよい。
 Megatron, DeepSpeed, bitsandbytes, FlexGenなどの学習や推論の効率化を検討する。
+さらに独自開発を進める場合は、最新の様々なTransformerを検討する。
+OSSとして公開されているLLMをカスタマイズするのもよい。
+日本語に対応したい場合は、既存のLLMに日本語データセットを追加学習する方法もある。
 
-### モデルに必要なGPUメモリ数
+### モデルに必要なVRAMのサイズ
 
-1パラメータ32ビットと考えると、1B * 4バイト = 4GBがロードするためだけでも最低限必要となる。
-7Bだと28GB、13Bだと52GB、70Bだと280GB、175Bだと700GB程度が必要となる。
-この他に、中間状態の保持、オプティマイザ、バッチデータ、など様々な追加メモリも必要とされる。
+1パラメータ16ビットと考えると、1B * 2バイト = 2GBがロードするためだけでも最低限必要となる。
+7Bだと14GB、13Bだと26GB、70Bだと140GB、175Bだと350GB程度が必要となる。
+推論を動かすだけであれば8bit量子化を行うと必要メモリが半減する。
+動作速度に難はあるが、GPUのVRAMではなく、CPU側のRAMを使用する方法もある。
+
+モデルの他に、中間状態の保持、オプティマイザ、バッチデータ、など様々な追加メモリも必要とされる。
 さらに微調整(Fine-Tuning)となるとその倍はメモリが必要となってくる。
+QLoLAなどで微調整を行う場合は必要メモリは少なくて済む。
+
+### GPU
+
+大きなLLMでも短時間動かすだけならクラウドが簡単。
+
+家庭用で考える場合はRTX 4060 Tiの16GBを二枚搭載すると32GB程度まで対応できる。
+複数枚運用の場合はソフトウェア側の対応も必要となる。
+ローカルで動かしたいだけであれば一枚で運用する方がトラブルは少ない。
 
 NVIDIA DGX A100はA100 80GBが8枚搭載されているので640GBまで使える。
 価格は研究機関は2500万円、一般企業は5000万円とされる。
 A100 80GBは200万～300万円程度と思われる。
-なお、A100は当初40GBだったが、アップデートされたモデルは80GBとなっている。
+当初A100は40GBだったが、アップデートされたモデルは80GBとなっている。
 H100 80GBは500万円程度。
 
 ## 参考
@@ -1102,3 +1172,8 @@ H100 80GBは500万円程度。
 [百花繚乱の大規模言語モデル　その現状まとめ【2023年4月末版】](https://www.itmedia.co.jp/news/articles/2304/25/news156.html)
 [大規模言語モデル間の性能比較まとめ](https://note.com/mahlab/n/na71a267a16dc)
 [【自然言語処理】Transformer #まとめ編](https://yhayato1320.hatenablog.com/entry/2023/01/24/163747)
+
+[eugeneyan/open-llms](https://github.com/eugeneyan/open-llms)
+[Hannibal046/Awesome-LLM](https://github.com/Hannibal046/Awesome-LLM)
+[shm007g/LLaMA-Cult-and-More](https://github.com/shm007g/LLaMA-Cult-and-More)
+[llm-jp/awesome-japanese-llm](https://github.com/llm-jp/awesome-japanese-llm)
