@@ -192,6 +192,7 @@ flowchart
 
 Transformer --> Sparse-Transformer
 Transformer --> Reformer
+Transformer --> FlashAttention
 
 ```
 
@@ -213,7 +214,14 @@ RevNet(Reversible Residual Network)とは、
 LSH(Locality-Sensitive Hashing)とは、
 ベクトルの近似的な最近傍を効率的に検索するための手法。
 
-Transformerを改良したものは、この後も登場し、様々なLLMに搭載されることとなる。
+*FlashAttention (2022.05.27)*
+[FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+GPUへのメモリの読み書きを効率化することで学習が2-4倍程高速化される。
+
+*FlashAttention-2 (2023.07.17)*
+[FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+
+Transformerを改良したもの、または代わるものは、この後も登場し、様々なLLMに搭載されることとなる。
 
 ```mermaid
 flowchart
@@ -513,6 +521,8 @@ flowchart
 
 RNN --> RWKV
 Transformer --> RWKV
+Transformer --> Hyena
+H3 --> Hyena
 ```
 
 *RWKV-LM (2021.08.13 BlinkDL) Apache2.0*
@@ -526,6 +536,10 @@ RNNで高い性能を示し話題となった。
 14Bのモデルを訓練するにはA100 GPUで22,436時間かかったとされる。
 
 AlpacaやShareGPTで微調整されたRavenというモデルもある。
+
+*Hyena (2023.02.21) Apache2.0*
+[Hyena Hierarchy: Towards Larger Convolutional Language Models](https://arxiv.org/abs/2302.10866)
+Transformerに変わる新しい仕組みH3(Hungry Hungry Hippos)が使われている。
 
 ```mermaid
 flowchart
@@ -616,7 +630,7 @@ Pathwaysモデル。
 ```mermaid
 flowchart
 
-GPT --> Claude
+GPT-3 --> Claude
 ```
 
 *[Claude](https://en.wikipedia.org/wiki/Anthropic#Claude) (2023.03.14 Anthropic)*
@@ -725,6 +739,11 @@ Gatoはスペイン語で雄ネコ。
 DeepMindのAlphaGoやAlphaZeroのAlphaシリーズのコード生成版。
 OpenAI Codexを競技プログラミングレベルに引き上げたもの。
 
+*AlphaCode2 (2023.12.07 DeepMind)*
+Gemini Proベース。
+競技プログラミングで上位15%に入った。
+AlphaCode1だと50%くらいだった。
+
 *[OPT-175B](https://ai.facebook.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/) (2022.05.03 Meta) 非商用*
 パラメータ数: 1.3B, 2.7B, 6.7B, 13B, 30B, 66B, 175B / Finetuned, Instruct tuned
 [OPT: Open Pre-trained Transformer Language Models](https://arxiv.org/abs/2205.01068)
@@ -818,8 +837,11 @@ GPT-3 --> LLaMA --> Alpaca --> Dolly
 Alpaca --> Vicuna
 LLaMA --> GPT4ALL
 LLaMA --> Koala
+LLaMA --> RedPajama-INCITE
 Vicuna --> LLaVA
 Alpaca --> Guanaco
+LLaMA --> LLaMA2
+
 ```
 
 *[LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) (2023.02.24 Meta) 非商用*
@@ -833,6 +855,13 @@ LLaMA-13BはGPT-3(175B)よりほとんどのベンチマークで優れている
 
 訓練費用は100万ドル。
 2048個のA100 80GB GPUで21日間トレーニングしたと報告されている。
+
+*[LLaMA 2](https://ai.meta.com/llama/) (2023.07.18 Meta) 商用可*
+パラメータ数: 7B, 13B, 70B / Finetuned
+商用利用可能だが、月間ユーザーが7億人を超えると追加ライセンスが必要となる。
+
+2Tトークンで訓練された。
+コンテキスト長は4kトークン。
 
 *[Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html) (2023.03.13 Stanford) Apache-2.0, 非商用*
 パラメータ数: 7B / Finetuned, Instruct Tuned
@@ -872,6 +901,15 @@ ChatGPTの90%程度の性能を達成できるとされる。
 *[LLaVA](https://github.com/haotian-liu/LLaVA) (2023.04.17) 非商用*
 Vicunaベースで画像を認識できるようにしたもの。
 
+*[RedPajama-INCITE](https://www.together.xyz/blog/redpajama-models-v1) (2023.05.05 Together) Apache2.0, 商用可*
+パラメータ数: 3B, 7B / Finetuned, Instruct tuned
+名前の由来はLlama Llama Red Pajamaから。
+LLaMAを忠実に再現することを目的としたモデル。
+RedPajama-Data-1Tという高品質、広範囲のデータセットを作成した。
+
+3Bモデルは同パラメータ帯の他と比べて優秀で、RTX 2070でも動作する。
+7BモデルはPythia 7Bを上回る性能を示したとされる。
+
 *Guanaco (2023.05.23 UW) MIT, 非商用*
 パラメータ数: 7B, 13B, 33B, 65B / Finetuned, Instruct tuned
 [Guanaco - Generative Universal Assistant for Natural-language Adaptive Context-aware Omnilingual outputs](https://guanaco-model.github.io/)
@@ -896,8 +934,8 @@ TorchHub, TensorFlowHub, HuggingFaceのデータセットで学習している�
 ```mermaid
 flowchart
 
-GPT --> Pythia --> Dolly2.0
 GPT --> Falcon
+GPT --> Pythia --> Dolly2.0
 GPT --> MPT
 ```
 
@@ -940,16 +978,10 @@ FlashAttentionとFasterTransformerを使用している。
 ```mermaid
 flowchart
 
-LLaMA --> Orca --> OpenOrca
-LLaMA2 --> Orca-2
 GPT-2 --> Phi-1 --> Phi-1.5 --> Phi-2
+LLaMA --> Orca
+LLaMA --> LLaMA2 --> Orca-2
 ```
-
-*[Orca](https://www.microsoft.com/en-us/research/project/orca/) (2023.06.05 Microsoft)*
-[Orca: Progressive Learning from Complex Explanation Traces of GPT-4](https://arxiv.org/abs/2306.02707)
-
-*Orca-2 (2023.11.18 Microsoft)*
-[Orca 2: Teaching Small Language Models How to Reason](https://arxiv.org/abs/2311.11045)
 
 *[phi-1](https://huggingface.co/microsoft/phi-1) (2023.06.21 Microsoft)*
 パラメータ数: phi-1-small=350M, phi-1-base=1.3B, phi-1=1.3B
@@ -979,62 +1011,54 @@ GPT-3.5からの高品質なトークンがなければ達成できなかった�
 
 *[phi-2](https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/) (2023.12.11 Microsoft)*
 
+*[Orca](https://www.microsoft.com/en-us/research/project/orca/) (2023.06.05 Microsoft)*
+[Orca: Progressive Learning from Complex Explanation Traces of GPT-4](https://arxiv.org/abs/2306.02707)
+
+*Orca-2 (2023.11.18 Microsoft)*
+[Orca 2: Teaching Small Language Models How to Reason](https://arxiv.org/abs/2311.11045)
+
 ```mermaid
 flowchart
 
 GPT --> Mistral --> Mixtral
-Mistral --> OpenHermes
 ```
+
+*[Mistral-7B](https://mistral.ai/news/announcing-mistral-7b/) (2023.09.27 Mistral AI) Apache 2.0*
+コード生成に向いているモデルであり、7BパラメータでありながらLLaMA2-13BやLLaMA-34Bを上回ったとされる。
+GQA(Grouped-Query Attendance)により高速な推論が可能。
+SWA(Sliding-Window Attention)により長いシーケンスを省コストで処理できる。
+
+*[Mixtral-8x7B](https://mistral.ai/news/mixtral-of-experts/) (2023.12.11 Mistral AI) Apache 2.0*
+Mistral-7Bを元に、Feed forwardブロックを8倍に拡張したモデル。
+SMoE(Sparse-Mixture-of-Exparts)により、2つのブロックのみ利用して推論する。
+複数のExpartブロックを搭載する手法はGLaMで使われていた。
+32kトークンまで処理可能。
 
 ```mermaid
 flowchart
 
-LLaMA --> OpenLLaMA
-LLaMA --> RedPajama-INCITE
-```
-
-*OpenLLaMA (2023.04.28 OpenLM Research) Apache2.0, 商用可*
-パラメータ数: 7B / Finetuned
-[openlm-research/OpenLLaMA](https://github.com/openlm-research/open_llama)
-LLaMAは商用利用禁止のため、パブリックライセンスのオープンソースで再現したもの。
-LLaMA2は制限があるが商用利用可能になった。
-アルゴリズムやパラメータ等はLLaMAと同じにしている。
-
-JAXベースのEasyLMを使用した。
-RedPajamaデータセットを用いた。
-
-*[RedPajama-INCITE](https://www.together.xyz/blog/redpajama-models-v1) (2023.05.05 Together) Apache2.0, 商用可*
-パラメータ数: 3B, 7B / Finetuned, Instruct tuned
-名前の由来はLlama Llama Red Pajamaから。
-LLaMAを忠実に再現することを目的としたモデル。
-RedPajama-Data-1Tという高品質、広範囲のデータセットを作成した。
-
-3Bモデルは同パラメータ帯の他と比べて優秀で、RTX 2070でも動作する。
-7BモデルはPythia 7Bを上回る性能を示したとされる。
-
-```mermaid
-flowchart
-
-GPT-NeoX --> OpenCALM --> CALM-2
-GPT-NeoX --> Rinna
-```
-
-*OpenCALM (2023.05.25 サイバーエージェント)*
-パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B / Non-tuned
-CALMはCyber Agent Language Modelと思われる。
-サイバーエージェントが公開した微調整前の日本語モデル。
-
-*rinna (2023.05.26 rinna)*
-パラメータ数: 3.6B
-japanese-gpt-neox-3.6b
-japanese-gpt-neox-3.6b-instruction-sft
-りんなが公開した日本語モデル。
-
-```mermaid
-flowchart
-
+GPT-NeoX --> OpenCALM
+GPT-NeoX --> Japanese-GPT-NeoX
+OpenCALM --> CyberAgentLM2
 LLaMA --> PLaMo
+LLaMA --> CyberAgentLM2
 ```
+
+*[OpenCALM](https://www.cyberagent.co.jp/news/detail/id=28817) (2023.05.11 サイバーエージェント) CC4.0*
+パラメータ数: 160M, 400M, 830M, 1.4B, 2.7B, 6.8B / Non-tuned
+サイバーエージェントが公開した微調整前の日本語モデル。
+CALMはCyber Agent Language Modelのこと。
+GPT-NeoXを使用。
+Hugging FaceのページにはOpenCALM-XXをファインチューニングしたものと書かれている？
+
+*[CyberAgentLM2](https://www.cyberagent.co.jp/news/detail/id=29479) (2023.11.02 サイバーエージェント) Apache 2.0*
+パラメータ数: 7B(Base), 7B(Chat)
+LLaMAベースだが、日本語を追加学習したわけではなく、日本語データセットを用意して再構築したものとなる。
+32kトークンに対応。
+
+*Japanese-GPT-NeoX (2023.05.26 りんな)*
+パラメータ数: 3.6B(Base), 3.6B(SFT)
+りんなが公開した日本語モデル。
 
 *[PLaMo](https://tech.preferred.jp/ja/blog/llm-plamo/) (2023.09.28 PFN) Apache 2.0*
 パラメータ数: 13B
@@ -1044,17 +1068,10 @@ LLaMA --> PLaMo
 flowchart
 
 LLaMA --> LLaMA2 --> CodeLLaMA
-LLaMA2 --> ELYZA-japanese
+LLaMA2 --> ELYZA-japanese-LLaMA2
 LLaMA2 --> Youri-7B
 LLaMA2 --> LLaVA-1.5
 ```
-
-*[LLaMA 2](https://ai.meta.com/llama/) (2023.07.18 Meta) 商用可*
-パラメータ数: 7B, 13B, 70B / Finetuned
-商用利用可能だが、月間ユーザーが7億人を超えると追加ライセンスが必要となる。
-
-2Tトークンで訓練された。
-コンテキスト長は4kトークン。
 
 *Code LLaMA (2023.08.24 Meta)*
 LLaMA2をベースに500BのCodeで訓練された。
@@ -1073,6 +1090,23 @@ LLaMA2に視覚エンコーダー(CLIP ViT-L/14)を組み合わせたもの。
 
 ## LLMを取り巻くフレームワークやツール
 
+### LLM構築環境
+
+
+
+*JAX*
+
+*EasyLM*
+
+*PyTorch*
+
+*TensorFlow*
+
+*vLLM*
+
+*LiteLLM*
+
+
 *PEFT (2023.02.11 Hugging Face)*
 [huggingface/PEFT](https://github.com/huggingface/peft)
 効率的なFine-Tuningのためのライブラリ。
@@ -1085,6 +1119,11 @@ LoRA, Prefix Tuning, P-Tuning, Prompt Tuning, AdaLoRAの手法が使える。
 DeepSpeedも使える。
 3Bモデルで、通常の微調整だとGPU 48GBが必要なのに対して、PEFT-LoRA DeepSpeedでGPU 10GB程度になる。
 
+ビット量子化も行える。
+
+*trl*
+PEFTを使うためのライブラリ？
+
 *DeepSpeed-Chat (2023.04.12 Microsoft)*
 [microsoft/DeepSpeed-Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat/japanese)
 DeepSpeedの仕組みを利用したLLM構築フレームワーク。
@@ -1093,29 +1132,107 @@ Azure上でNVIDIA A100を64台用いた場合は、
 OPT-13Bモデルは7.5h(2,000ドル)、
 BLOOM-176Bモデルは20h(5,000ドル)で学習できる。
 
+*FastChat*
+
+*AutoGPTQ*
+GPTQフォーマットに変換してビット量子化するためのツール。
+GPTQフォーマットはTransformersで動かせるようになる。
+
+*FastChat*
+
+*FlexGen*
+
+### ローカルLLM実行環境
+
+*[Llama.cpp](https://github.com/ggerganov/llama.cpp)*
+LLMをnビット量子化して実行するためのアプリケーション。
+Windows/Linux/MacOSに対応している。
+GGUF形式に対応する。
+VRAMを使用せずCPUだけで動かすことも可能。
+
+各種プログラミング言語に対するバインディングプロジェクトも多数存在する。
+llama-cpp-python
+LLaMaSharp
+
+*Text generation web UI*
+ローカルでLLMを動かし、Web UIを提供するためのアプリケーション。
+Transformers(GPTQ)やllama.cpp(GGUF)をバックエンドとして動かすことができる。
+Windows/Linux/MacOSで動かすことができる。
+NVIDIA GPUの他に、CPUだけでも動かすことができる。
+
+*GPT4ALL*
+同じ名前のモデルもあるので注意。
+LLMをローカルCPUで実行するためのもの
+Windows/Linux/MacOSで動かすことができる。
+GGUFに対応。
+
+*Ollama*
+GGUFのLLMをローカルで実行するためのアプリケーション。
+
+*[LlamaFile](https://github.com/Mozilla-Ocho/llamafile)*
+単一ファイルでLLMを動かすためのアプリケーション。
+Windows/Linux/MacOSに対応している。
+内部的にllama.cppを使用している。
+
+クイックスタートとして4GBのLLaVA-1.5-7B-q4が使えるようになっている。
+
+*LM Studio*
+手軽にLLMを実行することができる。
+Windows/Linux/MacOSで動かすことができる。
+HuggingFaceから互換性のあるモデルをダウンロードする。
+
+### LLM機能拡張
+
+*LlamaIndex*
+データを追加するためのRAG(Retrieval-Augmented Generation)フレームワーク
+
+*LangChain*
+アプリケーションにLLM機能を追加するためのライブラリ。
+PythonとJSで使える。
+Goalを設定することで、目的に達するまで自立実行ができる。
+MemoryやRAGにも対応しているし、Agent機能でツールも実行できる。
+SemanticKernelよりもデフォルトで備わっている機能が充実している。
+
+似たようなソフトウェアにAutoGPTやBabyAGIがあります。
+
+*AgentGPT*
+ブラウザベースで、ノーコードで自立実行ができるアプリケーション。
+内部でLangChainを使っている。
+
+*SemanticKernel*
+アプリケーションにLLM機能を追加するためのライブラリ。
+最大の特徴はC#(.NET)で使うことができること。
+Azureの他にOpenAIやHuggingFaceのAPIを使用できるほか、カスタムでローカルなど任意のLLMも使用できる。
+プロンプトを記述することでプラグインを多数作成しておける。
+C#でNativeFunctionを作成すると、アプリケーションやOSの機能にアクセスすることができる。
+MemoryやRAGの機能も簡単に組み込める。
+プラグインやファンクションの説明文から、自動で計画を立てて実行できる。
+
+まだまだ開発中なので頻繁に機能が変わるので注意。(1.0.0 RC-3現在)
+
+
+
+### LLMサービス(API含む)
+
+*OpenAI*
+
+*Azure AI Service*
+
+*Google*
+
+*Claude*
+
+*AWS*
+
+*IBM WatsonX*
+
+*HuggingGPT*
+
 *[OpenAssistant](https://open-assistant.io/ja) (2023.04.15 LAION) Apache2.0*
 [LAION-AI/Open-Assistant](https://github.com/LAION-AI/Open-Assistant)
 ChatGPTに変わるオープンソースの提供を目的としている。
 人間が入力した高品質なサンプルを集めるためのチャットボット。
 Huggng FaceのHuggingChatの一部として提供されている。
-
-LammaIndex
-LlamaFile
-Llama.cpp
-LS Studio
-NeMo
-
-FastChat
-
-FlexGen
-
-SemanticKernel
-LangChain
-AutoGPT
-AgentGPT
-BabyAGI
-
-text-generation-webui
 
 
 ## LLMを開発するには？
