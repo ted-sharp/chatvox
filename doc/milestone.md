@@ -1,61 +1,60 @@
 # milestone
 
-- use LLM(ChatGPT)
-- use TTS(VOICEVOX)
-- use STT(Wisper)
-- use Image(Live2D)
+- use LLM(ChatGPT - Azure AI Service - SemanticKernel)
+- use STT(Speech to Text - Azure AI Service)
+- use TTS(VOICEVOX/VOICEPEAK)
+- use Image(Live2D - Cubism SDK for WEB/Unity)
 - use Lipsync
 - use Motion(Breathing, Blink)
 - use Emote
-- use Semantic Kernel
 - use LLMs
 - use SKILLs
 
 ```mermaid
 sequenceDiagram
-    title: 1st phase "use LLM(ChatGPT)"
+    title: 1st phase "use LLM"
 
     actor Alice
     participant ChatVox
-    participant ChatGptAPI
+    participant LLM_API
 
     Alice->>ChatVox: input text
-    ChatVox->>ChatGptAPI: text
-    ChatGptAPI-->>ChatVox: text to text
+    ChatVox->>LLM_API: text
+    LLM_API-->>ChatVox: text to text
 ```
 
 ```mermaid
 sequenceDiagram
-    title: 2nd phase "use TTS(VOICEVOX)"
+    title: 2nd phase "use STT"
 
     actor Alice
     participant ChatVox
-    participant ChatGptAPI
-    participant VoicevoxAPI
-
-    Alice->>ChatVox: input text
-    ChatVox->>ChatGptAPI: text
-    ChatGptAPI-->>ChatVox: text to text
-    ChatVox->>VoicevoxAPI: text
-    VoicevoxAPI-->>Alice: text to speech
-```
-
-```mermaid
-sequenceDiagram
-    title: 3rd phase "use STT(Wisper)"
-
-    actor Alice
-    participant ChatVox
-    participant WisperAPI
-    participant ChatGptAPI
-    participant VoicevoxAPI
+    participant STT_API
+    participant LLM_API
 
     Alice->>ChatVox: Speaking...
-    ChatVox->>WisperAPI: sound
-    WisperAPI-->>ChatVox: speech to text
-    ChatVox->>ChatGptAPI: text
-    ChatGptAPI-->>ChatVox: text to text
-    ChatVox->>VoicevoxAPI: text
-    VoicevoxAPI-->>Alice: text to speech
+    ChatVox->>STT_API: sound
+    STT_API-->>ChatVox: speech to text
+    ChatVox->>LLM_API: text
+    LLM_API-->>ChatVox: text to text
 ```
 
+
+```mermaid
+sequenceDiagram
+    title: 3rd phase "use TTS"
+
+    actor Alice
+    participant ChatVox
+    participant STT_API
+    participant LLM_API
+    participant TTS_API
+
+    Alice->>ChatVox: Speaking...
+    ChatVox->>STT_API: sound
+    STT_API-->>ChatVox: speech to text
+    ChatVox->>LLM_API: text
+    LLM_API-->>ChatVox: text to text
+    ChatVox->>TTS_API: text to speach
+    TTS_API-->>Alice: sound
+```
