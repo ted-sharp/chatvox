@@ -3,8 +3,11 @@
 [OpenAI](https://openai.com/)
 ChatGPT API, Wisper API
 
-## Speech to text
-
+[microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel)
+複数のプラグインから最適なものを選択して実行するための基盤。
+OpenAI ChatGPTだけでなく、ローカルのLLMも使える。
+C#版のLangChainのようなものだが、そこまで充実していない。
+まだ開発途中のため、破壊的変更が多い。
 
 ## Text to speech
 
@@ -87,23 +90,13 @@ AquesTalkを使う製品にSofTalk、UTAU、棒読みちゃん、ゆっくろい
 
 [Amazon Polly](https://aws.amazon.com/jp/polly/)
 
-## Others
+## Speech to text
 
-Semantic Kernel
+Azureが雑音に強い。
+Wisperは認識率が高い。
 
-LangChain
-
-AutoGPT
-
-AgentGPT
-
-HuggingGPT
-
-BabyAGI
-
-CAMEL
-
-JARVIS
+ウェイクアップ用に特定のキーワードを認識させるだけならWindows搭載の音声認識のディクテーションで十分。
+ウェイクアップキーワードはあまり短いと暴発するので、ある程度の長さか、複雑さが必要。
 
 ## Libraries
 
@@ -116,21 +109,19 @@ JARVIS
 [ksasao/TTSController](https://github.com/ksasao/TTSController)
 VOICEVOX, COEIROINK, VOICEPEAK, CeVIO AI, A.I.VOICEなどを統一的に扱うライブラリ。
 
+[VoicePeakSpeaker](https://github.com/tunajp/VoicePeakSpeaker)
+
+[voicepeak-connect](https://github.com/azumyar/voicepeak-connect)
+
 ## Refers
+
+### コンソール/API
 
 [Gortana GPT - Voice Chat Interface](https://github.com/dasdata/gortanagtp)
 Azure Cognitive Services
 OpenAI ChatGPT
 
-[Unity VOICEVOX Bridge](https://github.com/mikito/unity-voicevox-bridge)
-VOICEVOX
-
-[ChatdollKit](https://github.com/uezo/ChatdollKit/blob/master/README.ja.md)
-Unity
-
 [Whisper API, ChatGPT API, VOICEVOXを使ってAIと会話する](https://zenn.dev/umyomyomyon/articles/5f07abe67a289b)
-
-[ChatGPTキャラクターマスコットアプリの紹介【準備＆インストール編】](https://qiita.com/Haruyama_Dev/items/d03cd30b80d96697db2c)
 
 [VOICEVOXをC#でREST-API経由で喋らせる（その１　発話）](https://qiita.com/oyahun/items/e01e56878dc011cdc094)
 
@@ -138,6 +129,39 @@ Unity
 
 [ChatGPTでキャラを動かそう！キャラ再現率が高いプロンプトと回答をしっかり縛れるAPIフロー](https://zenn.dev/niwatoro/articles/180f6185c382bb)
 
+### Live2D関連
+
+[Live2D Cubism SDK とは](https://www.live2d.com/sdk/about/)
+SDKの利用は無料だが、リリースライセンスは別途必要(個人は無料)
+
+[ChatGPTキャラクターマスコットアプリの紹介【準備＆インストール編】](https://qiita.com/Haruyama_Dev/items/d03cd30b80d96697db2c)
+
 [チャット欄に答えて雑談配信する「AI VTuber」の作り方](https://zenn.dev/makunugi/articles/a4ed9e142526f2)
 
+### Unity/VRM関連
 
+[Unity VOICEVOX Bridge](https://github.com/mikito/unity-voicevox-bridge)
+VOICEVOX
+
+[ChatdollKit](https://github.com/uezo/ChatdollKit/blob/master/README.ja.md)
+
+[UniVRMViewer](https://github.com/Bian-Sh/UniVRMViewer)
+VRMをD&Dで読み込ませてる
+
+[VRM_AI](https://github.com/tori29umai0123/VRM_AI)
+UniVRMでuLipSyncしてる
+
+[Unity製のデスクトップマスコットに影を載せる](https://www.baku-dreameater.net/entry/2019/05/29/214332)
+影は立体感が出そう
+
+### その他
+
+[Kinocot](https://github.com/gootalife/Kinocot)
+プラグイン形式で機能を追加
+
+[Liplis-Windows](https://github.com/LipliStyle/Liplis-Windows)
+ツイートの内容を読み上げる
+
+[うちの子デスクトップマスコットを作るためのツール・ソフト一覧まとめ【一次創作】](https://sousakuhow.com/tools-for-desktop-mascot/)
+しめじ: Windowを認識して動く
+伺か: 複数キャラによる掛け合いにより常駐時の面白さを実現。
